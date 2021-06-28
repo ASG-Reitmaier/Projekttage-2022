@@ -18,7 +18,7 @@
   </head>
 
   <body>
-    <h1 align="center">Testseite</h1><br> <br>
+    <h1 align = "center">Testseite</h1><br> <br>
     
     <div class="container">
 
