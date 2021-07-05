@@ -23,9 +23,9 @@ class DB
         }
     }
 
-    // Returns all kurse via MySQL query (+ Prevention of SQL Injection)
+    // Gibt Alles von Benutzer aus via MySQL query (+ Prevention of SQL Injection)
 
-    public function viewUser()
+    public function zeigeBenutzer()
     {
         $query = "SELECT benutzer_ID,	name,	jahrgangsstufe,	rolle FROM benutzer ORDER BY Name";
         $statement = $this->con->prepare($query);
@@ -33,6 +33,8 @@ class DB
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
+
+
 
 
 }
