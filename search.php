@@ -24,17 +24,42 @@ class DB
     }
 
     // Gibt Alles von Benutzer aus via MySQL query (+ Prevention of SQL Injection)
-
     public function zeigeBenutzer()
     {
-        $query = "SELECT benutzer_ID,	name,	jahrgangsstufe,	rolle FROM benutzer ORDER BY Name";
+        $query = "SELECT * FROM benutzer ORDER BY name";
         $statement = $this->con->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
 
+    // Gibt Alles von Veranstaltungen aus via MySQL query (+ Prevention of SQL Injection)
+    public function zeigeVeranstaltungen()
+    {
+        $query = "SELECT * FROM veranstaltungen ORDER BY name";
+        $statement = $this->con->prepare($query);
+        $statement->execute();
+        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
 
+    // Gibt Alles von Raeume aus via MySQL query (+ Prevention of SQL Injection)
+    public function zeigeRaeume()
+    {
+        $query = "SELECT * FROM raeume ORDER BY raumnummer";
+        $statement = $this->con->prepare($query);
+        $statement->execute();
+        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
 
-
+    // Gibt Alles von Kurse aus via MySQL query (+ Prevention of SQL Injection)
+    public function zeigeKurse()
+    {
+        $query = "SELECT * FROM kurse ORDER BY name";
+        $statement = $this->con->prepare($query);
+        $statement->execute();
+        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
 }
