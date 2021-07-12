@@ -5,19 +5,11 @@ if(count(get_included_files()) ==1) exit("Direct access not permitted.");
 class DB
 {
     // Connection to MySQL database. Trying connection. Exception on Failure
-<<<<<<< HEAD
-    public $con;
-    public $host;
-    public $dbname;
-    public $user;
-    public $password;
-=======
-    private con$;
+    private $con;
     private $host;
     private $dbname;
     private $user;
     private $password;
->>>>>>> 4cda8141ee62e6524a741cfe1aab317b4d65c5ba
 
     public function __construct()
     {
