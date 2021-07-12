@@ -5,11 +5,11 @@ if(count(get_included_files()) ==1) exit("Direct access not permitted.");
 class DB
 {
     // Connection to MySQL database. Trying connection. Exception on Failure
-    private $con;
-    private $host;
-    private $dbname;
-    private $user;
-    private $password;
+    public $con;
+    public $host;
+    public $dbname;
+    public $user;
+    public $password;
 
     public function __construct()
     {
@@ -18,7 +18,7 @@ class DB
      $dbname = 'projekttage';
      $user = 'Protage';
      $password = 'protage2020';
-     $dsn = "mysql:host=" . $this->host . ";dbname=" . $this->dbname . ";charset=utf8";
+     $dsn = "mysql:host=" . $host . ";dbname=" . $dbname . ";charset=utf8";
 
         try {
             $this->con = new PDO($dsn, $this->user, $this->password);
