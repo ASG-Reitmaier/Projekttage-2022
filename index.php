@@ -1,3 +1,10 @@
+<?php require_once 'search.php';
+
+$db = new DB();
+
+session_start();
+?>
+
 <html lang="de">
   <head>
     <meta charset="utf-8">
@@ -23,7 +30,13 @@
     <div class="container">
 
       <div class="row">
-        <div class="col-md-4"><img src="https://cdn.pixabay.com/photo/2021/06/09/01/55/worker-6322085_1280.jpg" alt="Beispielbild" class="img-fluid"></div>
+        <div class="col-md-4">
+          <?php
+            $kurse = $db->zeigeKurse();
+            echo "<img src='". $kurse['0']['bild']. "' alt='Beispielbild' class='img-fluid'>";
+        
+        ?>
+        </div>
         <div class="col-md-4"><img src="https://cdn.pixabay.com/photo/2020/03/06/15/08/escalator-4907329_1280.jpg" alt="Beispielbild" class="img-fluid"></div>
         <div class="col-md-4"><img src="https://cdn.pixabay.com/photo/2016/07/11/20/34/lost-places-1510592_1280.jpg" alt="Beispielbild" class="img-fluid"></div>
         <div class="col-md-4">inhalt</div>
