@@ -30,13 +30,19 @@ session_start();
     <div class="container">
 
       <div class="row">
-        <div class="col-md-4">
           <?php
-            $kurse = $db->zeigeKurse();
-            echo "<img src='". $kurse['0']['bild']. "' alt='Beispielbild' class='img-fluid'>";
+          $kurse = $db->zeigeKurse();
+          foreach($kurse AS $row) # Es werden alle Elemente in einer Variable gespeichert
+          {
+            echo "<div class='col-md-4'><img src='". $row['bild']." ' alt='Beispielbild' class='img-fluid'></div>";
+          }
+
+
+        
+
+            
         
         ?>
-        </div>
         <div class="col-md-4"><img src="https://cdn.pixabay.com/photo/2020/03/06/15/08/escalator-4907329_1280.jpg" alt="Beispielbild" class="img-fluid"></div>
         <div class="col-md-4"><img src="https://cdn.pixabay.com/photo/2016/07/11/20/34/lost-places-1510592_1280.jpg" alt="Beispielbild" class="img-fluid"></div>
         <div class="col-md-4">inhalt</div>
