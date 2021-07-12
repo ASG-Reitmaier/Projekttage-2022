@@ -40,8 +40,6 @@
         <div class="col-md-4">inhalt</div>
       </div>
 
-     
-
     </div> 
   </body>
 </html>
