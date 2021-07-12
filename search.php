@@ -14,11 +14,11 @@ class DB
     public function __construct()
     {
 
-     $host = 'vmd48086.contaboserver.net';
-     $dbname = 'projekttage';
-     $user = 'Protage';
-     $password = 'protage2020';
-     $dsn = "mysql:host=" . $host . ";dbname=" . $dbname . ";charset=utf8";
+     $this->host = 'vmd48086.contaboserver.net';
+     $this->dbname = 'projekttage';
+     $this->user = 'Protage';
+     $this->password = 'protage2020';
+     $dsn = "mysql:host=" . $this->host . ";dbname=" . $this->dbname . ";charset=utf8";
 
         try {
             $this->con = new PDO($dsn, $this->user, $this->password);
