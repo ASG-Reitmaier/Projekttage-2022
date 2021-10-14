@@ -1,10 +1,3 @@
-<?php require_once 'search.php';
-
-$db = new DB();
-
-session_start();
-?>
-
 <html lang="de">
   <head>
     <meta charset="utf-8">
@@ -25,22 +18,66 @@ session_start();
   </head>
 
   <body>
+    
+    <form action="" method="get">
+        Suche:
+        <input type="text" name="search">
+        <input type="submit" value="OK">
+    </form>
+
+    <br><br>
     <h1 align = "center">Testseite</h1><br> <br>
     
     <div class="container">
 
       <div class="row">
-          <?php
-          $kurse = $db->zeigeKurse();
-          foreach($kurse AS $row) # Es werden alle Elemente in einer Variable gespeichert
-          {
-            echo "<div class='col-md-4'><img src='". $row['bild']." ' alt='Beispielbild' class='img-fluid'></div>";
-          }
-
-        ?>
-
+        <div class="col-md-4"><img src="https://cdn.pixabay.com/photo/2021/06/09/01/55/worker-6322085_1280.jpg" alt="Beispielbild" class="img-fluid"></div>
+        <div class="col-md-4"><img src="https://cdn.pixabay.com/photo/2020/03/06/15/08/escalator-4907329_1280.jpg" alt="Beispielbild" class="img-fluid"></div>
+        <div class="col-md-4"><img src="https://cdn.pixabay.com/photo/2016/07/11/20/34/lost-places-1510592_1280.jpg" alt="Beispielbild" class="img-fluid"></div>
+        <div class="col-md-4">inhalt</div>
+        <div class="col-md-4">inhalt</div>
+        <div class="col-md-4">inhalt</div>
+        <div class="col-md-4"><img src="https://cdn.pixabay.com/photo/2015/11/28/17/55/paint-1067686_1280.jpg" alt="Beispielbild" class="img-fluid"></div>
+        <div class="col-md-4"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Gzuz_und_Bonez_MC_-_Pusher_Apparel.jpg/405px-Gzuz_und_Bonez_MC_-_Pusher_Apparel.jpg" alt="Beispielbild" class="img-fluid"></div>
+        <div class="col-md-4"><img src="https://cdn.pixabay.com/photo/2015/11/28/17/55/paint-1067686_1280.jpg" alt="Beispielbild" class="img-fluid"></div>
+        <div class="col-md-4">inhalt</div>
+        <div class="col-md-4">inhalt</div>
+        <div class="col-md-4">inhalt</div>
       </div>
-
     </div> 
   </body>
 </html>
+
+
+<?php
+  // Connection to MySQL database. Trying connection. Exception on Failure
+  // man kann es nicht ausprobieren, weil der Datenbank nicht angezeigt ist
+  private $con;
+  private $host = 'vmd48086.contaboserver.net';
+  private $dbname = 'projekttage';
+  private $user = 'Protage';
+  private $password = 'protage2020';
+
+  public function __construct()
+  {
+      $dsn = "mysql:host=" . $this->host . ";dbname=" . $this->dbname;
+
+      try {
+        $this->con = new PDO($dsn, $this->user, $this->password);
+        $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      } catch (PDOException $e) {
+        echo "Connection Failure" . $e->getMessage();
+      }
+  }
+
+  if (isset($_GET["search"])){
+    $query = "SELECT * FROM kurse WHERE 'name' LIKE \"%". $_GET["search"] ."%\" OR WHERE 'beschreibung' LIKE \"%". $_GET["search"] ."%\"";
+    $statement = $this -> con -> prepare($query);
+  } else {
+    $query = "SELECT * FROM kurse";
+    $statement = $this -> con -> prepare($query);
+  }
+  $statement -> execute();
+  $data = $statement -> fetchAll(PDO::FETCH_ASSOC);
+  return $data;
+}
