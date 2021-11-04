@@ -23,8 +23,13 @@
 
  
     <h1 align = "center">Projekterstellung</h1><br> <br>
-    
-    <form action="search.php" method="post">
+
+    <div class="row">
+      <div class="col">
+</div>
+<div class="col">
+   
+<form action="search.php" method="post">
   <div class="form-group">
     <label for="name">Name</label>
     <input class="form-control" id="name" placeholder="">
@@ -54,31 +59,43 @@
     <label for="name">Teilnehmerbegrenzung</label>
     <input type="number" class="form-control" id="teilnehmerbegrenzung" min="1" max="30" step="1" value="10" >
   </div>
-</form>
+
+  <div class="form-group">
+    <label for="name">Jahrgangsstufen_Beschraenkung</label>
+    <input class="form-control" id="jahrgangsstufen_beschraenkung" placeholder="">
+  </div>
+
+  <div class="form-group">
+    <label for="name">Ort</label>
+    <input class="form-control" id="ort" placeholder="">
+  </div>
+
+  <div class="form-group">
+    <label for="name">Zeitraum_von</label>
+    <input type="datetime-local" class="form-control" id="zeitraum_von" placeholder="">
+  </div>
+
+  <div class="form-group">
+    <label for="name">Zeitraum_bis</label>
+    <input type="datetime-local" class="form-control" id="zeitraum_bis" placeholder="">
+  </div>
+
+  <div class="form-group">
+    <label for="name">Kosten</label>
+    <input class="form-control" id="kosten" placeholder="">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Senden</button>
+  </form>
+
+  
+</div>
+<div class="col">
+</div>
+</div> 
+
+  
+
+
   </body>
 </html>
-<!-- <div class="form-group">
-    <label for="exampleFormControlSelect1">Example select</label>
-    <select class="form-control" id="exampleFormControlSelect1">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlSelect2">Example multiple select</label>
-    <select multiple class="form-control" id="exampleFormControlSelect2">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlTextarea1">Example textarea</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-  </div>
--->
