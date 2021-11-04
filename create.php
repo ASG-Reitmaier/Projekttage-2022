@@ -15,6 +15,10 @@
 
     <!-- Grid-Design von Bootstrap -->
     <link href="https://getbootstrap.com/docs/4.0/examples/grid/grid.css" rel="stylesheet">
+<?php
+    include("search.php");
+    ?>
+
   </head>
 
   <body>
@@ -23,13 +27,31 @@
 
  
     <h1 align = "center">Projekterstellung</h1><br> <br>
+<?php
+    if(!empty($_POST)) {
+        $name                   = $_POST["name"];
+        $beschreibung           = $_POST["beschreibung"];
+        $kursleiter1            = $_POST["kursleiter1"];
+        $kursleiter2            = $_POST["kursleiter2"];
+        $kursleiter3            = $_POST["kursleiter3"];
+        $teilnehmerbegrenzung   = $_POST["teilnehmerbegrenzung"];
+        $beschraenkung          = $_POST["jahrgangsstufenbeschraenkung"];
+        $ort                    = $_POST["ort"];
+        $zeitraum_von           = $_POST["zeitraum_von"];
+        $zeitraum_bis           = $_POST["zeitraum_bis"];
+        $kosten                 = $_POST["kosten"];
 
+        echo kursEinfuegen($name, $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort, $zeitraum_von, $zeitraum_bis, $kosten);
+    }
+    ?>
+    
+    
     <div class="row">
       <div class="col">
 </div>
 <div class="col">
    
-<form action="search.php" method="post">
+<form action="create.php" method="post">
   <div class="form-group">
     <label for="name">Name</label>
     <input class="form-control" id="name" placeholder="">
