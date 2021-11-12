@@ -46,8 +46,8 @@ $db = new DB();
       if(isset($_POST["search"])){
         $suchbegriff = $_POST["search"];
         $suchDaten = $db->suche($suchbegriff);
-     }
- ?>
+        ?>
+
 
 <div class = "container" data-scroll>
      <div class = "clearfix">
@@ -57,18 +57,14 @@ $db = new DB();
               <a href="#" class="d-block mb-4 h-100">
                 <img src='<?php echo $row['bild'];?>' alt ='Beispielbild' class='img-fluid w-100 shadow-1-strong rounded mb-4 img-thumbnail'>
                 <h4> <?php echo $row['name'];?></h4>
-            </a>
-                </div>
-
-
+              </a>
+              </div>
           <?php } ?>
-
-
       </div>
-
-
      </div>
-</div>
+    </div>
+
+<?php } ?>
 
 
   </body>
