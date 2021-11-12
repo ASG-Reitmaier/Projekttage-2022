@@ -114,9 +114,17 @@ class DB
             return("Fehler beim Eintragen des Kurses!");
         }
 
+    }
 
-       
 
+    public function suche($suchbegriff){
+        $query = "  SELECT DISTINCT kurse.name, kurse.bild
+                    FROM kurse
+                    WHERE (LOWER(kurse.beschreibung) LIKE LOWER(:begriff) OR LOWER(kurse.name) LIKE LOWER(:begriff))";
+        $statement = $this->con->prepare($query);
+        $statement->execute(["begriff"=>"%".$suchbegriff."%"]);
+        $date = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $date;
 
     }
 

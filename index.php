@@ -1,7 +1,6 @@
 <?php
-define('__ROOT__', dirname(dirname(__FILE__)));
-require_once(__ROOT__.'/search.php');
-$con = new DB();
+require_once('search.php');
+$db = new DB();
 ?>
 
 
@@ -22,27 +21,54 @@ $con = new DB();
 
     <!-- Grid-Design von Bootstrap -->
     <link href="https://getbootstrap.com/docs/4.0/examples/grid/grid.css" rel="stylesheet">
-  </head>
+  </head>  
 
   <body>
-    
-    <form action="" method="get">
-        Suche:
-        <input type="text" name="search">
-        <input type="submit" value="OK">
-    </form>
+
+    <nav class = "navbar navbar-light bg-light">
+      <div class = "container-fluid">
+        <form class = "d-flex" action = "index.php" method = "POST">
+            <input class = "form-control me-2" type="search" placeholder = "Suche..." aria-label="Search" name="search">
+            <button class = "btn btn-outline-succes" type = "submit"> Search </button>
+        </form>
+
+      </div>
+    </nav>
+
+
+    <?php 
+      if(isset($_POST["search"])){
+        $suchbegriff = $_POST["search"];
+        $suchDaten = $db->suche($suchbegriff);
+     }
+ ?>
+
+<div class = "container" data-scroll>
+     <div class = "clearfix">
+      <div class = "row">
+          <?php foreach($suchDaten AS $row){?>
+              <div class = 'col-lg-4 bg-transparent text-dark border-0' data-scroll>
+              <a href="#" class="d-block mb-4 h-100">
+                <img src='<?php echo $row['bild'];?>' alt ='Beispielbild' class='img-fluid w-100 shadow-1-strong rounded mb-4 img-thumbnail'>
+                <h4> <?php echo $row['name'];?></h4>
+            </a>
+                </div>
+
+
+          <?php } ?>
+
+
+      </div>
+
+
+     </div>
+</div>
+
+
+  </body>
+
+  </html>
 
 
 
-<?php
-  if (isset($_GET["search"])){
-    $query = "SELECT * FROM kurse WHERE 'name' LIKE \"%". $_GET["search"] ."%\" OR WHERE 'beschreibung' LIKE \"%". $_GET["search"] ."%\"";
-    $statement = $this -> con -> prepare($query);
-  } else {
-    $query = "SELECT * FROM kurse";
-    $statement = $this -> con -> prepare($query);
-  }
-  $statement -> execute();
-  $data = $statement -> fetchAll(PDO::FETCH_ASSOC);
-  return $data;
-?>
+
