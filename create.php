@@ -82,7 +82,6 @@
   </div>
 
   <div class="form-group">
-<<<<<<< HEAD
     <label for="jahrgangsstufen_beschraenkung">Jahrgangsstufen_Beschraenkung</label>
     <input class="form-control" name="jahrgangsstufen_beschraenkung" placeholder="">
   </div>
@@ -94,6 +93,7 @@
 
   <div class="form-group">
     <label for="zeitraum_von">Zeitraum_von</label>
+<<<<<<< HEAD
 =======
     <label for="name">Jahrgangsstufen_Beschraenkung</label>
     <input  type="text"  class="form-control" name="j_b" placeholder="">
@@ -116,27 +116,20 @@
 =======
     <label for="name">Zeitraum_von</label>
 >>>>>>> 342c7172fd4abbb3e3020f672d7b17c089311d2f
+=======
+>>>>>>> bbae94849ab0455372aabfce05a28e2b1a1a9648
     <input type="datetime-local" class="form-control" name="zeitraum_von" placeholder="">
   </div>
 
   <div class="form-group">
-<<<<<<< HEAD
     <label for="zeitraum_bis">Zeitraum_bis</label>
-=======
-    <label for="name">Zeitraum_bis</label>
->>>>>>> 342c7172fd4abbb3e3020f672d7b17c089311d2f
     <input type="datetime-local" class="form-control" name="zeitraum_bis" placeholder="">
 >>>>>>> ba0e3d7766e383835a99beebe349ec7d4e2c5ee6
   </div>
 
   <div class="form-group">
-<<<<<<< HEAD
     <label for="kosten">Kosten</label>
     <input class="form-control" name="kosten" placeholder="">
-=======
-    <label for="name">Kosten</label>
-    <input type="text"  class="form-control" name="kosten" placeholder="">
->>>>>>> 342c7172fd4abbb3e3020f672d7b17c089311d2f
   </div>
 
   <button type="submit" class="btn btn-primary">Senden</button>
