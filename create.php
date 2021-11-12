@@ -16,32 +16,39 @@
     <!-- Grid-Design von Bootstrap -->
     <link href="https://getbootstrap.com/docs/4.0/examples/grid/grid.css" rel="stylesheet">
 <?php
-    include("search.php");
+    require_once('search.php');
+    $db = new DB();
     ?>
 
   </head>
 
   <body>
     
-    
+  
 
  
     <h1 align = "center">Projekterstellung</h1><br> <br>
 <?php
-    if(!empty($_POST)) {
+ 
+ require_once('search.php');
+ $db = new DB();
+
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+
         $name                   = $_POST["name"];
+echo $name;
         $beschreibung           = $_POST["beschreibung"];
         $kursleiter1            = $_POST["kursleiter1"];
         $kursleiter2            = $_POST["kursleiter2"];
         $kursleiter3            = $_POST["kursleiter3"];
         $teilnehmerbegrenzung   = $_POST["teilnehmerbegrenzung"];
-        $beschraenkung          = $_POST["jahrgangsstufenbeschraenkung"];
+        $beschraenkung          = $_POST["j_b"];
         $ort                    = $_POST["ort"];
         $zeitraum_von           = $_POST["zeitraum_von"];
         $zeitraum_bis           = $_POST["zeitraum_bis"];
         $kosten                 = $_POST["kosten"];
 
-        echo kursEinfuegen($name, $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort, $zeitraum_von, $zeitraum_bis, $kosten);
+        $db->kursEinfuegen($name, $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort, $zeitraum_von, $zeitraum_bis, $kosten);
     }
     ?>
     
@@ -51,60 +58,60 @@
 </div>
 <div class="col">
    
-<form action="create.php" method="post">
+<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
   <div class="form-group">
     <label for="name">Name</label>
-    <input class="form-control" id="name" placeholder="">
+    <input type="text" class="form-control" name="name" placeholder="">
   </div>
 
   <div class="form-group">
     <label for="name">Beschreibung</label>
-    <textarea class="form-control" id="beschreibung" placeholder="" rows="3"></textarea>
+    <textarea type="text"  class="form-control" name="beschreibung" placeholder="" rows="3"></textarea>
   </div>
   
   <div class="form-group">
     <label for="name">Kursleiter1</label>
-    <input class="form-control" id="kursleiter1" placeholder="">
+    <input type="text"  class="form-control" name="kursleiter1" placeholder="">
   </div>
 
   <div class="form-group">
     <label for="name">Kursleiter2</label>
-    <input class="form-control" id="kursleiter2" placeholder="">
+    <input type="text"  class="form-control" name="kursleiter2" placeholder="">
   </div>
 
   <div class="form-group">
     <label for="name">Kursleiter3</label>
-    <input class="form-control" id="kursleiter3" placeholder="">
+    <input type="text"  class="form-control" name="kursleiter3" placeholder="">
   </div>
 
   <div class="form-group">
     <label for="name">Teilnehmerbegrenzung</label>
-    <input type="number" class="form-control" id="teilnehmerbegrenzung" min="1" max="30" step="1" value="10" >
+    <input type="number" class="form-control" name="teilnehmerbegrenzung" min="1" max="30" step="1" value="10" >
   </div>
 
   <div class="form-group">
     <label for="name">Jahrgangsstufen_Beschraenkung</label>
-    <input class="form-control" id="jahrgangsstufen_beschraenkung" placeholder="">
+    <input  type="text"  class="form-control" name="j_b" placeholder="">
   </div>
 
   <div class="form-group">
     <label for="name">Ort</label>
-    <input class="form-control" id="ort" placeholder="">
+    <input  type="text" class="form-control" name="ort" placeholder="">
   </div>
 
   <div class="form-group">
     <label for="name">Zeitraum_von</label>
-    <input type="datetime-local" class="form-control" id="zeitraum_von" placeholder="">
+    <input type="datetime-local" class="form-control" name="zeitraum_von" placeholder="">
   </div>
 
   <div class="form-group">
     <label for="name">Zeitraum_bis</label>
-    <input type="datetime-local" class="form-control" id="zeitraum_bis" placeholder="">
+    <input type="datetime-local" class="form-control" name="zeitraum_bis" placeholder="">
   </div>
 
   <div class="form-group">
     <label for="name">Kosten</label>
-    <input class="form-control" id="kosten" placeholder="">
+    <input type="text"  class="form-control" name="kosten" placeholder="">
   </div>
 
   <button type="submit" class="btn btn-primary">Senden</button>

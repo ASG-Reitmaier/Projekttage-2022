@@ -99,12 +99,11 @@ class DB
         $zeitraum_bis           = $_POST["zeitraum_bis"];
         $kosten                 = $_POST["kosten"]; */
 
-        $eintrag = "INSERT INTO 'kurse'
-        ('name', 'beschreibung', 'kursleiter1', 'kursleiter2', 'kursleiter3', 'teilnehmerbegrenzung', 'jahrgangsstufen_beschraenkung', 'ort', 'zeitraum_von', 'zeitraum_bis', 'kosten')
+        $eintrag = "INSERT INTO `kurse` (`kurs_id`, `name`, `bild`, `beschreibung`, `kursleiter1`, `kursleiter2`, `kursleiter3`, `teilnehmerbegrenzung`, `jahrgangstufen_beschraenkung`, `ort`, `zeitraum_von`, `zeitraum_bis`, `kosten`) VALUES ('10', $name, 'bild', $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort , $zeitraum_von, $zeitraum_bis, $kosten);";
 
-        VALUES
-        ('$name', '$beschreibung', '$kursleiter1', '$kursleiter2', '$kursleiter3', '$teilnehmerbegrenzung', '$beschraenkung', '$ort', '$zeitraum_von', '$zeitraum_bis', '$kosten')";
-
+        $statement = $this->con->prepare($eintrag);
+        $statement->execute();
+/*
         $eintragen = mysql_query($eintrag);
 
         if($eintragen == true) {
@@ -113,6 +112,8 @@ class DB
         } else {
             return("Fehler beim Eintragen des Kurses!");
         }
+
+*/
 
     }
 
