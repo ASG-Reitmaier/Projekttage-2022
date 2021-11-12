@@ -28,8 +28,8 @@
 <?php
    
     if(isset($_POST["name"]) && isset($_POST["beschreibung"]) && isset($_POST["kursleiter1"]) && isset($_POST["kursleiter2"]) && isset($_POST["kursleiter3"]) && isset($_POST["teilnehmerbegrenzung"]) && isset($_POST["jahrgangsstufen_beschraenkung"]) && isset($_POST["ort"]) && isset($_POST["zeitraum_von"]) && isset($_POST["zeitraum_bis"]) && isset($_POST["kosten"])) {
-      if($_POST["name"]!="" && $_POST["beschreibung"]!="" && $_POST["kursleiter1"]!="" && $_POST["kursleiter2"]!="" && $_POST["kursleiter3"]!="" && $_POST["teilnehmerbegrenzung"]!="" && $_POST["jahrgangsstufen_beschraenkung"]!="" && isset($_POST["ort"]) && $_POST["zeitraum_von"]!=="" && $_POST["zeitraum_bis"]!="" && $_POST["kosten"]!=""){ 
-      $name                   = $_POST["name"];
+      if($_POST["name"]!="" && $_POST["beschreibung"]!="" && $_POST["kursleiter1"]!="" && $_POST["kursleiter2"]!=""  && $_POST["teilnehmerbegrenzung"]!="" && $_POST["jahrgangsstufen_beschraenkung"]!="" && isset($_POST["ort"]) && $_POST["zeitraum_von"]!=="" && $_POST["zeitraum_bis"]!="" && $_POST["kosten"]!=""){ 
+        $name                   = $_POST["name"];
         $beschreibung           = $_POST["beschreibung"];
         $kursleiter1            = $_POST["kursleiter1"];
         $kursleiter2            = $_POST["kursleiter2"];
@@ -43,7 +43,7 @@
 
         echo $db->kursEinfuegen($name, $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort, $zeitraum_von, $zeitraum_bis, $kosten);
     } else{
-      echo "<p align = 'center' style='color:red' > Bitte füllen Sie das Formular vollständig aus! </p>";
+      echo "<p align = 'center' style='color:red' > Fehler: Bitte füllen Sie das Formular vollständig aus! </p>";
 
     }
   }
