@@ -41,8 +41,9 @@
         $zeitraum_bis           = $_POST["zeitraum_bis"];
         $kosten                 = $_POST["kosten"];
 
-        echo $db->kursEinfuegen($name, $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort, $zeitraum_von, $zeitraum_bis, $kosten);
-    } else{
+         $db->kursEinfuegen($name, $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort, $zeitraum_von, $zeitraum_bis, $kosten);
+        echo "<p align = 'center' style='color:green' > Der Kurs wurde erfolgreich eingefügt! </p>"
+      } else{
       echo "<p align = 'center' style='color:red' > Fehler: Bitte füllen Sie das Formular vollständig aus! </p>";
 
     }
