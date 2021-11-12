@@ -31,7 +31,13 @@ $db = new DB();
             <input class = "form-control me-2" type="search" placeholder = "Suche..." aria-label="Search" name="search">
             <button class = "btn btn-outline-succes" type = "submit"> Search </button>
         </form>
-
+        <div style="hover " class="dropdown"> 
+          <button class="dropbtn">Sortieren nach</button>
+          <div  class="dropdown-content">
+            <a href="#">Link 1</a>
+        </div>
+      </div>
+      </div>
       </div>
     </nav>
 
