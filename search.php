@@ -86,20 +86,17 @@ class DB
     //Methode zum einfuegen von neuen Kursen
     public function kursEinfuegen($name, $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort, $zeitraum_von, $zeitraum_bis, $kosten)
     {
-       /* if(!empty($_POST)) {
-        $name                   = $_POST["name"];
-        $beschreibung           = $_POST["beschreibung"];
-        $kursleiter1            = $_POST["kursleiter1"];
-        $kursleiter2            = $_POST["kursleiter2"];
-        $kursleiter3            = $_POST["kursleiter3"];
-        $teilnehmerbegrenzung   = $_POST["teilnehmerbegrenzung"];
-        $beschraenkung          = $_POST["jahrgangsstufenbeschraenkung"];
-        $ort                    = $_POST["ort"];
-        $zeitraum_von           = $_POST["zeitraum_von"];
-        $zeitraum_bis           = $_POST["zeitraum_bis"];
-        $kosten                 = $_POST["kosten"]; */
+        $query = "SELECT MAX(kurs_id) FROM kurse";
 
-        $eintrag = "INSERT INTO `kurse` (`kurs_id`, `name`, `bild`, `beschreibung`, `kursleiter1`, `kursleiter2`, `kursleiter3`, `teilnehmerbegrenzung`, `jahrgangstufen_beschraenkung`, `ort`, `zeitraum_von`, `zeitraum_bis`, `kosten`) VALUES ('10', $name, 'bild', $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort , $zeitraum_von, $zeitraum_bis, $kosten);";
+        $statement = $this->con->prepare($query);
+        $statement->execute();  
+        $id = $statement->fetch(PDO::FETCH_BOTH);
+
+        $num = intval($id[0]);
+
+        $num = $num +1;
+
+        $eintrag = "INSERT INTO `kurse` (`kurs_id`, `name`, `bild`, `beschreibung`, `kursleiter1`, `kursleiter2`, `kursleiter3`, `teilnehmerbegrenzung`, `jahrgangsstufen_beschraenkung`, `ort`, `zeitraum_von`, `zeitraum_bis`, `kosten`) VALUES ('$num', '$name', 'bild', '$beschreibung', '$kursleiter1', '$kursleiter2', '$kursleiter3', '$teilnehmerbegrenzung', '$beschraenkung', '$ort' , '$zeitraum_von', '$zeitraum_bis', '$kosten');";
 
         $statement = $this->con->prepare($eintrag);
         $statement->execute();

@@ -36,7 +36,6 @@
     if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $name                   = $_POST["name"];
-echo $name;
         $beschreibung           = $_POST["beschreibung"];
         $kursleiter1            = $_POST["kursleiter1"];
         $kursleiter2            = $_POST["kursleiter2"];
@@ -100,13 +99,13 @@ echo $name;
   </div>
 
   <div class="form-group">
-    <label for="name">Zeitraum_von</label>
-    <input type="datetime-local" class="form-control" name="zeitraum_von" placeholder="">
+    <label for="name">Zeitraum_von - Muss so eingegeben werden: yyyy-mm-dd hh:mm:ss</label>
+    <input type="text" class="form-control" name="zeitraum_von" placeholder="yyyy-mm-dd hh:mm:ss">
   </div>
 
   <div class="form-group">
-    <label for="name">Zeitraum_bis</label>
-    <input type="datetime-local" class="form-control" name="zeitraum_bis" placeholder="">
+    <label for="name">Zeitraum_bis - Muss so eingegeben werden: yyyy-mm-dd hh:mm:ss</label>
+    <input type="text" class="form-control" name="zeitraum_bis" placeholder="yyyy-mm-dd hh:mm:ss">
   </div>
 
   <div class="form-group">
