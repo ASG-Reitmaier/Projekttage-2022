@@ -98,34 +98,21 @@ class DB
         $num = $num +1;
 
         $eintrag = "INSERT INTO `kurse` (`kurs_id`, `name`, `bild`, `beschreibung`, `kursleiter1`, `kursleiter2`, `kursleiter3`, `teilnehmerbegrenzung`, `jahrgangsstufen_beschraenkung`, `ort`, `zeitraum_von`, `zeitraum_bis`, `kosten`) VALUES ('$num', '$name', 'bild', '$beschreibung', '$kursleiter1', '$kursleiter2', '$kursleiter3', '$teilnehmerbegrenzung', '$beschraenkung', '$ort' , '$zeitraum_von', '$zeitraum_bis', '$kosten');";
-=======
-      
-        $query = "INSERT INTO 'kurse'
-        ('name', 'beschreibung', 'kursleiter1', 'kursleiter2', 'kursleiter3', 'teilnehmerbegrenzung', 'jahrgangsstufen_beschraenkung', 'ort', 'zeitraum_von', 'zeitraum_bis', 'kosten')
 
-        VALUES
-        (':name', ':beschreibung', ':kursleiter1', ':kursleiter2', ':kursleiter3', ':teilnehmerbegrenzung', ':beschraenkung', ':ort', ':zeitraum_von', ':zeitraum_bis', ':kosten')";
-
-        $statement = $this->con->prepare($query);
-        $statement->execute(["name"=>$name,"beschreibung"=>$beschreibung,"kursleiter1"=>$kursleiter1,"kursleiter2"=>$kursleiter2,"kursleiter3"=>$kursleiter3,"teilnehmerbegrenzung"=>$teilnehmerbegrenzung,"beschraenkung"=>$beschraenkung,"ort"=>$ort,"zeitraum_von"=>$zeitraum_von,"zeitraum_bis"=>$zeitraum_bis,"kosten"=>$kosten]);
-        $date = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         $statement = $this->con->prepare($eintrag);
         $statement->execute();
-/*
-        $eintragen = mysql_query($eintrag);
->>>>>>> 342c7172fd4abbb3e3020f672d7b17c089311d2f
-=======
->>>>>>> bbae94849ab0455372aabfce05a28e2b1a1a9648
+     
 
+/*
         if($date == true) {
 
             return ("Kurs erfolgreich eingetragen!");
         } else {
             return("Fehler beim Eintragen des Kurses!");
         }
-
 */
+
 
     }
 

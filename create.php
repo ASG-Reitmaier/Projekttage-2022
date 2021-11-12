@@ -27,8 +27,9 @@
 
 <?php
    
-    if(!empty($_POST)) {
-        $name                   = $_POST["name"];
+    if(isset($_POST["name"]) && isset($_POST["beschreibung"]) && isset($_POST["kursleiter1"]) && isset($_POST["kursleiter2"]) && isset($_POST["kursleiter3"]) && isset($_POST["teilnehmerbegrenzung"]) && isset($_POST["jahrgangsstufen_beschraenkung"]) && isset($_POST["ort"]) && isset($_POST["zeitraum_von"]) && isset($_POST["zeitraum_bis"]) && isset($_POST["kosten"])) {
+      if($_POST["name"]!="" && $_POST["beschreibung"]!="" && $_POST["kursleiter1"]!="" && $_POST["kursleiter2"]!="" && $_POST["kursleiter3"]!="" && $_POST["teilnehmerbegrenzung"]!="" && $_POST["jahrgangsstufen_beschraenkung"]!="" && isset($_POST["ort"]) && $_POST["zeitraum_von"]!=="" && $_POST["zeitraum_bis"]!="" && $_POST["kosten"]!=""){ 
+      $name                   = $_POST["name"];
         $beschreibung           = $_POST["beschreibung"];
         $kursleiter1            = $_POST["kursleiter1"];
         $kursleiter2            = $_POST["kursleiter2"];
@@ -40,8 +41,13 @@
         $zeitraum_bis           = $_POST["zeitraum_bis"];
         $kosten                 = $_POST["kosten"];
 
-        $db->kursEinfuegen($name, $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort, $zeitraum_von, $zeitraum_bis, $kosten);
+        echo $db->kursEinfuegen($name, $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort, $zeitraum_von, $zeitraum_bis, $kosten);
+    } else{
+      echo "<p align = 'center' style='color:red' > Bitte füllen Sie das Formular vollständig aus! </p>";
+
     }
+  }
+    
     ?>
     
 
@@ -92,39 +98,13 @@
   </div>
 
   <div class="form-group">
-    <label for="zeitraum_von">Zeitraum_von</label>
-<<<<<<< HEAD
-=======
-    <label for="name">Jahrgangsstufen_Beschraenkung</label>
-    <input  type="text"  class="form-control" name="j_b" placeholder="">
-  </div>
-
-  <div class="form-group">
-    <label for="name">Ort</label>
-    <input  type="text" class="form-control" name="ort" placeholder="">
-  </div>
-
-  <div class="form-group">
-<<<<<<< HEAD
-    <label for="name">Zeitraum_von - Muss so eingegeben werden: yyyy-mm-dd hh:mm:ss</label>
+    <label for="zeitraum_von">Zeitraum_von - Muss so eingegeben werden: yyyy-mm-dd hh:mm:ss</label>
     <input type="text" class="form-control" name="zeitraum_von" placeholder="yyyy-mm-dd hh:mm:ss">
   </div>
 
   <div class="form-group">
     <label for="name">Zeitraum_bis - Muss so eingegeben werden: yyyy-mm-dd hh:mm:ss</label>
     <input type="text" class="form-control" name="zeitraum_bis" placeholder="yyyy-mm-dd hh:mm:ss">
-=======
-    <label for="name">Zeitraum_von</label>
->>>>>>> 342c7172fd4abbb3e3020f672d7b17c089311d2f
-=======
->>>>>>> bbae94849ab0455372aabfce05a28e2b1a1a9648
-    <input type="datetime-local" class="form-control" name="zeitraum_von" placeholder="">
-  </div>
-
-  <div class="form-group">
-    <label for="zeitraum_bis">Zeitraum_bis</label>
-    <input type="datetime-local" class="form-control" name="zeitraum_bis" placeholder="">
->>>>>>> ba0e3d7766e383835a99beebe349ec7d4e2c5ee6
   </div>
 
   <div class="form-group">
