@@ -86,6 +86,7 @@ class DB
     //Methode zum einfuegen von neuen Kursen
     public function kursEinfuegen($name, $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort, $zeitraum_von, $zeitraum_bis, $kosten)
     {
+<<<<<<< HEAD
         $query = "SELECT MAX(kurs_id) FROM kurse";
 
         $statement = $this->con->prepare($query);
@@ -97,13 +98,42 @@ class DB
         $num = $num +1;
 
         $eintrag = "INSERT INTO `kurse` (`kurs_id`, `name`, `bild`, `beschreibung`, `kursleiter1`, `kursleiter2`, `kursleiter3`, `teilnehmerbegrenzung`, `jahrgangsstufen_beschraenkung`, `ort`, `zeitraum_von`, `zeitraum_bis`, `kosten`) VALUES ('$num', '$name', 'bild', '$beschreibung', '$kursleiter1', '$kursleiter2', '$kursleiter3', '$teilnehmerbegrenzung', '$beschraenkung', '$ort' , '$zeitraum_von', '$zeitraum_bis', '$kosten');";
+=======
+<<<<<<< HEAD
+      
+        $query = "INSERT INTO 'kurse'
+        ('name', 'beschreibung', 'kursleiter1', 'kursleiter2', 'kursleiter3', 'teilnehmerbegrenzung', 'jahrgangsstufen_beschraenkung', 'ort', 'zeitraum_von', 'zeitraum_bis', 'kosten')
+
+        VALUES
+        (':name', ':beschreibung', ':kursleiter1', ':kursleiter2', ':kursleiter3', ':teilnehmerbegrenzung', ':beschraenkung', ':ort', ':zeitraum_von', ':zeitraum_bis', ':kosten')";
+
+        $statement = $this->con->prepare($query);
+        $statement->execute(["name"=>$name,"beschreibung"=>$beschreibung,"kursleiter1"=>$kursleiter1,"kursleiter2"=>$kursleiter2,"kursleiter3"=>$kursleiter3,"teilnehmerbegrenzung"=>$teilnehmerbegrenzung,"beschraenkung"=>$beschraenkung,"ort"=>$ort,"zeitraum_von"=>$zeitraum_von,"zeitraum_bis"=>$zeitraum_bis,"kosten"=>$kosten]);
+        $date = $statement->fetchAll(PDO::FETCH_ASSOC);
+=======
+       /* if(!empty($_POST)) {
+        $name                   = $_POST["name"];
+        $beschreibung           = $_POST["beschreibung"];
+        $kursleiter1            = $_POST["kursleiter1"];
+        $kursleiter2            = $_POST["kursleiter2"];
+        $kursleiter3            = $_POST["kursleiter3"];
+        $teilnehmerbegrenzung   = $_POST["teilnehmerbegrenzung"];
+        $beschraenkung          = $_POST["jahrgangsstufenbeschraenkung"];
+        $ort                    = $_POST["ort"];
+        $zeitraum_von           = $_POST["zeitraum_von"];
+        $zeitraum_bis           = $_POST["zeitraum_bis"];
+        $kosten                 = $_POST["kosten"]; */
+
+        $eintrag = "INSERT INTO `kurse` (`kurs_id`, `name`, `bild`, `beschreibung`, `kursleiter1`, `kursleiter2`, `kursleiter3`, `teilnehmerbegrenzung`, `jahrgangstufen_beschraenkung`, `ort`, `zeitraum_von`, `zeitraum_bis`, `kosten`) VALUES ('10', $name, 'bild', $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort , $zeitraum_von, $zeitraum_bis, $kosten);";
+>>>>>>> ba0e3d7766e383835a99beebe349ec7d4e2c5ee6
 
         $statement = $this->con->prepare($eintrag);
         $statement->execute();
 /*
         $eintragen = mysql_query($eintrag);
+>>>>>>> 342c7172fd4abbb3e3020f672d7b17c089311d2f
 
-        if($eintragen == true) {
+        if($date == true) {
 
             return ("Kurs erfolgreich eingetragen!");
         } else {
