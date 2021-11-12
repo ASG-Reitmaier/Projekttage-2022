@@ -1,9 +1,7 @@
+
+
 <html lang='de'>
  
-<?php
-  require_once("search.php");
-  $db = new DB();
-?>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -11,12 +9,33 @@
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 </head>
 <body>
+
+
     <div class="container">
     <h1> Projekttage </h1>
+
     <?php
     
-    $sqlBefehl = 'SELECT * FROM projekttage';
-    $abfrage = $con->prepare($sqlbefehl);
+    //Besser folgendes verwenden:
+    //require_once('search.php');
+    //$db = new DB();
+    
+    $host = 'vmd48086.contaboserver.net';
+    $dbname = 'projekttage';
+    $user = 'Protage';
+    $password = 'protage2020';
+    $dsn = "mysql:host=" . $host . ";dbname=" . $dbname . ";charset=utf8";
+
+       try {
+           $con = new PDO($dsn, $user, $password);
+           $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       } catch (PDOException $e) {
+           echo "Connection Failure" . $e->getMessage();
+       }
+   
+
+    $sqlBefehl = "SELECT * FROM kurse";
+    $abfrage = $con->prepare($sqlBefehl);
     $abfrage->execute();
     $ergebnismenge = $abfrage -> fetchAll(PDO::FETCH_ASSOC);
  
@@ -34,7 +53,7 @@
         echo "<td>". $zeile ["kursleiter2"] . "</td>" ; 
         echo "<td>". $zeile ["kursleiter3"] . "</td>";
         echo "<td>". $zeile ["teilnehmerbegrenzung"] . "</td>" ;           
-        echo "<td>". $zeile ["beschraenkung"] . "</td>" ;
+        echo "<td>". $zeile ["jahrgangsstufen_beschraenkung"] . "</td>" ;
         echo "<td>". $zeile ["ort"] . "</td>" ;
         echo "<td>". $zeile ["zeitraum_von"] . "</td>" ;
         echo "<td>". $zeile ["zeitraum_bis"] . "</td>"  ;
