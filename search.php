@@ -68,6 +68,15 @@ class DB
         return $data;
     }
 
+    public function zeigeKursNamen()
+    {
+        $query = "SELECT name FROM kurse ORDER BY name";
+        $statement = $this->con->prepare($query);
+        $statement->execute();
+        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
     //Benutzer zu Kurse
     public function zeigeBenutzer_zu_Kurse()
     {
@@ -112,8 +121,28 @@ class DB
             return("Fehler beim Eintragen des Kurses!");
         }
 */
+    }
 
+    public function namePruefen($name)
+    {
+        $query = "SELECT * FROM kurse WHERE name='$name' ORDER BY name";
+        $this->console_log($query);
+        $statement = $this->con->prepare($query);
+        $statement->execute();
+        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+        if( empty($data))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public function console_log($data)
+    {
+        echo '<script>';
+        echo 'console.log('. json_encode( $data ) .')';
+        echo '</script>';
     }
 
 
