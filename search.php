@@ -126,7 +126,6 @@ class DB
     public function namePruefen($name)
     {
         $query = "SELECT * FROM kurse WHERE name='$name' ORDER BY name";
-        $this->console_log($query);
         $statement = $this->con->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
