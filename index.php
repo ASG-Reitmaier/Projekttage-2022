@@ -21,27 +21,31 @@ $db = new DB();
 
     <!-- Grid-Design von Bootstrap -->
     <link href="https://getbootstrap.com/docs/4.0/examples/grid/grid.css" rel="stylesheet">
+
+    <!-- js für das Dropdown-Menü -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </head>  
 
   <body>
-
     <nav class = "navbar navbar-light bg-light">
       <div class = "container-fluid">
         <form class = "d-flex" action = "index.php" method = "POST">
             <input class = "form-control me-2" type="search" placeholder = "Suche..." aria-label="Search" name="search">
             <button class = "btn btn-outline-succes" type = "submit"> Search </button>
         </form>
-        <div style="hover " class="dropdown"> 
-          <button class="dropbtn">Sortieren nach</button>
-          <div  class="dropdown-content">
-            <a href="#">Link 1</a>
+        <!-- das Dropdown-Menü -->
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+          Sortieren nach</button>
+          <div class="dropdown-menu dropdown-menu-right" >
+            <button class="dropdown-item" formmethod="post" type="button">Alphabetisch</button>
+            <button class="dropdown-item" formmethod="post" type="button">Klasse</button>
+          </div>
         </div>
       </div>
-      </div>
-      </div>
     </nav>
-
-
+    
     <?php 
       if(isset($_POST["search"])){
         $suchbegriff = $_POST["search"];
@@ -49,9 +53,9 @@ $db = new DB();
         ?>
 
 
-<div class = "container" data-scroll>
-     <div class = "clearfix">
-      <div class = "row">
+    <div class = "container" data-scroll>
+      <div class = "clearfix">
+        <div class = "row">
           <?php foreach($suchDaten AS $row){?>
               <div class = 'col-lg-4 bg-transparent text-dark border-0' data-scroll>
               <a href="#" class="d-block mb-4 h-100">
@@ -60,16 +64,16 @@ $db = new DB();
               </a>
               </div>
           <?php } ?>
+        </div>
       </div>
-     </div>
     </div>
 
-<?php } ?>
+    <?php } ?>
 
 
   </body>
 
-  </html>
+</html>
 
 
 
