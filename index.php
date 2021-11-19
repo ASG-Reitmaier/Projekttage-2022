@@ -39,17 +39,25 @@ $db = new DB();
           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
           Sortieren nach</button>
           <div class="dropdown-menu dropdown-menu-right" >
-            <button class="dropdown-item" formmethod="post" type="button">Alphabetisch</button>
-            <button class="dropdown-item" formmethod="post" type="button">Klasse</button>
+          <!--onclick ersetzen-->
+            <button class="dropdown-item" formmethod="post" onclick="sortieren('name')">Alphabetisch</button>
+            <button class="dropdown-item" formmethod="post" onclick="sortieren('klasse')">Klasse</button>
           </div>
         </div>
       </div>
     </nav>
     
     <?php 
+      $sortierung = "name";
+      $suchbegriff = "";
+      function sortieren($str){
+        $sortierung = $str;
+        $suchDaten = $db->suche($suchbegriff, $sortierung);
+        echo 'name';
+      }
       if(isset($_POST["search"])){
         $suchbegriff = $_POST["search"];
-        $suchDaten = $db->suche($suchbegriff);
+        $suchDaten = $db->suche($suchbegriff, $sortierung);
         ?>
 
 

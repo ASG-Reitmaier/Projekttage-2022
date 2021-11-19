@@ -145,15 +145,18 @@ class DB
     }
 
 
-    public function suche($suchbegriff){
+    public function suche($suchbegriff, $sortierung){
         $query = "  SELECT DISTINCT kurse.name, kurse.bild
                     FROM kurse
                     WHERE (LOWER(kurse.beschreibung) LIKE LOWER(:begriff) OR LOWER(kurse.name) LIKE LOWER(:begriff))";
+        if ($sortierung == "name")
+            $query = $query. " ORDER BY kurse.name";
+        else
+            $query = $query. " ORDER BY kurse.name DESC";
         $statement = $this->con->prepare($query);
         $statement->execute(["begriff"=>"%".$suchbegriff."%"]);
         $date = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $date;
-
     }
 
     /*Kurs zu Raumnummer
