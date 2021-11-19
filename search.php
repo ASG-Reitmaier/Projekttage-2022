@@ -153,7 +153,7 @@ class DB
 
 
     public function suche($suchbegriff, $sortierung){
-        $query = "  SELECT DISTINCT kurse.name, kurse.bild
+        $query = "  SELECT DISTINCT kurse.kurs_id, kurse.name, kurse.bild
                     FROM kurse
                     WHERE (LOWER(kurse.beschreibung) LIKE LOWER(:begriff) OR LOWER(kurse.name) LIKE LOWER(:begriff))";
         if ($sortierung == "name")
