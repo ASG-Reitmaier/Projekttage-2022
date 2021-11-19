@@ -7,8 +7,11 @@
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
     <title>Projekterstellung</title>
+    <link rel="icon" href="https://yt3.ggpht.com/ytc/AKedOLR1otAb1XhsKGxT-hIgEcZmDQRHuCFFY6Bpt9Tq=s250-c-k-c0x00ffffff-no-rj" sizes="32x32" type="image/png">
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/grid/">
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/components/alerts/">
 
     <!-- CSS von Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -45,15 +48,15 @@
         {
           echo $db->namePruefen($name);
           $db->kursEinfuegen($name, $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort, $zeitraum_von, $zeitraum_bis, $kosten);
-          echo "<p align = 'center' style='color:green' > Der Kurs wurde erfolgreich eingefügt! </p>";
+          echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-success alert-dismissible fade show' role='alert'> Der Kurs wurde erfolgreich eingefügt!   </div></div><div class='col'></div></div>";
         }
         else
         {
-          echo "<p align = 'center' style='color:red' > Dieser Kursname existiert bereits! Bitte wählen Sie einen anderen. </p>";
+          echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-danger alert-dismissible fade show' role='alert'> Dieser Kursname existiert bereits! Bitte wählen Sie einen anderen!   </div></div><div class='col'></div></div>";
         }
          
       } else{
-      echo "<p align = 'center' style='color:red' > Fehler: Bitte füllen Sie das Formular vollständig aus! </p>";
+      echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-danger alert-dismissible fade show' role='alert'> Fehler: Bitte füllen Sie das Formular vollständig aus!   </div></div><div class='col'></div></div>";
 
     }
   }
