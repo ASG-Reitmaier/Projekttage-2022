@@ -112,12 +112,12 @@
 
   <div class="form-group">
     <label for="zeitraum_von">Zeitraum_von - Muss so eingegeben werden: yyyy-mm-dd hh:mm:ss</label>
-    <input type="text" class="form-control" name="zeitraum_von" placeholder="yyyy-mm-dd hh:mm:ss">
+    <input type="datetime-local" class="form-control" name="zeitraum_von" placeholder="yyyy-mm-dd hh:mm:ss">
   </div>
 
   <div class="form-group">
     <label for="name">Zeitraum_bis - Muss so eingegeben werden: yyyy-mm-dd hh:mm:ss</label>
-    <input type="text" class="form-control" name="zeitraum_bis" placeholder="yyyy-mm-dd hh:mm:ss">
+    <input type="datetime-local" class="form-control" name="zeitraum_bis" placeholder="yyyy-mm-dd hh:mm:ss">
   </div>
 
   <div class="form-group">
