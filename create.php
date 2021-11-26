@@ -44,7 +44,7 @@
         $zeitraum_bis           = $_POST["zeitraum_bis"];
         $kosten                 = $_POST["kosten"];
 
-        if(!file_exists($name))
+        if(!file_exists('uploads/'.$name))
         {mkdir('uploads/'.$name, 0777);
         move_uploaded_file($_FILES['datei']['tmp_name'], 'uploads/'.$name.'/'.$_FILES['datei']['name']);}
         
@@ -131,27 +131,19 @@
   </div>
 
   <div>
-  
-  <label for="datei">Bild</label>
-  <input type="file" name="datei"><br>
- 
-</div>
-
-
-  
+  <label for="datei">Bild</label><br>
+  <input type="file" name="datei"><br><br>
+ </div>
 
   <button type="submit" class="btn btn-primary">Senden</button>
+  
   </form>
 
-  
   
 </div>
 <div class="col">
 </div>
 </div> 
-
-  
-
 
   </body>
 </html>
