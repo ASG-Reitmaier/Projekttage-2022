@@ -44,6 +44,11 @@
         $zeitraum_bis           = $_POST["zeitraum_bis"];
         $kosten                 = $_POST["kosten"];
 
+        if(!file_exists($name))
+        {mkdir('uploads/'.$name, 0777);
+        move_uploaded_file($_FILES['datei']['tmp_name'], 'uploads/'.$name.'/'.$_FILES['datei']['name']);}
+        
+
         if($db->namePruefen($name))
         {
           echo $db->namePruefen($name);
@@ -69,7 +74,7 @@
 </div>
 <div class="col">
    
-<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="multipart/form-data">
   <div class="form-group">
     <label for="name">Name</label>
     <input class="form-control" name="name" placeholder="">
@@ -111,12 +116,12 @@
   </div>
 
   <div class="form-group">
-    <label for="zeitraum_von">Zeitraum_von - Muss so eingegeben werden: yyyy-mm-dd hh:mm:ss</label>
+    <label for="zeitraum_von">Zeitraum_von</label>
     <input type="datetime-local" class="form-control" name="zeitraum_von" placeholder="yyyy-mm-dd hh:mm:ss">
   </div>
 
   <div class="form-group">
-    <label for="name">Zeitraum_bis - Muss so eingegeben werden: yyyy-mm-dd hh:mm:ss</label>
+    <label for="name">Zeitraum_bis</label>
     <input type="datetime-local" class="form-control" name="zeitraum_bis" placeholder="yyyy-mm-dd hh:mm:ss">
   </div>
 
@@ -126,22 +131,19 @@
   </div>
 
   <div>
-<div id="drop_file_zone" ondrop="upload_file(event)" ondragover="return false">
-    <div id="drag_upload_file">
-        <p>Drop file here</p>
-        <p>or</p>
-        <p><input type="button" value="Select File" onclick="file_explorer();"></p>
-        <input type="file" id="selectfile">
-    </div>
+  
+  <label for="datei">Bild</label>
+  <input type="file" name="datei"><br>
+ 
 </div>
- 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="custom.js"></script>
-  </div>
+
+
+  
 
   <button type="submit" class="btn btn-primary">Senden</button>
   </form>
 
+  
   
 </div>
 <div class="col">
