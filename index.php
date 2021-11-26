@@ -58,9 +58,9 @@ $db = new DB();
         <div class = "row">
           <?php foreach($suchDaten AS $row){?>
               <div class = 'col-lg-4 bg-transparent text-dark border-0' data-scroll>
-              <a href="#" class="d-block mb-4 h-100">
+              <a href="projekt.php/?id=<?php echo $row['kurs_id'];?>" class="d-block mb-4 h-100">
                 <img src='<?php echo $row['bild'];?>' alt ='Beispielbild' class='img-fluid w-100 shadow-1-strong rounded mb-4 img-thumbnail'>
-                <h4> <?php echo $row['name'];?></h4>
+                <h4> <?php echo $row['name'];?> </h4>
               </a>
               </div>
           <?php } ?>

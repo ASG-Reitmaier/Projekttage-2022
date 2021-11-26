@@ -146,7 +146,7 @@ class DB
 
 
     public function suche($suchbegriff){
-        $query = "  SELECT DISTINCT kurse.name, kurse.bild
+        $query = "  SELECT DISTINCT kurse.kurs_id, kurse.name, kurse.bild
                     FROM kurse
                     WHERE (LOWER(kurse.beschreibung) LIKE LOWER(:begriff) OR LOWER(kurse.name) LIKE LOWER(:begriff))";
         $statement = $this->con->prepare($query);

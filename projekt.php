@@ -3,10 +3,12 @@
 <html lang='de'>
  
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+        
+        <meta name ="viewport" content="width-device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <title>Anmeldemaske</title>
+       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+              
 </head>
 <body>
 
@@ -15,6 +17,8 @@
     <h1> Projekttage </h1>
 
     <?php
+
+    echo $_GET['id'];
     
     //Besser folgendes verwenden:
     //require_once('search.php');
@@ -63,5 +67,7 @@
     }
     echo "</table>";  
     ?>
+
+ 
  
     </body>
