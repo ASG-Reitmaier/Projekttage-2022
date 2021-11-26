@@ -13,7 +13,6 @@ class DB
 
     public function __construct()
     {
-
      $this->host = 'vmd48086.contaboserver.net';
      $this->dbname = 'projekttage';
      $this->user = 'Protage';
@@ -47,6 +46,7 @@ class DB
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
+    
 
     // Gibt Alles von Raeume aus via MySQL query (+ Prevention of SQL Injection)
     public function zeigeRaeume()

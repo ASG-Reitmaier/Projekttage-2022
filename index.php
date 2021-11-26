@@ -38,23 +38,32 @@ $db = new DB();
         <div class="dropdown">
           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
           Sortieren nach</button>
-          <div class="dropdown-menu dropdown-menu-right" >
+          <form class="dropdown-menu dropdown-menu-right" method = "post">
           <!--onclick ersetzen-->
-            <button class="dropdown-item" formmethod="post" onclick="sortieren('name')">Alphabetisch</button>
-            <button class="dropdown-item" formmethod="post" onclick="sortieren('klasse')">Klasse</button>
+            <input type = "submit" name= "sortname" class ="button dropdown-item" value ="Alphabetisch"></button>
+            <input type = "submit" name= "sortklasse" class ="button dropdown-item" value ="Klasse"></button>
           </div>
         </div>
       </div>
     </nav>
-    
+
     <?php 
       $sortierung = "name";
       $suchbegriff = "";
-      function sortieren($str){
-        $sortierung = $str;
-        $suchDaten = $db->suche($suchbegriff, $sortierung);
-        echo 'name';
+      if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['sortname'])){
+        $sortierung = "name";
+        sortieren();
+      } else if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['sortklasse'])){
+        $sortierung = "nameRev";
+        sortieren();
       }
+
+      
+      function sortieren(){
+        $suchDaten = $db->suche($suchbegriff, $sortierung);
+      }
+      
+
       if(isset($_POST["search"])){
         $suchbegriff = $_POST["search"];
         $suchDaten = $db->suche($suchbegriff, $sortierung);
