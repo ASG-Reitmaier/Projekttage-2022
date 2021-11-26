@@ -125,6 +125,10 @@
     <input class="form-control" name="kosten" placeholder="">
   </div>
 
+  <div>
+  
+  </div>
+
   <button type="submit" class="btn btn-primary">Senden</button>
   </form>
 
