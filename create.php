@@ -44,7 +44,7 @@
         $zeitraum_bis           = $_POST["zeitraum_bis"];
         $kosten                 = $_POST["kosten"];
 
-        if(!file_exists($name))
+        if(!file_exists('uploads/'.$name))
         {mkdir('uploads/'.$name, 0777);
         move_uploaded_file($_FILES['datei']['tmp_name'], 'uploads/'.$name.'/'.$_FILES['datei']['name']);}
         
