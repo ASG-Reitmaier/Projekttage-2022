@@ -27,7 +27,7 @@ session_start();
 
     <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
         <div class="container-fluid">
-            <img src="http://asg-passau.de/wp-content/uploads/2014/07/Logo-Desktop.png" class="rounded float-left mg-fluid" style="width: 25%; height: 80">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwzB-PnY6KPKMhQxP9mBPsWxX29ESb72pGgQ&usqp=CAU" class="rounded float-right mg-fluid" style="width: 5%; height: auto">
             <a class="navbar-brand">
                 <h1> Verwaltung</h1>
             </a>
@@ -59,10 +59,6 @@ session_start();
     <br>
 
 
-
-
-<!-- Hochladen der Benutzer -->
-    <div class="container">
         <form action="import_query.php" method="post" name="uploadcsv" enctype="multipart/form-data" class="border shadow p-3">
             <div style=" padding-left: 3%; padding-right: 3%" class="mb-3">
                 <label class="col-sm-2 col-form-label">Schülerdaten hochladen</label>

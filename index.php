@@ -39,17 +39,25 @@ $db = new DB();
           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
           Sortieren nach</button>
           <div class="dropdown-menu dropdown-menu-right" >
-            <button class="dropdown-item" formmethod="post" type="button">Alphabetisch</button>
-            <button class="dropdown-item" formmethod="post" type="button">Klasse</button>
+          <!--onclick ersetzen-->
+            <button class="dropdown-item" formmethod="post" onclick="sortieren('name')">Alphabetisch</button>
+            <button class="dropdown-item" formmethod="post" onclick="sortieren('klasse')">Klasse</button>
           </div>
         </div>
       </div>
     </nav>
     
     <?php 
+      $sortierung = "name";
+      $suchbegriff = "";
+      function sortieren($str){
+        $sortierung = $str;
+        $suchDaten = $db->suche($suchbegriff, $sortierung);
+        echo 'name';
+      }
       if(isset($_POST["search"])){
         $suchbegriff = $_POST["search"];
-        $suchDaten = $db->suche($suchbegriff);
+        $suchDaten = $db->suche($suchbegriff, $sortierung);
         ?>
 
 
@@ -58,7 +66,7 @@ $db = new DB();
         <div class = "row">
           <?php foreach($suchDaten AS $row){?>
               <div class = 'col-lg-4 bg-transparent text-dark border-0' data-scroll>
-              <a href="#" class="d-block mb-4 h-100">
+              <a href="projekt.php/?id=<?php echo $row['kurs_id'];?>" class="d-block mb-4 h-100">
                 <img src='<?php echo $row['bild'];?>' alt ='Beispielbild' class='img-fluid w-100 shadow-1-strong rounded mb-4 img-thumbnail'>
                 <h4> <?php echo $row['name'];?></h4>
               </a>

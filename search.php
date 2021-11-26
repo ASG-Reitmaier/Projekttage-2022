@@ -95,12 +95,19 @@ class DB
     //Methode zum einfuegen von neuen Kursen
     public function kursEinfuegen($name, $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort, $zeitraum_von, $zeitraum_bis, $kosten)
     {
+        $zeitraum_von=mb_substr($zeitraum_von, 0, 10) ." ".mb_substr($zeitraum_von, 11)."-00";
+        $zeitraum_von=mb_substr($zeitraum_von, 0, 13)."-".mb_substr($zeitraum_von, 14);
+
+        $zeitraum_bis=mb_substr($zeitraum_bis, 0, 10) ." ".mb_substr($zeitraum_bis, 11)."-00";
+        $zeitraum_bis=mb_substr($zeitraum_bis, 0, 13)."-".mb_substr($zeitraum_bis, 14);
 
         $query = "SELECT MAX(kurs_id) FROM kurse";
 
         $statement = $this->con->prepare($query);
         $statement->execute();  
         $id = $statement->fetch(PDO::FETCH_BOTH);
+
+       
 
         $num = intval($id[0]);
 
@@ -145,15 +152,18 @@ class DB
     }
 
 
-    public function suche($suchbegriff){
-        $query = "  SELECT DISTINCT kurse.name, kurse.bild
+    public function suche($suchbegriff, $sortierung){
+        $query = "  SELECT DISTINCT kurse.kurs_id, kurse.name, kurse.bild
                     FROM kurse
                     WHERE (LOWER(kurse.beschreibung) LIKE LOWER(:begriff) OR LOWER(kurse.name) LIKE LOWER(:begriff))";
+        if ($sortierung == "name")
+            $query = $query. " ORDER BY kurse.name";
+        else
+            $query = $query. " ORDER BY kurse.name DESC";
         $statement = $this->con->prepare($query);
         $statement->execute(["begriff"=>"%".$suchbegriff."%"]);
         $date = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $date;
-
     }
 
     /*Kurs zu Raumnummer
