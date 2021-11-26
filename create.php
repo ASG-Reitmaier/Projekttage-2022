@@ -131,27 +131,19 @@
   </div>
 
   <div>
-  
   <label for="datei">Bild</label><br>
   <input type="file" name="datei"><br><br>
- 
-</div>
-
-
-  
+ </div>
 
   <button type="submit" class="btn btn-primary">Senden</button>
+  
   </form>
 
-  
   
 </div>
 <div class="col">
 </div>
 </div> 
-
-  
-
 
   </body>
 </html>
