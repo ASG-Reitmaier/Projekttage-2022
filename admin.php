@@ -29,14 +29,36 @@ session_start();
         <div class="container-fluid">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwzB-PnY6KPKMhQxP9mBPsWxX29ESb72pGgQ&usqp=CAU" class="rounded float-right mg-fluid" style="width: 5%; height: auto">
             <a class="navbar-brand">
-                <h1>Verwaltung</h1>
+                <h1> Verwaltung</h1>
             </a>
-        </div>
-    </nav>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-item nav-link" href="index.php"> Übersicht</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-item nav-link" href="create.php">Erstellen</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-item nav-link" href="login.php">Anmelden</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-item nav-link" href="projekt.php">Kurse</a>
+      </li>
+      
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
+  </div>
+</nav>
+
 
     <br>
 
-    <div class="container">
 
         <form action="import_query.php" method="post" name="uploadcsv" enctype="multipart/form-data" class="border shadow p-3">
             <div style=" padding-left: 3%; padding-right: 3%" class="mb-3">
@@ -58,3 +80,4 @@ session_start();
 </body>
 
 </html>
+ 
