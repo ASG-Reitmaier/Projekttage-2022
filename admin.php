@@ -35,17 +35,18 @@ session_start();
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-item nav-link" href="#"> Übersicht <span class="sr-only">:)</span></a>
+        <a class="nav-item nav-link" href="index.php"> Übersicht</a>
       </li>
       <li class="nav-item">
-      <a class="nav-item nav-link" href="#">ok</a>
+      <a class="nav-item nav-link" href="create.php">Erstellen</a>
       </li>
       <li class="nav-item">
-      <a class="nav-item nav-link" href="#">pech</a>
+      <a class="nav-item nav-link" href="login.php">Anmelden</a>
       </li>
       <li class="nav-item">
-      <a class="nav-item nav-link disabled" href="#">tschüss</a>
+      <a class="nav-item nav-link" href="projekt.php">Kurse</a>
       </li>
+      
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -79,3 +80,4 @@ session_start();
 </body>
 
 </html>
+ 
