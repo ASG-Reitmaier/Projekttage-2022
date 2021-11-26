@@ -1,4 +1,7 @@
-
+<?php
+require_once('search.php');
+$db = new DB();
+?>
 
 <html lang='de'>
  
@@ -14,61 +17,47 @@
 
 
 
-    <h1> Projekttage - Die Identifikationsnummer des ausgewählten Kurses ist <?php echo $_GET['id']?></h1>
+    <h1> Projekttage</h1>
 
 
     <?php
 
+if(isset($_GET['id'])){
     echo $_GET['id'];
-    
-    //Besser folgendes verwenden:
-    //require_once('search.php');
-    //$db = new DB();
-
-       
-    $host = 'vmd48086.contaboserver.net';
-    $dbname = 'projekttage';
-    $user = 'Protage';
-    $password = 'protage2020';
-    $dsn = "mysql:host=" . $host . ";dbname=" . $dbname . ";charset=utf8";
-
-       try {
-           $con = new PDO($dsn, $user, $password);
-           $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-       } catch (PDOException $e) {
-           echo "Connection Failure" . $e->getMessage();
-       }
-   
-
-    $sqlBefehl = "SELECT * FROM kurse";
-    $abfrage = $con->prepare($sqlBefehl);
-    $abfrage->execute();
-    $ergebnismenge = $abfrage -> fetchAll(PDO::FETCH_ASSOC);
- 
-    echo "<table>";
-    echo "<thead><tr>";
-    echo "<td>Name</td><td>Kursleiter1</td><td>Kursleiter2</td><td>Kursleiter3</td>
-    <td>Teilnehmerbegrenzung</td><td>Beschränkung</td><td>Ort</td><td>Zeitraum von</td>
-    <td>Zeitraum bis</td><td>Kosten</td>";
- 
-
-    foreach($ergebnismenge AS $zeile) {
-        echo "<tr>";
-        echo "<td>". $zeile ["name"] . "</td>";      
-        echo "<td>". $zeile ["kursleiter1"] . "</td>";  
-        echo "<td>". $zeile ["kursleiter2"] . "</td>" ; 
-        echo "<td>". $zeile ["kursleiter3"] . "</td>";
-        echo "<td>". $zeile ["teilnehmerbegrenzung"] . "</td>" ;           
-        echo "<td>". $zeile ["jahrgangsstufen_beschraenkung"] . "</td>" ;
-        echo "<td>". $zeile ["ort"] . "</td>" ;
-        echo "<td>". $zeile ["zeitraum_von"] . "</td>" ;
-        echo "<td>". $zeile ["zeitraum_bis"] . "</td>"  ;
-        echo "<td>". $zeile ["kosten"] . "</td>" ;
-        echo "</tr>" ;
-                     
-    }
-    echo "</table>";  
+    $projektDaten = $db->zeigeKurs($_GET['id']);
+    echo $projektDaten[0]["name"];
     ?>
+
+   <img src= '<?php echo $projektDaten[0]['bild']?>' class='img-fluid' alt='Responsive image'>
+   <?php
+   echo $projektDaten[0]["beschreibung"];
+
+   <div class="container-fluid">
+   <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">kursleiter1</th>
+      <th scope="col">kursleiter2</th>
+      <th scope="col">kursleiter3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>   echo $projektDaten[0]["kursleiter1"]</td>
+      <td>   echo $projektDaten[0]["kursleiter2"]</td>
+      <td>   echo $projektDaten[0]["kursleiter3"]</td>
+    </tr>
+  </tbody>
+</table>
+   echo $projektDaten[0]["kursleiter1"];
+   echo $projektDaten[0]["kursleiter2"];
+   echo $projektDaten[0]["kursleiter3"];
+</div>
+
+
+ } ?>
 
  
  

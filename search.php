@@ -59,7 +59,7 @@ class DB
     }
 
     // Gibt Alles von Kurse aus via MySQL query (+ Prevention of SQL Injection)
-    public function zeigeKurse()
+    public function zeigeAlleKurse()
     {
         $query = "SELECT * FROM kurse ORDER BY name";
         $statement = $this->con->prepare($query);
@@ -67,6 +67,16 @@ class DB
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
+
+        // Gibt alles von einem Kurs mit einer bestimmten id aus via MySQL query (+ Prevention of SQL Injection)
+        public function zeigeKurs($id)
+        {
+            $query = "SELECT * FROM kurse WHERE kurs_id = $id";
+            $statement = $this->con->prepare($query);
+            $statement->execute();
+            $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $data;
+        }
 
     public function zeigeKursNamen()
     {
@@ -152,11 +162,7 @@ class DB
     }
 
 
-<<<<<<< HEAD
-    public function suche($suchbegriff){
-=======
     public function suche($suchbegriff, $sortierung){
->>>>>>> 009d7ada4e189ae68d983b302fc2e6e11b9e4c7b
         $query = "  SELECT DISTINCT kurse.kurs_id, kurse.name, kurse.bild
                     FROM kurse
                     WHERE (LOWER(kurse.beschreibung) LIKE LOWER(:begriff) OR LOWER(kurse.name) LIKE LOWER(:begriff))";
