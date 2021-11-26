@@ -30,34 +30,29 @@ if(isset($_GET['id'])){
 
    <img src= '<?php echo $projektDaten[0]['bild']?>' class='img-fluid' alt='Responsive image'>
    <?php
-   echo $projektDaten[0]["beschreibung"];
+   echo $projektDaten[0]["beschreibung"];?>
 
    <div class="container-fluid">
    <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">kursleiter1</th>
-      <th scope="col">kursleiter2</th>
-      <th scope="col">kursleiter3</th>
+      <th scope="col">Kursleiter 1</th>
+      <th scope="col">Kursleiter 2</th>
+      <th scope="col">Kursleiter 3</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td>   echo $projektDaten[0]["kursleiter1"]</td>
-      <td>   echo $projektDaten[0]["kursleiter2"]</td>
-      <td>   echo $projektDaten[0]["kursleiter3"]</td>
+      <td>     <?php echo $projektDaten[0]["kursleiter1"] ?></td>
+      <td>     <?php echo $projektDaten[0]["kursleiter2"] ?></td>
+      <td>     <?php echo $projektDaten[0]["kursleiter3"] ?></td>
     </tr>
   </tbody>
 </table>
-   echo $projektDaten[0]["kursleiter1"];
-   echo $projektDaten[0]["kursleiter2"];
-   echo $projektDaten[0]["kursleiter3"];
 </div>
 
 
- } ?>
+<?php } ?>
 
  
  
