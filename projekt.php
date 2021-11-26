@@ -11,15 +11,17 @@
 <body>
 
 
-    <div class="container">
-    <h1> Projekttage </h1>
+
+    <h1> Projekttage - Die Identifikationsnummer des ausgewählten Kurses ist <?php echo $_GET['id']?></h1>
+
 
     <?php
     
     //Besser folgendes verwenden:
     //require_once('search.php');
     //$db = new DB();
-    
+
+       
     $host = 'vmd48086.contaboserver.net';
     $dbname = 'projekttage';
     $user = 'Protage';
