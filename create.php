@@ -132,8 +132,8 @@
 
   <div>
   
-  <label for="datei">Bild</label>
-  <input type="file" name="datei"><br>
+  <label for="datei">Bild</label><br>
+  <input type="file" name="datei"><br><br>
  
 </div>
 
