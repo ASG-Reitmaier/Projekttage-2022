@@ -27,22 +27,42 @@ session_start();
 
     <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
         <div class="container-fluid">
-            <img src="img/asg-logo.jpg" class="rounded float-right mg-fluid" style="width: 5%; height: auto">
+            <img src="http://asg-passau.de/wp-content/uploads/2014/07/Logo-Desktop.png" class="rounded float-left mg-fluid" style="width: 25%; height: 80">
             <a class="navbar-brand">
-                <h1>Verwaltung</h1>
+                <h1> Verwaltung</h1>
             </a>
-        </div>
-    </nav>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-item nav-link" href="#"> Übersicht <span class="sr-only">:)</span></a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-item nav-link" href="#">ok</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-item nav-link" href="#">pech</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-item nav-link disabled" href="#">tschüss</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
+  </div>
+</nav>
+
 
     <br>
 
+
+
+
+<!-- Hochladen der Benutzer -->
     <div class="container">
-
-        <div class="mb-3">
-            <label for="formFile" class="form-label">Schülerdaten hochladen</label>
-            <input class="form-control" type="file" id="formFile">
-        </div>
-
         <form action="import_query.php" method="post" name="uploadcsv" enctype="multipart/form-data" class="border shadow p-3">
             <div style=" padding-left: 3%; padding-right: 3%" class="mb-3">
                 <label class="col-sm-2 col-form-label">Schülerdaten hochladen</label>
