@@ -103,7 +103,7 @@ class DB
     }
 
     //Methode zum einfuegen von neuen Kursen
-    public function kursEinfuegen($name, $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort, $zeitraum_von, $zeitraum_bis, $kosten)
+    public function kursEinfuegen($name, $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort, $zeitraum_von, $zeitraum_bis, $kosten, $bild)
     {
         $zeitraum_von=mb_substr($zeitraum_von, 0, 10) ." ".mb_substr($zeitraum_von, 11)."-00";
         $zeitraum_von=mb_substr($zeitraum_von, 0, 13)."-".mb_substr($zeitraum_von, 14);
@@ -123,7 +123,7 @@ class DB
 
         $num = $num +1;
 
-        $eintrag = "INSERT INTO `kurse` (`kurs_id`, `name`, `bild`, `beschreibung`, `kursleiter1`, `kursleiter2`, `kursleiter3`, `teilnehmerbegrenzung`, `jahrgangsstufen_beschraenkung`, `ort`, `zeitraum_von`, `zeitraum_bis`, `kosten`) VALUES ('$num', '$name', 'bild', '$beschreibung', '$kursleiter1', '$kursleiter2', '$kursleiter3', '$teilnehmerbegrenzung', '$beschraenkung', '$ort' , '$zeitraum_von', '$zeitraum_bis', '$kosten');";
+        $eintrag = "INSERT INTO `kurse` (`kurs_id`, `name`, `bild`, `beschreibung`, `kursleiter1`, `kursleiter2`, `kursleiter3`, `teilnehmerbegrenzung`, `jahrgangsstufen_beschraenkung`, `ort`, `zeitraum_von`, `zeitraum_bis`, `kosten`) VALUES ('$num', '$name', '$bild', '$beschreibung', '$kursleiter1', '$kursleiter2', '$kursleiter3', '$teilnehmerbegrenzung', '$beschraenkung', '$ort' , '$zeitraum_von', '$zeitraum_bis', '$kosten');";
 
 
         $statement = $this->con->prepare($eintrag);
