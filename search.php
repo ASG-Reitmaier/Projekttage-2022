@@ -27,8 +27,17 @@ class DB
         }
     }
 
-    public function gibVerbindung(){
-        return $this->con;
+
+    public function importiereBenutzer($fileName){
+        $file = fopen($fileName, 'r');
+        //1000 entspricht der maximalen Zeichenlänge und ; dem Trennzeichen der csv-Datei. In Deutschland üblicherweise ; statt ,
+        while($row = fgetcsv($file, 1000, ';')){#
+            //implode verknüpft alle Arrayelemente zu einem String.
+            $value = "'" . implode("','",$row)."'";
+            $query ="INSERT INTO benutzer (name, klasse, rolle) VALUES (".$value.")";
+            $statement = $this->con->prepare($query);
+            $statement->execute();
+        }
     }
 
     // Gibt Alles von Benutzer aus via MySQL query (+ Prevention of SQL Injection)
