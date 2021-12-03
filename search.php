@@ -27,6 +27,10 @@ class DB
         }
     }
 
+    public function gibVerbindung(){
+        return $this->con;
+    }
+
     // Gibt Alles von Benutzer aus via MySQL query (+ Prevention of SQL Injection)
     public function zeigeBenutzer()
     {
