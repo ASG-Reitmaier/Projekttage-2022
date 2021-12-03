@@ -4,7 +4,6 @@ $db = new DB();
 
 session_start();
 
-$con = $db->gibVerbindung();
 ?>
 
 <html lang="de">
@@ -60,13 +59,15 @@ $con = $db->gibVerbindung();
         </nav>
 
     <?php
-    if(isset($POST["import"])){
+    if(isset($_POST["import"])){
         $fileName = $_FILES["file"]["tmp_name"];
-        if($_FILES["file"]["size"]>0){
+        $db->importiereBenutzer($fileName);
+
+/*         if($_FILES["file"]["size"]>0){
             $file = fopen($fileName, "r");
-            while(($column = fgetcsv($file, 10000, ","))!== FALSE){
-                $query = "Insert into data (user_id, name, klasse, rolle) values '". $column[0] ."', '". $column[1] ."', '". $column[2] ."', '". $column[3] ."')";
-                $statement = $this->con->prepare($query);
+            while(($column = fgetcsv($file, 10000, ";"))!== FALSE){
+               $query = "Insert into benutzer (user_id, name, klasse, rolle) values ('". $column[0] ."', '". $column[1] ."', '". $column[2] ."', '". $column[3] ."')";
+                $statement = $con->prepare($query);
                 $statement->execute();
                 $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -77,18 +78,19 @@ $con = $db->gibVerbindung();
                 }
 
            }
-        }
+        }  */
 
+        
     }?>
 
-        <form action="admin.php" method="post" name="import" enctype="multipart/form-data" class="border shadow p-3">
+        <form action="admin.php" method="post" name="uploadCsv" enctype="multipart/form-data" class="border shadow p-3">
             <div style=" padding-left: 3%; padding-right: 3%" class="mb-3">
                 <label class="col-sm-2 col-form-label">Schülerdaten hochladen</label>
                 <div class="col-sm-10">
                     <input type="file" class="form-control" multiple name="file" id="filename" accept=".csv">
                 </div>
                 <div style="text-align: center;">
-                    <button type="button" class="btn btn-light" style="background-color:#fb4400; color: white; font-size:21px;  width: 10%" type="submit" id="submit" data-loading-text="Loading...">Upload</button>
+                    <button type="submit" name ="import" class="btn btn-light" style="background-color:#fb4400; color: white; font-size:21px;  width: 10%" type="submit" id="submit" data-loading-text="Loading...">Upload</button>
                 </div>
             </div>
         </form>
