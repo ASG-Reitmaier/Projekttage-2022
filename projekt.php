@@ -4,26 +4,35 @@ $db = new DB();
 ?>
 
 <html lang='de'>
+
+<!DOCTYPE html> 
+<html> 
  
 <head>
         
         <meta name ="viewport" content="width-device-width, initial-scale=1.0">
         <meta charset="utf-8">
+        <meta name="description" content="">
         <title>Anmeldemaske</title>
+        <meta name="author" content="">
        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-              
+       <link rel="shortcut icon" href="img/asg-logo.jpg" type="image/x-icon" />
+
+       <!-- CSS von Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
 </head>
 <body>
 
 
 
-    <h1> Projekttage</h1>
+    <h1> </h1>
 
 
     <?php
 
 if(isset($_GET['id'])){
-    echo $_GET['id'];
+    
     $projektDaten = $db->zeigeKurs($_GET['id']);
     echo $projektDaten[0]["name"];
     ?>
@@ -33,6 +42,8 @@ if(isset($_GET['id'])){
    <?php
    echo $projektDaten[0]["beschreibung"];?>
    <div>
+
+   <h1> <?php echo $projektDaten[0]["kursleiter1"] ?> <h1>
 
    <div class="container-fluid">
   <table class="table">
