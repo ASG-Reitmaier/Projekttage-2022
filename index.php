@@ -1,6 +1,15 @@
 <?php
 require_once('search.php');
 $db = new DB();
+// mit session kann man Variablen speichern, bis der Benutzer die Seite verlässt
+// Undefined beim ersten Mal, Exceptions sollten ignoriert werden.
+session_start();
+$_SESSION['suchBegriff'];
+$_SESSION['sortierung'];
+if ($_SESSION['suchBegriff'] == null || $_SESSION['sortierung'] == null){
+  $_SESSION['suchBegriff'] = "";
+  $_SESSION['sortierung'] = "name";
+}
 ?>
 
 
@@ -30,34 +39,54 @@ $db = new DB();
   <body>
     <nav class = "navbar navbar-light bg-light">
       <div class = "container-fluid">
-        <form class = "d-flex" action = "index.php" method = "POST">
-            <input class = "form-control me-2" type="search" placeholder = "Suche..." aria-label="Search" name="search">
+        <form class = "d-flex" action = "index.php" method = "GET">
+            <input class = "form-control me-2" type="search" placeholder = "Suche..." aria-label="Search" name="search" value= <?php if (isset($_GET["search"])) {echo $_GET["search"];}?>>
             <button class = "btn btn-outline-succes" type = "submit"> Search </button>
         </form>
         <!-- das Dropdown-Menü -->
         <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-          Sortieren nach</button>
-          <div class="dropdown-menu dropdown-menu-right" >
-          <!--onclick ersetzen-->
-            <button class="dropdown-item" formmethod="post" onclick="sortieren('name')">Alphabetisch</button>
-            <button class="dropdown-item" formmethod="post" onclick="sortieren('klasse')">Klasse</button>
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sortieren nach</button>
+          <form class="dropdown-menu dropdown-menu-right" method = "post">
+            <input type = "submit" name= "sortname" class ="button dropdown-item" value ="Alphabetisch" onclick="gewaehlt(1)"></button>
+            <input type = "submit" name= "sortklasse" class ="button dropdown-item" value ="Klasse" onclick="gewaehlt(2)"></button>
           </div>
         </div>
       </div>
     </nav>
-    
-    <?php 
-      $sortierung = "name";
-      $suchbegriff = "";
-      function sortieren($str){
-        $sortierung = $str;
-        $suchDaten = $db->suche($suchbegriff, $sortierung);
-        echo 'name';
+
+    <!-- funktionert nicht, muss in css geändert werden-->
+    <script>
+    function gewaehlt(num) {
+      if (name == 1){
+        document.getElementByName("sortname").style.backgroundColor = "#e1e1e1";
+        document.getElementByName("sortklasse").style.backgroundColor = "#fff";
+      } else if (name == 2){
+        document.getElementByName("sortname").style.backgroundColor = "#fff";
+        document.getElementByName("sortklasse").style.backgroundColor = "#e1e1e1";
       }
-      if(isset($_POST["search"])){
-        $suchbegriff = $_POST["search"];
-        $suchDaten = $db->suche($suchbegriff, $sortierung);
+    }
+    </script>
+
+    <?php 
+      if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['sortname']))
+      {
+        $_SESSION['sortierung'] = "name";
+        $suchDaten = $db->suche($_SESSION['suchBegriff'], $_SESSION['sortierung']);
+      } 
+      else if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['sortklasse']))
+      {
+        $_SESSION['sortierung'] = "nameRev";
+        $suchDaten = $db->suche($_SESSION['suchBegriff'], $_SESSION['sortierung']);
+      }
+      
+
+      if(isset($_GET["search"]))
+      {
+        $_SESSION['suchBegriff'] = $_GET["search"];
+        $suchDaten = $db->suche($_SESSION['suchBegriff'], $_SESSION['sortierung']);
+        zeigeDaten($suchDaten);
+      }
+      function zeigeDaten($suchDaten){
         ?>
 
 
