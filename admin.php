@@ -23,42 +23,41 @@ session_start();
 
 <body>
     <!-- Header-->
-    <div style="float: right; background-color:#fb4400; height: 100% ; width:4%" data-scroll></div>
+    <div style="float: right; background-color:#fb4400; height: 100% ; width:4%" data-scroll>
+        <img src="uploads\Test\Logout Logo.png" style="width: 100%;"> 
+    </div>
 
-    <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light" style="height: 10ch;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwzB-PnY6KPKMhQxP9mBPsWxX29ESb72pGgQ&usqp=CAU" class="rounded float-right mg-fluid" style="width: 5%;">
         <div class="container-fluid">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwzB-PnY6KPKMhQxP9mBPsWxX29ESb72pGgQ&usqp=CAU" class="rounded float-right mg-fluid" style="width: 5%; height: auto">
-            <a class="navbar-brand">
-                <h1> Verwaltung</h1>
+            <ul class="navbar-nav mr-auto" style="font-size: 2.5ch; padding">
+                <li class="nav-item active">
+                    <a class="nav-item nav-link" href="index.php"> Übersicht</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="create.php">Erstellen</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="login.php">Adminstration</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="projekt.php">Kurse</a>
+                </li>
+                <li class="nav-item">
+                    <form class = "d-flex" action = "index.php" method = "GET">
+                        <input class = "form-control me-2" type="search" placeholder = "Suche..." aria-label="Search" name="search" value= <?php if (isset($_GET["search"])) {echo $_GET["search"];}?>>
+                        <button class = "btn btn-outline-succes" type = "submit"> Search </button>
+                    </form>
+                </li>
+            </ul>
+            <a style="float: right;">
+                <h1> Verwaltung </h1>
             </a>
+        </div>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-item nav-link" href="index.php"> Übersicht</a>
-      </li>
-      <li class="nav-item">
-      <a class="nav-item nav-link" href="create.php">Erstellen</a>
-      </li>
-      <li class="nav-item">
-      <a class="nav-item nav-link" href="login.php">Anmelden</a>
-      </li>
-      <li class="nav-item">
-      <a class="nav-item nav-link" href="projekt.php">Kurse</a>
-      </li>
-      
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+        </nav>
 
-  </div>
-</nav>
-
-
-    <br>
-
+        <br>
 
         <form action="import_query.php" method="post" name="uploadcsv" enctype="multipart/form-data" class="border shadow p-3">
             <div style=" padding-left: 3%; padding-right: 3%" class="mb-3">
@@ -71,9 +70,36 @@ session_start();
                 </div>
             </div>
         </form>
+
+    <?php
+        $ergebnis = $db->zeigeBenutzer();
+
+                echo "<table><tr><th>Benutzer ID</th><th>Name</th><th>Klasse</th><th>Rolle</th></tr>";
+                // output data of each row
+                foreach($ergebnis AS $row){
+                  echo "<tr><td>".$row["benutzer_id"]."</td><td>".$row["name"]." </td><td>".$row["klasse"]." </td><td>".$row["rolle"]." </td></tr>";
+                }
+                echo "</table>";
+    ?>
+
+    <?php
+        function zeigeDaten($suchDaten){
+        ?>
+    <div class = "container" data-scroll>
+      <div class = "clearfix">
+        <div class = "row">
+          <?php foreach($suchDaten AS $row){?>
+              <div class = 'col-lg-4 bg-transparent text-dark border-0' data-scroll>
+              <a href="projekt.php/?id=<?php echo $row['benutzer_id'];?>" class="d-block mb-4 h-100">
+                <h4> <?php echo $row['name'];?></h4>
+              </a>
+              </div>
+          <?php } ?>
+        </div>
+      </div>
     </div>
 
-
+    <?php } ?>
 
 
 
