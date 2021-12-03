@@ -43,6 +43,7 @@
         $zeitraum_von           = $_POST["zeitraum_von"];
         $zeitraum_bis           = $_POST["zeitraum_bis"];
         $kosten                 = $_POST["kosten"];
+        $bild                   = 'uploads/'.$name.'/'.$_FILES['datei']['name'];
 
         if(!file_exists('uploads/'.$name))
         {mkdir('uploads/'.$name, 0777);
@@ -52,7 +53,7 @@
         if($db->namePruefen($name))
         {
           echo $db->namePruefen($name);
-          $db->kursEinfuegen($name, $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort, $zeitraum_von, $zeitraum_bis, $kosten);
+          $db->kursEinfuegen($name, $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort, $zeitraum_von, $zeitraum_bis, $kosten, $bild);
           echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-success alert-dismissible fade show' role='alert'> Der Kurs wurde erfolgreich eingefügt!   </div></div><div class='col'></div></div>";
         }
         else

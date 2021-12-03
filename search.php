@@ -27,6 +27,10 @@ class DB
         }
     }
 
+    public function gibVerbindung(){
+        return $this->con;
+    }
+
     // Gibt Alles von Benutzer aus via MySQL query (+ Prevention of SQL Injection)
     public function zeigeBenutzer()
     {
@@ -59,7 +63,7 @@ class DB
     }
 
     // Gibt Alles von Kurse aus via MySQL query (+ Prevention of SQL Injection)
-    public function zeigeKurse()
+    public function zeigeAlleKurse()
     {
         $query = "SELECT * FROM kurse ORDER BY name";
         $statement = $this->con->prepare($query);
@@ -67,6 +71,16 @@ class DB
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
+
+        // Gibt alles von einem Kurs mit einer bestimmten id aus via MySQL query (+ Prevention of SQL Injection)
+        public function zeigeKurs($id)
+        {
+            $query = "SELECT * FROM kurse WHERE kurs_id = $id";
+            $statement = $this->con->prepare($query);
+            $statement->execute();
+            $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $data;
+        }
 
     public function zeigeKursNamen()
     {
@@ -93,7 +107,7 @@ class DB
     }
 
     //Methode zum einfuegen von neuen Kursen
-    public function kursEinfuegen($name, $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort, $zeitraum_von, $zeitraum_bis, $kosten)
+    public function kursEinfuegen($name, $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort, $zeitraum_von, $zeitraum_bis, $kosten, $bild)
     {
         $zeitraum_von=mb_substr($zeitraum_von, 0, 10) ." ".mb_substr($zeitraum_von, 11)."-00";
         $zeitraum_von=mb_substr($zeitraum_von, 0, 13)."-".mb_substr($zeitraum_von, 14);
@@ -113,7 +127,7 @@ class DB
 
         $num = $num +1;
 
-        $eintrag = "INSERT INTO `kurse` (`kurs_id`, `name`, `bild`, `beschreibung`, `kursleiter1`, `kursleiter2`, `kursleiter3`, `teilnehmerbegrenzung`, `jahrgangsstufen_beschraenkung`, `ort`, `zeitraum_von`, `zeitraum_bis`, `kosten`) VALUES ('$num', '$name', 'bild', '$beschreibung', '$kursleiter1', '$kursleiter2', '$kursleiter3', '$teilnehmerbegrenzung', '$beschraenkung', '$ort' , '$zeitraum_von', '$zeitraum_bis', '$kosten');";
+        $eintrag = "INSERT INTO `kurse` (`kurs_id`, `name`, `bild`, `beschreibung`, `kursleiter1`, `kursleiter2`, `kursleiter3`, `teilnehmerbegrenzung`, `jahrgangsstufen_beschraenkung`, `ort`, `zeitraum_von`, `zeitraum_bis`, `kosten`) VALUES ('$num', '$name', '$bild', '$beschreibung', '$kursleiter1', '$kursleiter2', '$kursleiter3', '$teilnehmerbegrenzung', '$beschraenkung', '$ort' , '$zeitraum_von', '$zeitraum_bis', '$kosten');";
 
 
         $statement = $this->con->prepare($eintrag);
