@@ -97,6 +97,11 @@ if(isset($_GET['id'])){
 
 <?php } ?>
 
+<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="multipart/form-data">
+
+  <button type="submit" class="btn btn-primary">Senden</button>
+  
+  </form>
  
  
     </body>
