@@ -108,6 +108,10 @@ if ($_SESSION['suchBegriff'] == null || $_SESSION['sortierung'] == null){
     <?php } ?>
 
 
+
+</body>
+
+
   </body>
 
 </html>
