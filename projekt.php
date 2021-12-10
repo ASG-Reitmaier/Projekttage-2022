@@ -36,9 +36,10 @@ if(isset($_GET['id'])){
     $projektDaten = $db->zeigeKurs($_GET['id']);
     echo $projektDaten[0]["name"];
     ?>
+    
 
    <div>
-   <img src= '<?php echo $projektDaten[0]['bild']?>' class='img-thumbnail' style='max-width:50%' alt='Responsive image'>
+   <img src= '<?php echo $projektDaten[0]['bild'];?>' class='img-thumbnail' style='max-width:50%' alt='Responsive image'>
    <?php
    echo $projektDaten[0]["beschreibung"];?>
    <div>
