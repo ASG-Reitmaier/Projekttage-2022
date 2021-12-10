@@ -24,7 +24,7 @@ session_start();
 
 <body>
     <!-- Header-->
-    <div style="float: right; background-color:#fb4400; height: 100% ; width:4%" data-scroll>
+    <div style="float: right; background-color:#fb4400; height: 170% ; width:4%" data-scroll>
         <img src="uploads\Test\Logout Logo.png" style="width: 100%;"> 
     </div>
 
@@ -56,7 +56,7 @@ session_start();
             </a>
         </div>
 
-        </nav>
+    </nav>
 
     <?php
     if(isset($_POST["import"])){
@@ -80,11 +80,10 @@ session_start();
            }
         }  */
 
-        
     }?>
-
-        <form action="admin.php" method="post" name="uploadCsv" enctype="multipart/form-data" class="border shadow p-3">
-            <div style=" padding-left: 3%; padding-right: 3%" class="mb-3">
+        <br>
+        <form action="admin.php" method="post" name="uploadCsv" enctype="multipart/form-data" class="border shadow p-3" style="margin: auto; width: 92%">
+            <div style="padding-left: 3%; padding-right: 3%;" class="mb-3">
                 <label class="col-sm-2 col-form-label">Schülerdaten hochladen</label>
                 <div class="col-sm-10">
                     <input type="file" class="form-control" multiple name="file" id="filename" accept=".csv">
@@ -94,16 +93,16 @@ session_start();
                 </div>
             </div>
         </form>
+        <br>
 
     <?php
         $ergebnis = $db->zeigeBenutzer();
-
-                echo "<table><tr><th>Benutzer ID</th><th>Name</th><th>Klasse</th><th>Rolle</th></tr>";
-                // output data of each row
-                foreach($ergebnis AS $row){
-                  echo "<tr><td>".$row["benutzer_id"]."</td><td>".$row["name"]." </td><td>".$row["klasse"]." </td><td>".$row["rolle"]." </td></tr>";
-                }
-                echo "</table>";
+            echo "<table class='table border shadow p-3' style='width: 92%; margin: auto;'><tr><th>Benutzer ID</th><th>Name</th><th>Klasse</th><th>Rolle</th></tr>";
+            // output data of each row
+            foreach($ergebnis AS $row){
+                echo "<tr><td>".$row["benutzer_id"]."</td><td>".$row["name"]." </td><td>".$row["klasse"]." </td><td>".$row["rolle"]." </td></tr>";
+            }
+            echo "</table>";
     ?>
 
     <?php
