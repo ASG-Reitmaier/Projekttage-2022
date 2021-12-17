@@ -25,7 +25,7 @@ session_start();
 <body>
     <!-- Header-->
     <div style="float: right; background-color:#fb4400; height: 170% ; width:4%" data-scroll>
-        <img src="uploads\Test\Logout Logo.png" style="width: 100%;"> 
+        <input formmethod="post" type="image" id="logout" alt="logout" src="uploads\Test\Logout Logo.png" style="width: 100%;"> 
     </div>
 
     <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light" style="height: 10ch;">
@@ -33,22 +33,13 @@ session_start();
         <div class="container-fluid">
             <ul class="navbar-nav mr-auto" style="font-size: 2.5ch; padding">
                 <li class="nav-item active">
-                    <a class="nav-item nav-link" href="index.php"> Übersicht</a>
+                    <a class="nav-item nav-link" href="index.php">Übersicht</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-item nav-link" href="create.php">Erstellen</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-item nav-link" href="login.php">Adminstration</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-item nav-link" href="projekt.php">Kurse</a>
-                </li>
-                <li class="nav-item">
-                    <form class = "d-flex" action = "index.php" method = "GET">
-                        <input class = "form-control me-2" type="search" placeholder = "Suche..." aria-label="Search" name="search" value= <?php if (isset($_GET["search"])) {echo $_GET["search"];}?>>
-                        <button class = "btn btn-outline-succes" type = "submit"> Search </button>
-                    </form>
                 </li>
             </ul>
             <a style="float: right;">
@@ -79,7 +70,9 @@ session_start();
 
            }
         }  */
-
+        if(isset($_POST["logout"])){
+            //Logout-Methode
+        }
     }?>
         <br>
         <form action="admin.php" method="post" name="uploadCsv" enctype="multipart/form-data" class="border shadow p-3" style="margin: auto; width: 92%">
@@ -89,7 +82,8 @@ session_start();
                     <input type="file" class="form-control" multiple name="file" id="filename" accept=".csv">
                 </div>
                 <div style="text-align: center;">
-                    <button type="submit" name ="import" class="btn btn-light" style="background-color:#fb4400; color: white; font-size:21px;  width: 10%" type="submit" id="submit" data-loading-text="Loading...">Upload</button>
+                    <button type="submit" name ="import" class="btn btn-light" style="background-color:#fb4400; color: white; font-size:21px;  width: 10%" 
+                        id="submit" data-loading-text="Loading...">Upload</button>
                 </div>
             </div>
         </form>
