@@ -41,15 +41,6 @@ session_start();
                 <li class="nav-item">
                     <a class="nav-item nav-link" href="login.php">Adminstration</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-item nav-link" href="projekt.php">Kurse</a>
-                </li>
-                <li class="nav-item">
-                    <form class = "d-flex" action = "index.php" method = "GET">
-                        <input class = "form-control me-2" type="search" placeholder = "Suche..." aria-label="Search" name="search" value= <?php if (isset($_GET["search"])) {echo $_GET["search"];}?>>
-                        <button class = "btn btn-outline-succes" type = "submit"> Search </button>
-                    </form>
-                </li>
             </ul>
             <a style="float: right;">
                 <h1> Verwaltung </h1>
