@@ -25,7 +25,7 @@ session_start();
 <body>
     <!-- Header-->
     <div style="float: right; background-color:#fb4400; height: 170% ; width:4%" data-scroll>
-        <input formmethod="post" type="image" id="logout" alt="logout" src="uploads\Test\Logout Logo.png" style="width: 100%;"> 
+        <input formmethod="post" type="image" id="logout" alt="logout" src="uploads\Test\Logout Logo v2.png" style="width: 100%;"> 
     </div>
 
     <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light" style="height: 10ch;">
@@ -68,12 +68,44 @@ session_start();
                     echo "CSV-Datei konnte nicht hochgeladen werden";
                 }
 
-           }
-        }  */
+           }*/
+        }  
+/*         if(isset($_POST["export"])){
+            $query = $db->con->prepare("SELECT * FROM benutzer"); 
+ 
+            if($query->num_rows > 0){ 
+                $delimiter = ","; 
+                $filename = "schüler-data_" . date('d-m-Y') . ".csv"; 
+                 
+                // Create a file pointer 
+                $f = fopen('php://memory', 'w'); 
+                 
+                // Set column headers 
+                $fields = array('ID', 'NAME', 'KLASSE', 'ROLLE'); 
+                fputcsv($f, $fields, $delimiter); 
+                 
+                // Output each row of the data, format line as csv and write to file pointer 
+                while($row = $query->fetch_assoc()){  
+                    $lineData = array($row['benutzer_id'], $row['name'], $row['klasse'], $row['rolle']); 
+                    fputcsv($f, $lineData, $delimiter); 
+                } 
+                 
+                // Move back to beginning of file 
+                fseek($f, 0); 
+                 
+                // Set headers to download file rather than displayed 
+                header('Content-Type: text/csv'); 
+                header('Content-Disposition: attachment; filename="' . $filename . '";'); 
+                 
+                //output all remaining data on a file pointer 
+                fpassthru($f); 
+            }
+       }   */
+
         if(isset($_POST["logout"])){
-            //Logout-Methode
+            
         }
-    }?>
+    ?>
         <br>
         <form action="admin.php" method="post" name="uploadCsv" enctype="multipart/form-data" class="border shadow p-3" style="margin: auto; width: 92%">
             <div style="padding-left: 3%; padding-right: 3%;" class="mb-3">
@@ -91,10 +123,11 @@ session_start();
 
     <?php
         $ergebnis = $db->zeigeBenutzer();
-            echo "<table class='table border shadow p-3' style='width: 92%; margin: auto;'><tr><th>Benutzer ID</th><th>Name</th><th>Klasse</th><th>Rolle</th></tr>";
+            echo "<table class='table border shadow p-3' style='width: 92%; margin: auto;'><tr><th>Benutzer ID</th><th>Name</th><th>Klasse</th><th>Rolle</th><th></th></tr>";
             // output data of each row
             foreach($ergebnis AS $row){
-                echo "<tr><td>".$row["benutzer_id"]."</td><td>".$row["name"]." </td><td>".$row["klasse"]." </td><td>".$row["rolle"]." </td></tr>";
+                echo "<tr><td>".$row["benutzer_id"]."</td><td>".$row["name"]." </td><td>".$row["klasse"]." </td><td>".$row["rolle"]." </td><td>
+                <button type='submit' name ='import' class='btn btn-light' id='submit'>bearbeiten</button></td></tr>";
             }
             echo "</table>";
     ?>
@@ -117,7 +150,10 @@ session_start();
     </div>
 
     <?php } ?>
-
+<!-- 
+    <form class="btn btn-primary" method = "post" action="admin.php">
+        <input type = "submit" name= "export" class ="button dropdown-item" value ="export"></button>
+    </form> -->
 
 
 </body>

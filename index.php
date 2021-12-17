@@ -47,9 +47,9 @@ if ($_SESSION['suchBegriff'] == null || $_SESSION['sortierung'] == null){
         <div class="dropdown">
           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sortieren nach</button>
           <form class="dropdown-menu dropdown-menu-right" method = "post">
-            <input type = "submit" name= "sortname" class ="button dropdown-item" value ="Alphabetisch" onclick="gewaehlt(1)"></button>
-            <input type = "submit" name= "sortklasse" class ="button dropdown-item" value ="Klasse" onclick="gewaehlt(2)"></button>
-          </div>
+            <input type = "submit" name= "sortname" class ="button dropdown-item" value ="Alphabetisch" onclick="gewaehlt(1)"></input>
+            <input type = "submit" name= "sortklasse" class ="button dropdown-item" value ="Klasse" onclick="gewaehlt(2)"></input>
+          </form>
         </div>
       </div>
     </nav>
