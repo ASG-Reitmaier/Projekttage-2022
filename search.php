@@ -189,6 +189,96 @@ class DB
         return $date;
     }
 
+public function benutzerZuKurse($kursId, $Id)
+{
+    $query = "INSERT INTO 'benutzer_zu_kurse' ('b_id','kurs_id') VALUES ('$kursId','$Id');";
+    $statement = $this->con->prepare($query);
+    $statement->execute();
+}
+
+public function pruefeUser_Zeit($kursId, $Id)
+{
+    $query = "SELECT COUNT(*) FROM benutzer_zu_kurse WHERE 'kurs_id'=$kursId;";
+    $statement = $this->con->prepare($query);
+    $statement->execute();
+    $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    $query = "SELECT 'teilnehmerbegrenzung' FROM kurse WHERE 'kurs_id'=$kursId;";
+    $statement = $this->con->prepare($query);
+    $statement->execute();
+    $datu = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    
+
+    if($data<$datu)
+    {
+        $query = "SELECT 'kurs_id' FROM benutzer_zu_kurse WHERE 'b_id'=$Id;";
+        $statement = $this->con->prepare($query);
+        $statement->execute();
+        $b_kurse = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                $query = "SELECT 'Tag_1' FROM kurse WHERE 'kurs_id'=$kursId;";
+                $statement = $this->con->prepare($query);
+                $statement->execute();
+                $tag1_pr = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                $query = "SELECT 'Tag_2' FROM kurse WHERE 'kurs_id'=$kursId";
+                $statement = $this->con->prepare($query);
+                $statement->execute();
+                $tag2_pr = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                $query = "SELECT 'Tag_3' FROM kurse WHERE 'kurs_id'=$kursId";
+                $statement = $this->con->prepare($query);
+                $statement->execute();
+                $tag3_pr = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $test=true;
+
+        for ($i = 0; $i <count($dath); $i++) 
+        {
+            $query = "SELECT 'Tag_1' FROM kurse WHERE 'kurs_id'=$b_kurse[i];";
+            $statement = $this->con->prepare($query);
+            $statement->execute();
+            $tag1 = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            $query = "SELECT 'Tag_2' FROM kurse WHERE 'kurs_id'=$b_kurse[i];";
+            $statement = $this->con->prepare($query);
+            $statement->execute();
+            $tag2 = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            $query = "SELECT 'Tag_3' FROM kurse WHERE 'kurs_id'=$b_kurse[i];";
+            $statement = $this->con->prepare($query);
+            $statement->execute();
+            $tag3 = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            
+
+            if($tag1_pr==true AND $tag1==true)
+            {
+                $test=false;
+
+            }
+            if($tag2_pr==true AND $tag2==true)
+            {
+                $test=false;
+
+            }
+            if($tag3_pr==true AND $tag3==true)
+            {
+                $test=false;
+
+            }
+        }
+
+        if($test)
+        {
+            $this->benutzerZuKurse($kursId, $Id);
+
+        }
+
+    }
+}
+
     /*Kurs zu Raumnummer
     public function zeigeKurse_zu_Raeume()
     {
