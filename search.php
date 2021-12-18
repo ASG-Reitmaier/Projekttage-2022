@@ -46,7 +46,6 @@ class DB
         $query = "SELECT * FROM benutzer ORDER BY name";
         $statement = $this->con->prepare($query);
         $statement->execute();
-        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
 
@@ -81,15 +80,15 @@ class DB
         return $data;
     }
 
-        // Gibt alles von einem Kurs mit einer bestimmten id aus via MySQL query (+ Prevention of SQL Injection)
-        public function zeigeKurs($id)
-        {
-            $query = "SELECT * FROM kurse WHERE kurs_id = $id";
-            $statement = $this->con->prepare($query);
-            $statement->execute();
-            $data = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $data;
-        }
+    // Gibt alles von einem Kurs mit einer bestimmten id aus via MySQL query (+ Prevention of SQL Injection)
+    public function zeigeKurs($id)
+    {
+        $query = "SELECT * FROM kurse WHERE kurs_id = $id";
+        $statement = $this->con->prepare($query);
+        $statement->execute();
+        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
 
     public function zeigeKursNamen()
     {
