@@ -27,6 +27,37 @@ class DB
         }
     }
 
+    public function exportieren($query){
+        $result = $this->con->prepare($query);
+        $result->execute();
+
+        //kann man ändern
+        $filename = 'Schülerdaten.csv';
+        
+        //entleert den Outputstream und erstellt eine CSV-Datei
+        ob_clean();
+        header( "Content-Type: text/csv; charset: utf-8");
+        header( "Content-Disposition: attachment; filename=\"$filename\"" );
+        $fp = fopen('php://output', 'w');
+
+
+        // utf-8 Unterstützung in csv
+        $arr = array();
+        fputs($fp, $bom = ( chr(0xEF) . chr(0xBB) . chr(0xBF) ));
+        //erste Reihe einfügen
+        for ($i = 0; $i < $result->columnCount(); $i++){
+            $arr = array_merge($arr, array($result->getColumnMeta($i)["name"]));
+        }
+        fputcsv($fp, $arr, ";");
+
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+            fputcsv($fp, $row, ";");
+        }
+        
+        //schließt die Datei
+        fclose($fp);
+        exit();
+    }
 
     public function importiereBenutzer($fileName){
         $file = fopen($fileName, 'r');
@@ -44,6 +75,16 @@ class DB
     public function zeigeBenutzer()
     {
         $query = "SELECT * FROM benutzer ORDER BY name";
+        $statement = $this->con->prepare($query);
+        $statement->execute();
+        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
+    // Gibt Alles von Benutzer aus via MySQL query (+ Prevention of SQL Injection)
+    public function zeigeSchüler()
+    {
+        $query = "SELECT * FROM benutzer WHERE rolle = 'Schüler' ORDER BY name";
         $statement = $this->con->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);

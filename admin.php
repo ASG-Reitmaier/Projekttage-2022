@@ -42,7 +42,7 @@ session_start();
                     <a class="nav-item nav-link" href="login.php">Adminstration</a>
                 </li>
             </ul>
-            <a style="float: right;">
+            <a style="float: right">
                 <h1> Verwaltung </h1>
             </a>
         </div>
@@ -53,7 +53,6 @@ session_start();
     if(isset($_POST["import"])){
         $fileName = $_FILES["file"]["tmp_name"];
         $db->importiereBenutzer($fileName);
-
 /*         if($_FILES["file"]["size"]>0){
             $file = fopen($fileName, "r");
             while(($column = fgetcsv($file, 10000, ";"))!== FALSE){
@@ -69,42 +68,15 @@ session_start();
                 }
 
            }*/
-        }  
-/*         if(isset($_POST["export"])){
-            $query = $db->con->prepare("SELECT * FROM benutzer"); 
- 
-            if($query->num_rows > 0){ 
-                $delimiter = ","; 
-                $filename = "schüler-data_" . date('d-m-Y') . ".csv"; 
-                 
-                // Create a file pointer 
-                $f = fopen('php://memory', 'w'); 
-                 
-                // Set column headers 
-                $fields = array('ID', 'NAME', 'KLASSE', 'ROLLE'); 
-                fputcsv($f, $fields, $delimiter); 
-                 
-                // Output each row of the data, format line as csv and write to file pointer 
-                while($row = $query->fetch_assoc()){  
-                    $lineData = array($row['benutzer_id'], $row['name'], $row['klasse'], $row['rolle']); 
-                    fputcsv($f, $lineData, $delimiter); 
-                } 
-                 
-                // Move back to beginning of file 
-                fseek($f, 0); 
-                 
-                // Set headers to download file rather than displayed 
-                header('Content-Type: text/csv'); 
-                header('Content-Disposition: attachment; filename="' . $filename . '";'); 
-                 
-                //output all remaining data on a file pointer 
-                fpassthru($f); 
-            }
-       }   */
+    
+    }
 
-        if(isset($_POST["logout"])){
-            
-        }
+    if(isset($_POST["export"])){
+        $db->exportieren("SELECT * FROM benutzer WHERE rolle = 'Schüler' ORDER BY name");
+    } 
+
+    if(isset($_POST["logout"])){     
+    }
     ?>
         <br>
         <form action="admin.php" method="post" name="uploadCsv" enctype="multipart/form-data" class="border shadow p-3" style="margin: auto; width: 92%">
@@ -123,13 +95,13 @@ session_start();
 
     <?php
         $ergebnis = $db->zeigeBenutzer();
-            echo "<table class='table border shadow p-3' style='width: 92%; margin: auto;'><tr><th>Benutzer ID</th><th>Name</th><th>Klasse</th><th>Rolle</th><th></th></tr>";
-            // output data of each row
-            foreach($ergebnis AS $row){
-                echo "<tr><td>".$row["benutzer_id"]."</td><td>".$row["name"]." </td><td>".$row["klasse"]." </td><td>".$row["rolle"]." </td><td>
-                <button type='submit' name ='import' class='btn btn-light' id='submit'>bearbeiten</button></td></tr>";
-            }
-            echo "</table>";
+        echo "<table class='table border shadow p-3' style='width: 92%; margin: auto;'><tr><th>Benutzer ID</th><th>Name</th><th>Klasse</th><th>Rolle</th><th></th></tr>";
+        // output data of each row
+        foreach($ergebnis AS $row){
+            echo "<tr><td>".$row["benutzer_id"]."</td><td>".$row["name"]." </td><td>".$row["klasse"]." </td><td>".$row["rolle"]." </td><td>
+            <button type='submit' name ='import' class='btn btn-light' id='submit'>bearbeiten</button></td></tr>";
+        }
+        echo "</table>";
     ?>
 
     <?php
@@ -150,10 +122,10 @@ session_start();
     </div>
 
     <?php } ?>
-<!-- 
-    <form class="btn btn-primary" method = "post" action="admin.php">
-        <input type = "submit" name= "export" class ="button dropdown-item" value ="export"></button>
-    </form> -->
+
+    <form class="btn btn-primary" method = "post" style="width: 92%; margin: auto;" action="admin.php">
+        <input type = "submit" name= "export" class ="button dropdown-item"  value ="export"></button>
+    </form>
 
 
 </body>
