@@ -46,6 +46,7 @@ class DB
         $query = "SELECT * FROM benutzer ORDER BY name";
         $statement = $this->con->prepare($query);
         $statement->execute();
+        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
 
