@@ -44,7 +44,7 @@ class DB
         // utf-8 Unterstützung in csv
         $arr = array();
         fputs($fp, $bom = ( chr(0xEF) . chr(0xBB) . chr(0xBF) ));
-        //erste Reihe einfügen
+        // Spaltennamen aus der SQL-Tabelle einfügen
         for ($i = 0; $i < $result->columnCount(); $i++){
             $arr = array_merge($arr, array($result->getColumnMeta($i)["name"]));
         }
