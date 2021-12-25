@@ -74,7 +74,7 @@ class DB
     // Gibt Alles von Benutzer aus via MySQL query (+ Prevention of SQL Injection)
     public function zeigeBenutzer()
     {
-        $query = "SELECT * FROM benutzer ORDER BY name";
+        $query = "SELECT * FROM benutzer ORDER BY lower(name)";
         $statement = $this->con->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -84,7 +84,7 @@ class DB
     // Gibt Alles von Benutzer aus via MySQL query (+ Prevention of SQL Injection)
     public function zeigeSchüler()
     {
-        $query = "SELECT * FROM benutzer WHERE rolle = 'Schüler' ORDER BY name";
+        $query = "SELECT * FROM benutzer WHERE rolle = 'Schüler' ORDER BY lower(name)";
         $statement = $this->con->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -94,7 +94,7 @@ class DB
     // Gibt Alles von Veranstaltungen aus via MySQL query (+ Prevention of SQL Injection)
     public function zeigeVeranstaltungen()
     {
-        $query = "SELECT * FROM veranstaltungen ORDER BY name";
+        $query = "SELECT * FROM veranstaltungen ORDER BY lower(name)";
         $statement = $this->con->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -115,7 +115,7 @@ class DB
     // Gibt Alles von Kurse aus via MySQL query (+ Prevention of SQL Injection)
     public function zeigeAlleKurse()
     {
-        $query = "SELECT * FROM kurse ORDER BY name";
+        $query = "SELECT * FROM kurse ORDER BY lower(name)";
         $statement = $this->con->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -134,7 +134,7 @@ class DB
 
     public function zeigeKursNamen()
     {
-        $query = "SELECT name FROM kurse ORDER BY name";
+        $query = "SELECT name FROM kurse ORDER BY lower(name)";
         $statement = $this->con->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -148,7 +148,7 @@ class DB
                   FROM benutzer, kurse,  benutzer_zu_kurse
                   WHERE benutzer.benutzer_id = benutzer_zu_kurse.b_id
                   AND kurse.kurs_id = benutzer_zu_kurse.kurs_id
-                  ORDER BY benutzer.name";
+                  ORDER BY lower(benutzer.name)";
 
         $statement = $this->con->prepare($query);
         $statement->execute();
