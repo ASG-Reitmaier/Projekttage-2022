@@ -147,9 +147,9 @@ class DB
     public function zeigeBenutzer_zu_Kurse()
     {
         $query = 
-            "SELECT benutzer.benutzer_id, benutzer.name, kurse.kurs_id, kurse.name, klasse, rolle, kursleiter1, kursleiter2, kursleiter3,
-            teilnehmerbegrenzung, jahrgangsstufen_beschraenkung, ort,
-            Tag_1, Tag_2, Tag_3, zeitraum_von, zeitraum_bis, kosten 
+            "SELECT benutzer.benutzer_id, benutzer.name, kurse.kurs_id, kurse.name, klasse, rolle,
+            kursleiter1, kursleiter2, kursleiter3, teilnehmerbegrenzung, jahrgangsstufen_beschraenkung,
+            ort, Tag_1, Tag_2, Tag_3, zeitraum_von, zeitraum_bis, kosten 
             FROM benutzer, kurse,  benutzer_zu_kurse
             WHERE benutzer.benutzer_id = benutzer_zu_kurse.b_id
             AND kurse.kurs_id = benutzer_zu_kurse.kurs_id
