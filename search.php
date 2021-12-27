@@ -27,12 +27,13 @@ class DB
         }
     }
 
-    public function exportieren($query){
+    public function exportieren($query)
+    {
         $result = $this->con->prepare($query);
         $result->execute();
 
         //kann man ändern
-        $filename = 'Schülerdaten.csv';
+        $filename = 'Tabelle.csv';
         
         //entleert den Outputstream und erstellt eine CSV-Datei
         ob_clean();
@@ -59,7 +60,8 @@ class DB
         exit();
     }
 
-    public function importiereBenutzer($fileName){
+    public function importiereBenutzer($fileName)
+    {
         $file = fopen($fileName, 'r');
         //1000 entspricht der maximalen Zeichenlänge und ; dem Trennzeichen der csv-Datei. In Deutschland üblicherweise ; statt ,
         while($row = fgetcsv($file, 1000, ';')){#
@@ -144,14 +146,23 @@ class DB
     //Benutzer zu Kurse
     public function zeigeBenutzer_zu_Kurse()
     {
-        $query = "SELECT * 
-                  FROM benutzer, kurse,  benutzer_zu_kurse
-                  WHERE benutzer.benutzer_id = benutzer_zu_kurse.b_id
-                  AND kurse.kurs_id = benutzer_zu_kurse.kurs_id
-                  ORDER BY lower(benutzer.name)";
+        $query = 
+            "SELECT benutzer.benutzer_id, benutzer.name, kurse.kurs_id, kurse.name, klasse, rolle, kursleiter1, kursleiter2, kursleiter3,
+            teilnehmerbegrenzung, jahrgangsstufen_beschraenkung, ort,
+            Tag_1, Tag_2, Tag_3, zeitraum_von, zeitraum_bis, kosten 
+            FROM benutzer, kurse,  benutzer_zu_kurse
+            WHERE benutzer.benutzer_id = benutzer_zu_kurse.b_id
+            AND kurse.kurs_id = benutzer_zu_kurse.kurs_id
+            ORDER BY lower(benutzer.name)";
 
         $statement = $this->con->prepare($query);
         $statement->execute();
+        // //Spaltennamen überprüfen
+        // $arr = array();
+        // for ($i = 0; $i < $statement->columnCount(); $i++){
+        //     $arr = array_merge($arr, array($statement->getColumnMeta($i)["name"]), array(" ");
+        // }
+        // echo implode($arr);
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
@@ -171,7 +182,6 @@ class DB
         $statement->execute();  
         $id = $statement->fetch(PDO::FETCH_BOTH);
 
-       
 
         $num = intval($id[0]);
 
@@ -179,10 +189,8 @@ class DB
 
         $eintrag = "INSERT INTO `kurse` (`kurs_id`, `name`, `bild`, `beschreibung`, `kursleiter1`, `kursleiter2`, `kursleiter3`, `teilnehmerbegrenzung`, `jahrgangsstufen_beschraenkung`, `ort`, `Tag_1`, `Tag_2`, `Tag_3`, `zeitraum_von`, `zeitraum_bis`, `kosten`) VALUES ('$num', '$name', '$bild', '$beschreibung', '$kursleiter1', '$kursleiter2', '$kursleiter3', '$teilnehmerbegrenzung', '$beschraenkung', '$ort' , '$tag1', '$tag2', '$tag3', '$zeitraum_von', '$zeitraum_bis', '$kosten');";
 
-
         $statement = $this->con->prepare($eintrag);
         $statement->execute();
-     
 
 /*
         if($date == true) {
@@ -216,7 +224,8 @@ class DB
     }
 
 
-    public function suche($suchbegriff, $sortierung){
+    public function suche($suchbegriff, $sortierung)
+    {
         $query = "  SELECT DISTINCT kurse.kurs_id, kurse.name, kurse.bild
                     FROM kurse
                     WHERE (LOWER(kurse.beschreibung) LIKE LOWER(:begriff) OR LOWER(kurse.name) LIKE LOWER(:begriff))";
@@ -230,93 +239,80 @@ class DB
         return $date;
     }
 
-public function benutzerZuKurse($kursId, $Id)
-{
-    $query = "INSERT INTO 'benutzer_zu_kurse' ('b_id','kurs_id') VALUES ('$kursId','$Id');";
-    $statement = $this->con->prepare($query);
-    $statement->execute();
-}
-
-public function pruefeUser_Zeit($kursId, $Id)
-{
-    $query = "SELECT COUNT(*) FROM benutzer_zu_kurse WHERE 'kurs_id'=$kursId;";
-    $statement = $this->con->prepare($query);
-    $statement->execute();
-    $data = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-    $query = "SELECT 'teilnehmerbegrenzung' FROM kurse WHERE 'kurs_id'=$kursId;";
-    $statement = $this->con->prepare($query);
-    $statement->execute();
-    $datu = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-    
-
-    if($data<$datu)
+    public function benutzerZuKurse($kursId, $Id)
     {
-        $query = "SELECT 'kurs_id' FROM benutzer_zu_kurse WHERE 'b_id'=$Id;";
+        $query = "INSERT INTO 'benutzer_zu_kurse' ('b_id','kurs_id') VALUES ('$kursId','$Id');";
         $statement = $this->con->prepare($query);
         $statement->execute();
-        $b_kurse = $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-                $query = "SELECT 'Tag_1' FROM kurse WHERE 'kurs_id'=$kursId;";
-                $statement = $this->con->prepare($query);
-                $statement->execute();
-                $tag1_pr = $statement->fetchAll(PDO::FETCH_ASSOC);
+    public function pruefeUser_Zeit($kursId, $Id)
+    {
+        $query = "SELECT COUNT(*) FROM benutzer_zu_kurse WHERE 'kurs_id'=$kursId;";
+        $statement = $this->con->prepare($query);
+        $statement->execute();
+        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                $query = "SELECT 'Tag_2' FROM kurse WHERE 'kurs_id'=$kursId";
-                $statement = $this->con->prepare($query);
-                $statement->execute();
-                $tag2_pr = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $query = "SELECT 'teilnehmerbegrenzung' FROM kurse WHERE 'kurs_id'=$kursId;";
+        $statement = $this->con->prepare($query);
+        $statement->execute();
+        $datu = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                $query = "SELECT 'Tag_3' FROM kurse WHERE 'kurs_id'=$kursId";
-                $statement = $this->con->prepare($query);
-                $statement->execute();
-                $tag3_pr = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-        $test=true;
-
-        for ($i = 0; $i <count($dath); $i++) 
+        if($data<$datu)
         {
-            $query = "SELECT 'Tag_1' FROM kurse WHERE 'kurs_id'=$b_kurse[i];";
+            $query = "SELECT 'kurs_id' FROM benutzer_zu_kurse WHERE 'b_id'=$Id;";
             $statement = $this->con->prepare($query);
             $statement->execute();
-            $tag1 = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $b_kurse = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-            $query = "SELECT 'Tag_2' FROM kurse WHERE 'kurs_id'=$b_kurse[i];";
+            $query = "SELECT 'Tag_1' FROM kurse WHERE 'kurs_id'=$kursId;";
             $statement = $this->con->prepare($query);
             $statement->execute();
-            $tag2 = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $tag1_pr = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-            $query = "SELECT 'Tag_3' FROM kurse WHERE 'kurs_id'=$b_kurse[i];";
+            $query = "SELECT 'Tag_2' FROM kurse WHERE 'kurs_id'=$kursId";
             $statement = $this->con->prepare($query);
             $statement->execute();
-            $tag3 = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $tag2_pr = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-            
+            $query = "SELECT 'Tag_3' FROM kurse WHERE 'kurs_id'=$kursId";
+            $statement = $this->con->prepare($query);
+            $statement->execute();
+            $tag3_pr = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-            if($tag1_pr==true AND $tag1==true)
+            $test=true;
+
+            for ($i = 0; $i < count($dath); $i++) 
             {
-                $test=false;
+               $query = "SELECT 'Tag_1' FROM kurse WHERE 'kurs_id'=$b_kurse[i];";
+                $statement = $this->con->prepare($query);
+                $statement->execute();
+                $tag1 = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+                $query = "SELECT 'Tag_2' FROM kurse WHERE 'kurs_id'=$b_kurse[i];";
+                $statement = $this->con->prepare($query);
+                $statement->execute();
+                $tag2 = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                $query = "SELECT 'Tag_3' FROM kurse WHERE 'kurs_id'=$b_kurse[i];";
+                $statement = $this->con->prepare($query);
+                $statement->execute();
+                $tag3 = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                if($tag1_pr==true AND $tag1==true){
+                    $test=false;
+                }
+                if($tag2_pr==true AND $tag2==true){
+                    $test=false;
+                }
+                if($tag3_pr==true AND $tag3==true){
+                    $test=false;
+                }
             }
-            if($tag2_pr==true AND $tag2==true)
-            {
-                $test=false;
 
-            }
-            if($tag3_pr==true AND $tag3==true)
-            {
-                $test=false;
-
-            }
-        }
-
-        if($test)
-        {
+        if($test){
             $this->benutzerZuKurse($kursId, $Id);
-
         }
-
     }
 }
 
