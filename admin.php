@@ -3,8 +3,11 @@
 $db = new DB();
 
 session_start();
-$_SESSION['Tabelle'] = "KursenTabelle";
+$_SESSION['ExportAbfrage'];
+$_SESSION['Tabelle'] = "BenutzerTabelle";
 $table = "Kurs";
+//ob_start immer nach session_start(). Zum exportieren
+ob_start();
 ?>
 
 <html lang="de">
@@ -26,10 +29,15 @@ $table = "Kurs";
 
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> 
+
+    <link rel="stylesheet" href="/path/to/cdn/bootstrap.min.css" />
+        <script src="/path/to/cdn/bootstrap.min.js"></script>
+    <link href="bootstrap5-dropdown-ml-hack-hover.css" rel="stylesheet" />
+        <script src="bootstrap5-dropdown-ml-hack.js"></script>
 </head>
 
 <body>
-    <div style="float: right; background-color:#fb4400; height: 300%; width: 5ch" data-scroll>
+    <div style="float: right; background-color:#fb4400; height: 200%; width: 5ch" data-scroll>
         <input formmethod="post" type="image" id="logout" alt="logout" src="uploads\Test\Logout Logo v2.png" style="width: 100%;"> 
     </div>
     
@@ -37,7 +45,7 @@ $table = "Kurs";
     <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light" style="height: 10ch;">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwzB-PnY6KPKMhQxP9mBPsWxX29ESb72pGgQ&usqp=CAU" class="rounded float-right mg-fluid" style="width: 5%;">
         <div class="container-fluid">
-            <ul class="navbar-nav mr-auto" style="font-size: 2.5ch; padding">
+            <ul class="navbar-nav mr-auto" style="font-size: 2.5ch;">
                 <li class="nav-item active">
                     <a class="nav-item nav-link" href="index.php"> Übersicht </a>
                 </li>
@@ -48,7 +56,7 @@ $table = "Kurs";
                     <a class="nav-item nav-link" href="login.php"> Adminstration </a>
                 </li>
             </ul>
-            <a style="float: right">
+            <a style="float: right;">
                 <h1> Verwaltung </h1>
             </a>
         </div>
@@ -71,24 +79,38 @@ $table = "Kurs";
     </form>
     <br>
 
-    <div class="dropdown" style="margin: auto; ">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" style="float: left; width: 50%; margin: auto; display: inline-block;">Zeigen</button>
-        <form class="dropdown-menu"  method = "post" action="admin.php" style="width: 50%; margin: auto;">
-            <input type = "submit" name= "BenutzerTabelle" class ="button dropdown-item"  value ="Schüler"></input>
-            <input type = "submit" name= "KlassenTabelle" class ="button dropdown-item" value ="Klasse"></input>
+    <div class="dropdown" style="margin: auto;">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" style="float: left; width: 20%; margin: auto;">Zeigen</button>
+        <form class="dropdown-menu"  method = "post" action="admin.php" style="width: 20%; margin: auto;">
+            <input type = "submit" name= "SchülerTabelle" class ="button dropdown-item"  value ="Schüler"></input>
+            <!-- <input type = "submit" name= "KlassenTabelle" class ="button dropdown-item" value ="Klasse"></input> -->
             <input type = "submit" name= "KursenTabelle" class ="button dropdown-item" value ="Kurse"></input>
         </form>
-        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" style="float right; width: 50%; margin: auto;display: inline-block;">Exportieren</button>
-        <form class="dropdown-menu"  method = "post" action="admin.php" style="width: 50%; margin: auto;">
-            <input type = "submit" name= "ExportSchüler" class ="button dropdown-item"  value ="Schüler"></input>
-            <input type = "submit" name= "ExportKlasse" class ="button dropdown-item" value ="Klasse"></input>
-            <input type = "submit" name= "ExportKurse" class ="button dropdown-item" value ="Kurse"></input>
+        
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" style="float: left; width: 20%; margin: auto;">Klasse</button>
+        <form class="dropdown-menu"  method = "post" action="admin.php" style="float: left; width: 20%; margin: auto;">
+            <input type = "submit" name= "KlassenTabelle5" class ="button dropdown-item"  value ="5. Klasse"></input>
+            <input type = "submit" name= "KlassenTabelle6" class ="button dropdown-item" value ="6. Klasse"></input>
+            <input type = "submit" name= "KlassenTabelle7" class ="button dropdown-item" value ="7. Klasse"></input>
+            <input type = "submit" name= "KlassenTabelle8" class ="button dropdown-item"  value ="8. Klasse"></input>
+            <input type = "submit" name= "KlassenTabelle9" class ="button dropdown-item" value ="9. Klasse"></input>
+            <input type = "submit" name= "KlassenTabelle10" class ="button dropdown-item" value ="10. Klasse"></input>
+            <input type = "submit" name= "KlassenTabelle11" class ="button dropdown-item"  value ="Q11"></input>
+            <input type = "submit" name= "KlassenTabelle12" class ="button dropdown-item" value ="Q12"></input>
         </form>
+
+        <form class="button"  method = "post" action="admin.php" style="float: right; width: 20%; margin: auto;">
+            <input type = "submit" name= "TabelleExportieren" class="btn btn-primary" value ="Tabelle Exportieren"></input>
+        </form>
+
     </div>
+
     <br>
+    <br>
+    
     <?php
-    if(isset($_POST["BenutzerTabelle"])){
-        $ergebnis = $db->zeigeBenutzer();
+    if(isset($_POST["SchülerTabelle"])){
+        $ergebnis = $db->zeigeSchüler();
         echo "<table class='table border shadow p-3' style='margin: auto;'><tr><th>Benutzer ID</th><th>Name</th><th>Klasse</th><th>Rolle</th><th></th></tr>";
         // output data of each row
         foreach($ergebnis AS $row){
@@ -99,15 +121,62 @@ $table = "Kurs";
             <button type='submit' name ='import' class='btn btn-light' id='submit'>bearbeiten</button></td></tr>";
         }
         echo "</table>";
+        $_SESSION['ExportAbfrage'] =
+            "SELECT * 
+            FROM benutzer 
+            WHERE rolle = 'Schüler' 
+            ORDER BY upper(name)";
     } 
-    if(isset($_POST["ExportKurse"])){
 
+    if(isset($_POST["KlassenTabelle5"])){
+        $ergebnis = $db->zeigeKlasse(5);
+        Klassentabelle($ergebnis, 5);
+    } if(isset($_POST["KlassenTabelle6"])){
+        $ergebnis = $db->zeigeKlasse(6);
+        Klassentabelle($ergebnis, 6);
+    } if(isset($_POST["KlassenTabelle7"])){
+        $ergebnis = $db->zeigeKlasse(7);
+        Klassentabelle($ergebnis, 7);
+    } if(isset($_POST["KlassenTabelle8"])){
+        $ergebnis = $db->zeigeKlasse(8);
+        Klassentabelle($ergebnis, 8);
+    } if(isset($_POST["KlassenTabelle9"])){
+        $ergebnis = $db->zeigeKlasse(9);
+        Klassentabelle($ergebnis, 9);
+    } if(isset($_POST["KlassenTabelle10"])){
+        $ergebnis = $db->zeigeKlasse(10);
+        Klassentabelle($ergebnis, 10);
+    } if(isset($_POST["KlassenTabelle11"])){
+        $ergebnis = $db->zeigeKlasse(11);
+        Klassentabelle($ergebnis, 11);
+    } if(isset($_POST["KlassenTabelle12"])){
+        $ergebnis = $db->zeigeKlasse(12);
+        Klassentabelle($ergebnis, 12);
     } 
-    if(isset($_POST["KursenTabelle"])){
+
+    function Klassentabelle($ergebnis, $klasse) {
+        echo "<table class='table border shadow p-3' style='margin: auto;'><tr><th>Benutzer ID</th><th>Name</th><th>Klasse</th><th>Rolle</th><th></th></tr>";
+        
+        foreach($ergebnis AS $row){
+            echo "<tr><td>".$row["benutzer_id"].
+            "</td><td>".$row["name"].
+            "</td><td>".$row["klasse"].
+            "</td><td>".$row["rolle"]."</td><td>";
+        }
+        echo "</table>";
+        $_SESSION['ExportAbfrage'] =
+            "SELECT * 
+            FROM benutzer 
+            WHERE rolle = 'Schüler' 
+            AND klasse = ".$klasse."
+            ORDER BY lower(name)";
+    }
+
+    /* if(isset($_POST["KursenTabelle"])){
         $ergebnis = $db->zeigeAlleKurse();
-        echo "<table class='table border shadow p-3' style='margin: auto;'><tr><th>ID</th><th>Name</th><th>Kursleiter</th><th>Teilnehmer</th><th>Jahrgangsstufen</th><th>Ort</th>
+        echo "<table class='table border shadow p-3' style='margin: auto;'><tr><th>ID</th><th>Name</th><th>Teilnehmer</th><th>Jahrgangsstufen</th><th>Ort</th>
         <th>Tage</th><th>Zeitraum</th><th>Kosten</th></tr>";
-        // output data of each row
+
         foreach($ergebnis AS $row){
             echo "<tr><td>".$row["kurs_id"].
             "</td><td>".$row["name"].
@@ -120,7 +189,56 @@ $table = "Kurs";
             "</td><td>".$row["kosten"]."</td><tr>";
         }
         echo "</table>";
+        $_SESSION['ExportAbfrage'] =
+            "SELECT kurs_id, name, kursleiter1, kursleiter2, kursleiter3,
+            teilnehmerbegrenzung, jahrgangsstufen_beschraenkung, ort,
+            Tag_1, Tag_2, Tag_3, zeitraum_von, zeitraum_bis, kosten 
+            FROM kurse 
+            ORDER BY upper(name) ASC";
+    } */
+
+    if (isset($_POST["KursenTabelle"])){
+        $ergebnis = $db->zeigeKurse_zu_Benutzer();
+        echo "<table class='table border shadow p-3' style='margin: auto;'><tr><th>Kurs ID</th><th>Name</th>
+        <th>Kursleiter</th><th>Teilnehmer</th><th>Benutzer ID</th><th>Name</th><th>Klasse</th></tr>";
+        
+        $letzteID = "";
+        foreach($ergebnis AS $row){
+            if($row["kurs_id"] == $letzteID){
+                echo "<tr><td>".
+                "</td><td>".
+                "</td><td>".
+                "</td><td>".
+                "</td><td>".$row["benutzer_id"].
+                "</td><td>".$row[5].
+                "</td><td>".$row["klasse"]."<tr>";
+            } else {
+                echo "<tr><td>".$row["kurs_id"].
+                "</td><td>".$row[1].
+                "</td><td>".$row["kursleiter1"]."<br>".$row["kursleiter2"]."<br>".$row["kursleiter3"].
+                "</td><td>".$row["teilnehmerbegrenzung"].
+                "</td><td>".$row["benutzer_id"].
+                "</td><td>".$row[5].
+                "</td><td>".$row["klasse"]."<tr>";
+            }
+            $letzteID = $row["kurs_id"];
+        }
+        echo "</table>";
+        $_SESSION['ExportAbfrage'] =
+            "SELECT *
+            FROM benutzer, kurse,  benutzer_zu_kurse
+            WHERE benutzer.benutzer_id = benutzer_zu_kurse.b_id
+            AND kurse.kurs_id = benutzer_zu_kurse.kurs_id
+            ORDER BY lower(kurse.name)";
     }
+    
+    if(isset($_POST["TabelleExportieren"])){
+        $db->exportieren($_SESSION['ExportAbfrage']);
+    }
+
+    if(isset($_POST["logout"])){     
+    }
+
     ?>
 
     <?php
@@ -172,23 +290,4 @@ $table = "Kurs";
     
     }
 
-    if(isset($_POST["ExportSchüler"])){
-        $db->exportieren("SELECT * FROM benutzer WHERE rolle = 'Schüler' ORDER BY upper(name)");
-    } 
-
-    if(isset($_POST["ExportKlasse"])){
-        $db->exportieren("SELECT * FROM benutzer WHERE rolle = 'Schüler' ORDER BY upper(name)");
-    } 
-
-    if(isset($_POST["ExportKurse"])){
-        $db->exportieren(
-            "SELECT kurs_id, name, kursleiter1, kursleiter2, kursleiter3,
-            teilnehmerbegrenzung, jahrgangsstufen_beschraenkung, ort,
-            Tag_1, Tag_2, Tag_3, zeitraum_von, zeitraum_bis, kosten 
-            FROM kurse 
-            ORDER BY upper(name) ASC");
-    } 
-
-    if(isset($_POST["logout"])){     
-    }
 ?>
