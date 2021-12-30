@@ -83,10 +83,20 @@ class DB
         return $data;
     }
 
-    // Gibt Alles von Benutzer aus via MySQL query (+ Prevention of SQL Injection)
+    // Gibt Alle Schüler aus via MySQL query (+ Prevention of SQL Injection)
     public function zeigeSchüler()
     {
         $query = "SELECT * FROM benutzer WHERE rolle = 'Schüler' ORDER BY lower(name)";
+        $statement = $this->con->prepare($query);
+        $statement->execute();
+        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
+    // Gibt Alle Schüler aus via MySQL query (+ Prevention of SQL Injection)
+    public function zeigeKlasse($klasse)
+    {
+        $query = "SELECT * FROM benutzer WHERE rolle = 'Schüler' AND klasse = " . $klasse. " ORDER BY lower(name)";
         $statement = $this->con->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -99,7 +109,7 @@ class DB
         $query = "SELECT * FROM veranstaltungen ORDER BY lower(name)";
         $statement = $this->con->prepare($query);
         $statement->execute();
-        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $data = $statement->fetchAll(PDO::FETCH_BOTH);
         return $data;
     }
     
@@ -163,7 +173,34 @@ class DB
         //     $arr = array_merge($arr, array($statement->getColumnMeta($i)["name"]), array(" ");
         // }
         // echo implode($arr);
-        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        //Identisch Spaltenname!! -> PDO::FETCH_BOTH um ein index oder name zu verwenden
+        $data = $statement->fetchAll(PDO::FETCH_BOTH);
+        return $data;
+    }
+
+    public function zeigeKurse_zu_Benutzer()
+    {
+        $query = 
+            "SELECT kurse.kurs_id, kurse.name, klasse, rolle, benutzer.benutzer_id, benutzer.name, 
+            kursleiter1, kursleiter2, kursleiter3, teilnehmerbegrenzung, jahrgangsstufen_beschraenkung,
+            ort, Tag_1, Tag_2, Tag_3, zeitraum_von, zeitraum_bis, kosten 
+            FROM benutzer, kurse,  benutzer_zu_kurse
+            WHERE benutzer.benutzer_id = benutzer_zu_kurse.b_id
+            AND kurse.kurs_id = benutzer_zu_kurse.kurs_id
+            ORDER BY lower(kurse.name)";
+
+        $statement = $this->con->prepare($query);
+        $statement->execute();
+        // //Spaltennamen überprüfen
+        // $arr = array();
+        // for ($i = 0; $i < $statement->columnCount(); $i++){
+        //     $arr = array_merge($arr, array($statement->getColumnMeta($i)["name"]), array(" ");
+        // }
+        // echo implode($arr);
+
+        //Identisch Spaltenname!! -> PDO::FETCH_BOTH um ein index oder name zu verwenden
+        $data = $statement->fetchAll(PDO::FETCH_BOTH);
         return $data;
     }
 
