@@ -39,7 +39,7 @@ if(isset($_GET['id'])){
     
 
    <div>
-   <img src= '<?php echo $projektDaten[0]['bild'];?>' class='img-thumbnail' style='max-width:50%' alt='Responsive image'>
+   <img src= '<?php echo "../".$projektDaten[0]['bild'];?>' class='img-thumbnail' style='max-width:25%' alt='Responsive image'>
    <?php
    echo $projektDaten[0]["beschreibung"];?>
    <div>
