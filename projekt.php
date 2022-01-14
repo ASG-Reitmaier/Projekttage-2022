@@ -26,8 +26,7 @@ $db = new DB();
 
 
 <img src="img/asg-logo.jpg" class="img-fluid" alt="Responsive image">
-
-    <h1> </h1>
+  
 
 
 
