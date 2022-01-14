@@ -45,25 +45,12 @@ session_start();
         <div class="dropdown">
           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sortieren nach</button>
           <form class="dropdown-menu dropdown-menu-right" method = "post">
-            <input type = "submit" name= "sortname" class ="button dropdown-item" value ="Alphabetisch" onclick="gewaehlt(1)"></input>
-            <input type = "submit" name= "sortklasse" class ="button dropdown-item" value ="Klasse" onclick="gewaehlt(2)"></input>
+            <input type = "submit" name= "sortname" class ="button dropdown-item" value ="Alphabetisch"></input>
+            <input type = "submit" name= "sortklasse" class ="button dropdown-item" value ="Klasse"></input>
           </form>
         </div>
       </div>
     </nav>
-
-    <!-- funktionert nicht, muss in css geändert werden-->
-    <script>
-    function gewaehlt(num) {
-      if (name == 1){
-        document.getElementByName("sortname").style.backgroundColor = "#e1e1e1";
-        document.getElementByName("sortklasse").style.backgroundColor = "#fff";
-      } else if (name == 2){
-        document.getElementByName("sortname").style.backgroundColor = "#fff";
-        document.getElementByName("sortklasse").style.backgroundColor = "#e1e1e1";
-      }
-    }
-    </script>
 
     <?php 
       if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['sortname']))
