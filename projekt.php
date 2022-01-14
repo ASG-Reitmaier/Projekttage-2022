@@ -106,7 +106,7 @@ if(isset($_GET['id'])){
   <?php
   if(isset($_POST["button"]))
   {
-    $db->pruefeUser_Zeit(1, 11);
+    $db->pruefeUser_Zeit(3, 11);
   
   }
  
