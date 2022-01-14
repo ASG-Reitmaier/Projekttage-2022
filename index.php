@@ -4,12 +4,8 @@ $db = new DB();
 // mit session kann man Variablen speichern, bis der Benutzer die Seite verlässt
 // Undefined beim ersten Mal, Exceptions sollten ignoriert werden.
 session_start();
-$_SESSION['suchBegriff']="";
-$_SESSION['sortierung'];
-if ($_SESSION['suchBegriff'] == null || $_SESSION['sortierung'] == null){
-  $_SESSION['suchBegriff'] = "";
-  $_SESSION['sortierung'] = "name";
-}
+@$_SESSION['suchBegriff'];
+@$_SESSION['sortierung'];
 ?>
 
 
@@ -37,6 +33,8 @@ if ($_SESSION['suchBegriff'] == null || $_SESSION['sortierung'] == null){
   </head>  
 
   <body>
+  <?php include 'header.php'
+  ?>
     <nav class = "navbar navbar-light bg-light">
       <div class = "container-fluid">
         <form class = "d-flex" action = "index.php" method = "GET">
@@ -47,25 +45,12 @@ if ($_SESSION['suchBegriff'] == null || $_SESSION['sortierung'] == null){
         <div class="dropdown">
           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sortieren nach</button>
           <form class="dropdown-menu dropdown-menu-right" method = "post">
-            <input type = "submit" name= "sortname" class ="button dropdown-item" value ="Alphabetisch" onclick="gewaehlt(1)"></input>
-            <input type = "submit" name= "sortklasse" class ="button dropdown-item" value ="Klasse" onclick="gewaehlt(2)"></input>
+            <input type = "submit" name= "sortname" class ="button dropdown-item" value ="Alphabetisch"></input>
+            <input type = "submit" name= "sortklasse" class ="button dropdown-item" value ="Klasse"></input>
           </form>
         </div>
       </div>
     </nav>
-
-    <!-- funktionert nicht, muss in css geändert werden-->
-    <script>
-    function gewaehlt(num) {
-      if (name == 1){
-        document.getElementByName("sortname").style.backgroundColor = "#e1e1e1";
-        document.getElementByName("sortklasse").style.backgroundColor = "#fff";
-      } else if (name == 2){
-        document.getElementByName("sortname").style.backgroundColor = "#fff";
-        document.getElementByName("sortklasse").style.backgroundColor = "#e1e1e1";
-      }
-    }
-    </script>
 
     <?php 
       if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['sortname']))

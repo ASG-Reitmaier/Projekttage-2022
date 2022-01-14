@@ -112,7 +112,15 @@ class DB
         $data = $statement->fetchAll(PDO::FETCH_BOTH);
         return $data;
     }
-    
+    //Anmeldung bei Projekt 
+    public function anmeldenbeiProjekt ($v_name, $b_id)
+    {
+        $query = "INSERT INTO benutzer_zu_veranstaltung (v_name , b_id) values ($v_name , $b_id)";
+        $statement = $this->con->prepare($query);
+        $statement->execute();
+        $data = $statement->fetchAll(PDO::FETCH_BOTH);
+        return $data;
+    }
 
     // Gibt Alles von Raeume aus via MySQL query (+ Prevention of SQL Injection)
     public function zeigeRaeume()

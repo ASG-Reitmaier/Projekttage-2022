@@ -12,12 +12,10 @@
         
     </head>
     <body>
+    
+    <?php include 'header.php' //problem lol
+  ?>
         
-        <div style="float: right; background-color:#fb4400; height: 1042px; width:4%" >
-        
-        </div>
-        
-        <img src="Logo-Desktop.jpg" style="padding: 2%; width:25%;height:auto;">
         
         <br>
          <br>
