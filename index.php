@@ -4,12 +4,8 @@ $db = new DB();
 // mit session kann man Variablen speichern, bis der Benutzer die Seite verlässt
 // Undefined beim ersten Mal, Exceptions sollten ignoriert werden.
 session_start();
-$_SESSION['suchBegriff']="";
-$_SESSION['sortierung'];
-if ($_SESSION['suchBegriff'] == null || $_SESSION['sortierung'] == null){
-  $_SESSION['suchBegriff'] = "";
-  $_SESSION['sortierung'] = "name";
-}
+@$_SESSION['suchBegriff'];
+@$_SESSION['sortierung'];
 ?>
 
 

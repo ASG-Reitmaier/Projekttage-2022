@@ -3,7 +3,7 @@
 $db = new DB();
 
 session_start();
-$_SESSION['ExportAbfrage'];
+@$_SESSION['ExportAbfrage'];
 $_SESSION['Tabelle'] = "BenutzerTabelle";
 $table = "Kurs";
 //ob_start immer nach session_start(). Zum exportieren
