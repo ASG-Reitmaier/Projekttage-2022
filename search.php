@@ -163,6 +163,17 @@ class DB
         return $data;
     }
 
+    //Ausgeben Login
+    public function loginAusgeben($username, $password)
+    {
+        $query = "SELECT * FROM benutzer WHERE name = '$username' AND passwort = '$password'";
+        $statement = $this->con->prepare($query);
+        $statement->execute();
+        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+
+    }
+
     //Benutzer zu Kurse
     public function zeigeBenutzer_zu_Kurse()
     {

@@ -24,37 +24,41 @@
         
     </head>
     <body>
-    
-    <?php include 'header.php' //problem lol?>
-    <div style="margin: auto; width: 92%; padding-right: 5ch">
-        <br>
-        <br>
-        <br>
-        <br>
-            
-        <h1 style="text-align: center; font-family: sans-serif">Anmelden</h1>
-        
-       <div style= "background-color: white; width: 60%; height: auto; margin: auto; border-style: solid; border-color: #f2f2f2; border-width: 12px; border-radius: 8px">
-                <br>
-                <br>
-            <div style=" padding-left: 3%; padding-right: 3%" class="mb-3">
-                <label for="Benutzername" class="form-label" style="font-family:sans-serif">Benutzername</label>
-                <input style="border-style:solid; border-color:#e9e9e9; border-width: 3px; ;background-color: #f2f2f2" type="text" class="form-control" id="Benutzername" placeholder="">
-            </div>
-            
-            <div style=" padding-left: 3%; padding-right: 3%" class="mb-3">
-                <label for="Passwort" class="form-label" style="font-family:sans-serif">Passwort</label>
-                <input style="border-style:solid; border-color:#e9e9e9; border-width: 3px; ;background-color: #f2f2f2" type="password" class="form-control" id="Passwort" placeholder="">
-            </div>
-              
-            <br>
-              
-            <a href="" style="text-align: center; margin: 42%;"> <button type="button" class="btn btn-light" style="background-color:#fb4400; color: white; font-size:21px;  width: 150px">Anmelden</button></a>
-            <br>
-           <br>
-        </div>
-        
-    </div>
-    </body>
+<div class="container d-flex justify-content-center align-items-center"
+      style="min-height: 100vh">
+      	<form class="border shadow p-3 rounded"
+      	      action="check-login.php" 
+      	      method="post" 
+      	      style="width: 450px;">
+      	      <h1 class="text-center p-3">LOGIN</h1>
+      	      <?php if (isset($_GET['error'])) { ?>
+      	      <div class="alert alert-danger" role="alert">
+				  <?=$_GET['error']?>
+			  </div>
+			  <?php } ?>
+		  <div class="mb-3">
+		    <label for="benutzername" 
+		           class="form-label">Benutzername</label>
+		    <input type="text" 
+		           class="form-control" 
+		           name="benutzername" 
+		           id="benutzer_id">
+		  </div>
+		  <div class="mb-3">
+		    <label for="password" 
+		           class="form-label">Passwort</label>
+		    <input type="password" 
+		           name="passwort" 
+		           class="form-control" 
+		           id="passwort_id">
+		  </div>
+		  
+		 
+		  <button type="submit" 
+		          class="btn btn-primary">LOGIN</button>
+		</form>
+      </div>
+
+</body>
     
 </html>
