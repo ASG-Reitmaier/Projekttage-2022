@@ -37,6 +37,8 @@ if ($_SESSION['suchBegriff'] == null || $_SESSION['sortierung'] == null){
   </head>  
 
   <body>
+  <?php include 'header.php'
+  ?>
     <nav class = "navbar navbar-light bg-light">
       <div class = "container-fluid">
         <form class = "d-flex" action = "index.php" method = "GET">

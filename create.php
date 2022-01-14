@@ -26,6 +26,9 @@
   </head>
 
   <body>
+  <?php include 'header.php'
+  ?>
+  
     <h1 align = "center">Projekterstellung</h1><br> <br>
 
 <?php

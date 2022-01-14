@@ -23,7 +23,8 @@ $db = new DB();
 
 </head>
 <body>
-
+<?php include 'header.php'
+  ?>
 
 
     <h1> </h1>
