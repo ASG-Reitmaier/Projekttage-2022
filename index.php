@@ -6,6 +6,8 @@ $db = new DB();
 session_start();
 @$_SESSION['suchBegriff'];
 @$_SESSION['sortierung'];
+if (!$_SESSION['sortierung'])
+  $_SESSION['sortierung'] = "Alphabetisch";
 ?>
 
 
@@ -19,13 +21,19 @@ session_start();
 
     <title>Testseite</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/grid/">
-
     <!-- CSS von Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <!-- Grid-Design von Bootstrap -->
-    <link href="https://getbootstrap.com/docs/4.0/examples/grid/grid.css" rel="stylesheet">
+     <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> 
+
+    <link rel="stylesheet" href="/path/to/cdn/bootstrap.min.css" />
+        <script src="/path/to/cdn/bootstrap.min.js"></script>
+    <link href="bootstrap5-dropdown-ml-hack-hover.css" rel="stylesheet" />
+        <script src="bootstrap5-dropdown-ml-hack.js"></script>
 
     <!-- js für das Dropdown-Menü -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

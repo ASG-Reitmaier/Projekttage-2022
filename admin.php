@@ -36,9 +36,8 @@ ob_start();
         <script src="bootstrap5-dropdown-ml-hack.js"></script>
 </head>
 
-<body>
-    <?php include 'header.php'
-    ?>
+<body class="body">
+    <?php include 'header.php'?>
 
 <div style="margin: auto; width: 92%; padding-right: 5ch">
     <br>

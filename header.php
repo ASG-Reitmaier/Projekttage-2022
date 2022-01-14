@@ -14,6 +14,7 @@
                 </li>
                 <li class="nav-item active">
                     <a class="nav-item nav-link" href="login.php">Adminstration</a>
+                </li>
                 <li class="nav-item active">
                     <a class="nav-item nav-link" href="admin.php">Verwaltung</a>
                 </li>
