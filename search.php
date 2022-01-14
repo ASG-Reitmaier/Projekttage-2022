@@ -286,7 +286,8 @@ class DB
 
     public function benutzerZuKurse($kursId, $Id)
     {
-        $query = "INSERT INTO 'benutzer_zu_kurse' ('b_id','kurs_id') VALUES ('$kursId','$Id');";
+        $query = "INSERT INTO 'benutzer_zu_kurse' ('b_id','kurs_id') VALUES ('$Id', '$kursId');";
+        echo "<p>fsdf</p>";
         $statement = $this->con->prepare($query);
         $statement->execute();
     }
