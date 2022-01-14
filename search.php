@@ -319,7 +319,7 @@ class DB
 
             $test=true;
 
-            for ($i = 0; $i < count($b_kurse; $i++) 
+            for ($i = 0; $i < count($b_kurse; $i++)) 
             {
                $query = "SELECT 'Tag_1' FROM kurse WHERE 'kurs_id'=$b_kurse[$i];";
                 $statement = $this->con->prepare($query);
