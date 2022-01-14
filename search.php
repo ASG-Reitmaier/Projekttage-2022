@@ -308,7 +308,7 @@ class DB
             $tag1_pr = $statement->fetchAll(PDO::FETCH_ASSOC);
 
             $query = "SELECT 'Tag_2' FROM kurse WHERE 'kurs_id'=$kursId";
-            $statement = $this->con->prepare($query);
+            $statement = $this->con->prepare($query); 
             $statement->execute();
             $tag2_pr = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -319,19 +319,19 @@ class DB
 
             $test=true;
 
-            for ($i = 0; $i < count($dath); $i++) 
+            for ($i = 0; $i < count($b_kurse; $i++) 
             {
-               $query = "SELECT 'Tag_1' FROM kurse WHERE 'kurs_id'=$b_kurse[i];";
+               $query = "SELECT 'Tag_1' FROM kurse WHERE 'kurs_id'=$b_kurse[$i];";
                 $statement = $this->con->prepare($query);
                 $statement->execute();
                 $tag1 = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                $query = "SELECT 'Tag_2' FROM kurse WHERE 'kurs_id'=$b_kurse[i];";
+                $query = "SELECT 'Tag_2' FROM kurse WHERE 'kurs_id'=$b_kurse[$i];";
                 $statement = $this->con->prepare($query);
                 $statement->execute();
                 $tag2 = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                $query = "SELECT 'Tag_3' FROM kurse WHERE 'kurs_id'=$b_kurse[i];";
+                $query = "SELECT 'Tag_3' FROM kurse WHERE 'kurs_id'=$b_kurse[$i];";
                 $statement = $this->con->prepare($query);
                 $statement->execute();
                 $tag3 = $statement->fetchAll(PDO::FETCH_ASSOC);
