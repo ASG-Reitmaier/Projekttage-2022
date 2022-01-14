@@ -1,4 +1,6 @@
+<link rel="canonical" href="https://getbootstrap.com/docs/5.0/components/alerts/">
 <?php
+
 
 if(count(get_included_files()) ==1) exit("Direct access not permitted.");
 
@@ -289,6 +291,7 @@ class DB
         $query = "INSERT INTO benutzer_zu_kurse (b_id,kurs_id) VALUES ($Id, $kursId)";
         $statement = $this->con->prepare($query);
         $statement->execute();
+        echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-success alert-dismissible fade show' role='alert'> Du hast dich erfolgreich im Kurs angemeldet!   </div></div><div class='col'></div></div>";
     }
 
     public function pruefeUser_Zeit($kursId, $Id)
@@ -303,10 +306,12 @@ class DB
         $statement->execute();
         $datu = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        $this->console_log($data);
-        $this->console_log($datu);
-        $this->console_log($data[0]["COUNT(*)"]);
-        $this->console_log($datu[0]["teilnehmerbegrenzung"]);
+       
+
+        if($data[0]["COUNT(*)"]>$datu[0]["teilnehmerbegrenzung"])
+        {
+            echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-danger alert-dismissible fade show' role='alert'> Der Kurs ist voll!   </div></div><div class='col'></div></div>";
+        }
 
         if($data[0]["COUNT(*)"]<$datu[0]["teilnehmerbegrenzung"])
         {
@@ -330,7 +335,7 @@ class DB
             $statement->execute();
             $tag3_pr = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-            $this->console_log($tag3_pr);
+            
 
             $test=true;
 
@@ -351,20 +356,23 @@ class DB
                 $statement->execute();
                 $tag3 = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                $this->console_log($tag3);
+               
 
                 if($tag1_pr==true AND $tag1==true){
                     $test=false;
+                    echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-danger alert-dismissible fade show' role='alert'>An Tag 1 hast du bereits einen Kurs gebucht!   </div></div><div class='col'></div></div>";
                 }
                 if($tag2_pr==true AND $tag2==true){
                     $test=false;
+                    echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-danger alert-dismissible fade show' role='alert'>An Tag 2 hast du bereits einen Kurs gebucht!   </div></div><div class='col'></div></div>";
                 }
                 if($tag3_pr==true AND $tag3==true){
                     $test=false;
+                    echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-danger alert-dismissible fade show' role='alert'>An Tag 3 hast du bereits einen Kurs gebucht!   </div></div><div class='col'></div></div>";
                 }
             }
 
-            $this->console_log($test);
+            
 
         if($test){
             $this->benutzerZuKurse($kursId, $Id);
