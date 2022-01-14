@@ -25,8 +25,10 @@ $db = new DB();
 <body>
 
 
+<img src="img/asg-logo.jpg" class="img-fluid" alt="Responsive image">
 
     <h1> </h1>
+
 
 
     <?php
@@ -34,19 +36,20 @@ $db = new DB();
 if(isset($_GET['id'])){
     
     $projektDaten = $db->zeigeKurs($_GET['id']);
-    echo $projektDaten[0]["name"];
+    
     ?>
 
-   <div>
-   <img src= '<?php echo $projektDaten[0]['bild']?>' class='img-thumbnail' style='max-width:50%' alt='Responsive image'>
-   <?php
-   echo $projektDaten[0]["beschreibung"];?>
-   <div>
+<h1 align ="center"> <?php echo $projektDaten[0]["name"]; ?></h1>
 
-   <h1> <?php echo $projektDaten[0]["kursleiter1"] ?> <h1>
+<div class="container-md">
+  <img src= '<?php echo $projektDaten[0]['bild']?>' class=' rounded mx-auto d-block' style='max-width:50%' alt='Responsive image'> 
+</div>
 
-   <div class="container-fluid">
-  <table class="table">
+  <div class="container-sm p-5 my-5 border">
+   <h5 align ="center"> <?php echo $projektDaten[0]["beschreibung"];?> </h5>
+  </div>
+   <div class="container-md">
+  <table class="table table-borderless table-active table-vcenter">
   <thead>
     <tr>
       <th scope="col">Kursleiter 1</th>
@@ -62,15 +65,15 @@ if(isset($_GET['id'])){
     </tr>
   </tbody>
 </table> 
-</div>
+
 <!-- <div class="d-flex align-items-start bg-light mb-3" style="height: 25px;">
   <div class="col"><td>     <?php echo $projektDaten[0]["kursleiter1"] ?></td></div>
   <div class="col"><td>     <?php echo $projektDaten[0]["kursleiter2"] ?></td></div>
   <div class="col"><td>     <?php echo $projektDaten[0]["kursleiter3"] ?></td></div>
 </div> -->
 
-<div class="container-fluid">
-  <table class="table">
+
+  <table class="table table-borderless table-active table-vcenter">
   <thead>
     <tr>
       <th scope="col">Zeitraum von</th>
