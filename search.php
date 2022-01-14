@@ -277,7 +277,7 @@ class DB
         if ($sortierung == "name")
             $query = $query. " ORDER BY lOWER(kurse.name)";
         else
-            $query = $query. " ORDER BY LOWER(kurse.name DESC)";
+            $query = $query. " ORDER BY LOWER(kurse.name) DESC";
         $statement = $this->con->prepare($query);
         $statement->execute(["begriff"=>"%".$suchbegriff."%"]);
         $date = $statement->fetchAll(PDO::FETCH_ASSOC);
