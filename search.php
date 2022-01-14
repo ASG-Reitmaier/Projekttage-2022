@@ -278,7 +278,8 @@ class DB
 
     public function benutzerZuKurse($kursId, $Id)
     {
-        $query = "INSERT INTO 'benutzer_zu_kurse' ('b_id','kurs_id') VALUES ('$kursId','$Id');";
+        $query = "INSERT INTO 'benutzer_zu_kurse' ('b_id','kurs_id') VALUES ('$Id', '$kursId');";
+        echo "<p>fsdf</p>";
         $statement = $this->con->prepare($query);
         $statement->execute();
     }
@@ -319,7 +320,7 @@ class DB
 
             $test=true;
 
-            for ($i = 0; $i < count($b_kurse; $i++) 
+            for ($i = 0; $i < count($b_kurse); $i++) 
             {
                $query = "SELECT 'Tag_1' FROM kurse WHERE 'kurs_id'=$b_kurse[$i];";
                 $statement = $this->con->prepare($query);

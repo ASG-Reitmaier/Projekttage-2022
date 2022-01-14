@@ -99,9 +99,16 @@ if(isset($_GET['id'])){
 
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="multipart/form-data">
 
-  <button type="submit" class="btn btn-primary">Senden</button>
+  <button type="submit" class="btn btn-primary" value="anmelden" name="button">Anmelden</button>
   
   </form>
+
+  <?php
+  if(isset($_POST["button"]))
+  {
+    $db->pruefeUser_Zeit(1, 11);
+  
+  }
  
- 
+ ?>
     </body>
