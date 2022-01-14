@@ -20,10 +20,33 @@ $db = new DB();
 
        <!-- CSS von Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/components/alerts/">
+    
 </head>
 <body>
+<div style="float: right; background-color:#fb4400; height: 170% ; width:4%" data-scroll>
+        <input formmethod="post" type="image" id="logout" alt="logout" src="../uploads\Test\Logout Logo v2.png" style="width: 100%;"> 
+    </div>
 
+    <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light" style="height: 10ch;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwzB-PnY6KPKMhQxP9mBPsWxX29ESb72pGgQ&usqp=CAU" class="rounded float-right mg-fluid" style="width: 5%;">
+        <div class="container-fluid">
+            <ul class="navbar-nav mr-auto" style="font-size: 2.5ch; padding">
+                <li class="nav-item active">
+                    <a class="nav-item nav-link" href="../index.php">Übersicht</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-item nav-link" href="../create.php">Erstellen</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-item nav-link" href="../login.php">Adminstration</a>
+                <li class="nav-item active">
+                    <a class="nav-item nav-link" href="../admin.php">Verwaltung</a>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
 
 
   
@@ -123,9 +146,16 @@ if(isset($_GET['id'])){
 
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="multipart/form-data">
 
-  <button type="submit" class="btn btn-primary">Senden</button>
+  <button type="submit" class="btn btn-primary" value="anmelden" name="button">Anmelden</button>
   
   </form>
+
+  <?php
+  if(isset($_POST["button"]))
+  {
+    $db->pruefeUser_Zeit(3, 11);
+  
+  }
  
- 
+ ?>
     </body>

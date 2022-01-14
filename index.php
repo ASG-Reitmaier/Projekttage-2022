@@ -4,12 +4,10 @@ $db = new DB();
 // mit session kann man Variablen speichern, bis der Benutzer die Seite verlässt
 // Undefined beim ersten Mal, Exceptions sollten ignoriert werden.
 session_start();
-$_SESSION['suchBegriff']="";
-$_SESSION['sortierung'];
-if ($_SESSION['suchBegriff'] == null || $_SESSION['sortierung'] == null){
-  $_SESSION['suchBegriff'] = "";
-  $_SESSION['sortierung'] = "name";
-}
+@$_SESSION['suchBegriff'];
+@$_SESSION['sortierung'];
+if (!$_SESSION['sortierung'])
+  $_SESSION['sortierung'] = "Alphabetisch";
 ?>
 
 
@@ -23,13 +21,19 @@ if ($_SESSION['suchBegriff'] == null || $_SESSION['sortierung'] == null){
 
     <title>Testseite</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/grid/">
-
     <!-- CSS von Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <!-- Grid-Design von Bootstrap -->
-    <link href="https://getbootstrap.com/docs/4.0/examples/grid/grid.css" rel="stylesheet">
+     <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> 
+
+    <link rel="stylesheet" href="/path/to/cdn/bootstrap.min.css" />
+        <script src="/path/to/cdn/bootstrap.min.js"></script>
+    <link href="bootstrap5-dropdown-ml-hack-hover.css" rel="stylesheet" />
+        <script src="bootstrap5-dropdown-ml-hack.js"></script>
 
     <!-- js für das Dropdown-Menü -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -37,6 +41,8 @@ if ($_SESSION['suchBegriff'] == null || $_SESSION['sortierung'] == null){
   </head>  
 
   <body>
+  <?php include 'header.php'
+  ?>
     <nav class = "navbar navbar-light bg-light">
       <div class = "container-fluid">
         <form class = "d-flex" action = "index.php" method = "GET">
@@ -47,25 +53,12 @@ if ($_SESSION['suchBegriff'] == null || $_SESSION['sortierung'] == null){
         <div class="dropdown">
           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sortieren nach</button>
           <form class="dropdown-menu dropdown-menu-right" method = "post">
-            <input type = "submit" name= "sortname" class ="button dropdown-item" value ="Alphabetisch" onclick="gewaehlt(1)"></input>
-            <input type = "submit" name= "sortklasse" class ="button dropdown-item" value ="Klasse" onclick="gewaehlt(2)"></input>
+            <input type = "submit" name= "sortname" class ="button dropdown-item" value ="Alphabetisch"></input>
+            <input type = "submit" name= "sortklasse" class ="button dropdown-item" value ="Klasse"></input>
           </form>
         </div>
       </div>
     </nav>
-
-    <!-- funktionert nicht, muss in css geändert werden-->
-    <script>
-    function gewaehlt(num) {
-      if (name == 1){
-        document.getElementByName("sortname").style.backgroundColor = "#e1e1e1";
-        document.getElementByName("sortklasse").style.backgroundColor = "#fff";
-      } else if (name == 2){
-        document.getElementByName("sortname").style.backgroundColor = "#fff";
-        document.getElementByName("sortklasse").style.backgroundColor = "#e1e1e1";
-      }
-    }
-    </script>
 
     <?php 
       if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['sortname']))

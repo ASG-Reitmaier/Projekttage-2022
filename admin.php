@@ -3,7 +3,7 @@
 $db = new DB();
 
 session_start();
-$_SESSION['ExportAbfrage'];
+@$_SESSION['ExportAbfrage'];
 $_SESSION['Tabelle'] = "BenutzerTabelle";
 $table = "Kurs";
 //ob_start immer nach session_start(). Zum exportieren
@@ -36,32 +36,8 @@ ob_start();
         <script src="bootstrap5-dropdown-ml-hack.js"></script>
 </head>
 
-<body>
-    <div style="float: right; background-color:#fb4400; height: 200%; width: 5ch" data-scroll>
-        <input formmethod="post" type="image" id="logout" alt="logout" src="uploads\Test\Logout Logo v2.png" style="width: 100%;"> 
-    </div>
-    
-    <!-- Header-->
-    <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light" style="height: 10ch;">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwzB-PnY6KPKMhQxP9mBPsWxX29ESb72pGgQ&usqp=CAU" class="rounded float-right mg-fluid" style="width: 5%;">
-        <div class="container-fluid">
-            <ul class="navbar-nav mr-auto" style="font-size: 2.5ch;">
-                <li class="nav-item active">
-                    <a class="nav-item nav-link" href="index.php"> Übersicht </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-item nav-link" href="create.php"> Erstellen </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-item nav-link" href="login.php"> Adminstration </a>
-                </li>
-            </ul>
-            <a style="float: right;">
-                <h1> Verwaltung </h1>
-            </a>
-        </div>
-
-    </nav>
+<body class="body">
+    <?php include 'header.php'?>
 
 <div style="margin: auto; width: 92%; padding-right: 5ch">
     <br>

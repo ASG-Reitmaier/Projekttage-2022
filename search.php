@@ -1,4 +1,6 @@
+<link rel="canonical" href="https://getbootstrap.com/docs/5.0/components/alerts/">
 <?php
+
 
 if(count(get_included_files()) ==1) exit("Direct access not permitted.");
 
@@ -112,7 +114,15 @@ class DB
         $data = $statement->fetchAll(PDO::FETCH_BOTH);
         return $data;
     }
-    
+    //Anmeldung bei Projekt 
+    public function anmeldenbeiProjekt ($v_name, $b_id)
+    {
+        $query = "INSERT INTO benutzer_zu_veranstaltung (v_name , b_id) values ($v_name , $b_id)";
+        $statement = $this->con->prepare($query);
+        $statement->execute();
+        $data = $statement->fetchAll(PDO::FETCH_BOTH);
+        return $data;
+    }
 
     // Gibt Alles von Raeume aus via MySQL query (+ Prevention of SQL Injection)
     public function zeigeRaeume()
@@ -267,9 +277,9 @@ class DB
                     FROM kurse
                     WHERE (LOWER(kurse.beschreibung) LIKE LOWER(:begriff) OR LOWER(kurse.name) LIKE LOWER(:begriff))";
         if ($sortierung == "name")
-            $query = $query. " ORDER BY kurse.name";
+            $query = $query. " ORDER BY lOWER(kurse.name)";
         else
-            $query = $query. " ORDER BY kurse.name DESC";
+            $query = $query. " ORDER BY LOWER(kurse.name) DESC";
         $statement = $this->con->prepare($query);
         $statement->execute(["begriff"=>"%".$suchbegriff."%"]);
         $date = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -278,74 +288,91 @@ class DB
 
     public function benutzerZuKurse($kursId, $Id)
     {
-        $query = "INSERT INTO 'benutzer_zu_kurse' ('b_id','kurs_id') VALUES ('$kursId','$Id');";
+        $query = "INSERT INTO benutzer_zu_kurse (b_id,kurs_id) VALUES ($Id, $kursId)";
         $statement = $this->con->prepare($query);
         $statement->execute();
+        echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-success alert-dismissible fade show' role='alert'> Du hast dich erfolgreich im Kurs angemeldet!   </div></div><div class='col'></div></div>";
     }
 
     public function pruefeUser_Zeit($kursId, $Id)
     {
-        $query = "SELECT COUNT(*) FROM benutzer_zu_kurse WHERE 'kurs_id'=$kursId;";
+        $query = "SELECT COUNT(*) FROM benutzer_zu_kurse WHERE kurs_id=$kursId";
         $statement = $this->con->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        $query = "SELECT 'teilnehmerbegrenzung' FROM kurse WHERE 'kurs_id'=$kursId;";
+        $query = "SELECT teilnehmerbegrenzung FROM kurse WHERE kurs_id=$kursId";
         $statement = $this->con->prepare($query);
         $statement->execute();
         $datu = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        if($data<$datu)
+       
+
+        if($data[0]["COUNT(*)"]>$datu[0]["teilnehmerbegrenzung"])
         {
-            $query = "SELECT 'kurs_id' FROM benutzer_zu_kurse WHERE 'b_id'=$Id;";
+            echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-danger alert-dismissible fade show' role='alert'> Der Kurs ist voll!   </div></div><div class='col'></div></div>";
+        }
+
+        if($data[0]["COUNT(*)"]<$datu[0]["teilnehmerbegrenzung"])
+        {
+            $query = "SELECT kurs_id FROM benutzer_zu_kurse WHERE b_id=$Id";
             $statement = $this->con->prepare($query);
             $statement->execute();
             $b_kurse = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-            $query = "SELECT 'Tag_1' FROM kurse WHERE 'kurs_id'=$kursId;";
+            $query = "SELECT Tag_1 FROM kurse WHERE kurs_id=$kursId";
             $statement = $this->con->prepare($query);
             $statement->execute();
             $tag1_pr = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-            $query = "SELECT 'Tag_2' FROM kurse WHERE 'kurs_id'=$kursId";
-            $statement = $this->con->prepare($query);
+            $query = "SELECT Tag_2 FROM kurse WHERE kurs_id=$kursId";
+            $statement = $this->con->prepare($query); 
             $statement->execute();
             $tag2_pr = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-            $query = "SELECT 'Tag_3' FROM kurse WHERE 'kurs_id'=$kursId";
+            $query = "SELECT Tag_3 FROM kurse WHERE kurs_id=$kursId";
             $statement = $this->con->prepare($query);
             $statement->execute();
             $tag3_pr = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+            
+
             $test=true;
 
-            for ($i = 0; $i < count($dath); $i++) 
+            for ($i = 0; $i < count($b_kurse); $i++) 
             {
-               $query = "SELECT 'Tag_1' FROM kurse WHERE 'kurs_id'=$b_kurse[i];";
+               $query = "SELECT Tag_1 FROM kurse WHERE kurs_id=$b_kurse[$i]";
                 $statement = $this->con->prepare($query);
                 $statement->execute();
                 $tag1 = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                $query = "SELECT 'Tag_2' FROM kurse WHERE 'kurs_id'=$b_kurse[i];";
+                $query = "SELECT Tag_2 FROM kurse WHERE kurs_id=$b_kurse[$i]";
                 $statement = $this->con->prepare($query);
                 $statement->execute();
                 $tag2 = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                $query = "SELECT 'Tag_3' FROM kurse WHERE 'kurs_id'=$b_kurse[i];";
+                $query = "SELECT Tag_3 FROM kurse WHERE kurs_id=$b_kurse[$i]";
                 $statement = $this->con->prepare($query);
                 $statement->execute();
                 $tag3 = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+               
+
                 if($tag1_pr==true AND $tag1==true){
                     $test=false;
+                    echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-danger alert-dismissible fade show' role='alert'>An Tag 1 hast du bereits einen Kurs gebucht!   </div></div><div class='col'></div></div>";
                 }
                 if($tag2_pr==true AND $tag2==true){
                     $test=false;
+                    echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-danger alert-dismissible fade show' role='alert'>An Tag 2 hast du bereits einen Kurs gebucht!   </div></div><div class='col'></div></div>";
                 }
                 if($tag3_pr==true AND $tag3==true){
                     $test=false;
+                    echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-danger alert-dismissible fade show' role='alert'>An Tag 3 hast du bereits einen Kurs gebucht!   </div></div><div class='col'></div></div>";
                 }
             }
+
+            
 
         if($test){
             $this->benutzerZuKurse($kursId, $Id);
