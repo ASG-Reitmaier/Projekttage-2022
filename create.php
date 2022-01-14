@@ -40,6 +40,9 @@
         $teilnehmerbegrenzung   = $_POST["teilnehmerbegrenzung"];
         $beschraenkung          = $_POST["jahrgangsstufen_beschraenkung"];
         $ort                    = $_POST["ort"];
+        if(isset($_POST["tag1"])){$tag1=1;} else{$tag1=0;};
+        if(isset($_POST["tag2"])){$tag2=1;} else{$tag2=0;};
+        if(isset($_POST["tag3"])){$tag3=1;} else{$tag3=0;};
         $zeitraum_von           = $_POST["zeitraum_von"];
         $zeitraum_bis           = $_POST["zeitraum_bis"];
         $kosten                 = $_POST["kosten"];
@@ -53,7 +56,7 @@
         if($db->namePruefen($name))
         {
           echo $db->namePruefen($name);
-          $db->kursEinfuegen($name, $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort, $zeitraum_von, $zeitraum_bis, $kosten, $bild);
+          $db->kursEinfuegen($name, $beschreibung, $kursleiter1, $kursleiter2, $kursleiter3, $teilnehmerbegrenzung, $beschraenkung, $ort, $tag1, $tag2, $tag3, $zeitraum_von, $zeitraum_bis, $kosten, $bild);
           echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-success alert-dismissible fade show' role='alert'> Der Kurs wurde erfolgreich eingefügt!   </div></div><div class='col'></div></div>";
         }
         else
@@ -114,6 +117,21 @@
   <div class="form-group">
     <label for="ort">Ort</label>
     <input class="form-control" name="ort" placeholder="">
+  </div>
+
+  <div class="form-group">
+    <label for="ort">Tag 1</label>
+    <input type="checkbox" name="tag1" placeholder="">
+  </div>
+
+  <div class="form-group">
+    <label for="ort">Tag 2</label>
+    <input type="checkbox" name="tag2" placeholder="">
+  </div>
+
+  <div class="form-group">
+    <label for="ort">Tag 3</label>
+    <input type="checkbox" name="tag3" placeholder="">
   </div>
 
   <div class="form-group">

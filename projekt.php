@@ -37,8 +37,17 @@ if(isset($_GET['id'])){
     $projektDaten = $db->zeigeKurs($_GET['id']);
     
     ?>
+    
 
+<<<<<<< HEAD
 <h1 align ="center"> <?php echo $projektDaten[0]["name"]; ?></h1>
+=======
+   <div>
+   <img src= '<?php echo "../".$projektDaten[0]['bild'];?>' class='img-thumbnail' style='max-width:25%' alt='Responsive image'>
+   <?php
+   echo $projektDaten[0]["beschreibung"];?>
+   <div>
+>>>>>>> 953e63610f21f6806d36de323e6b301cffa2915a
 
 <div class="container-md">
   <img src= '<?php echo $projektDaten[0]['bild']?>' class=' rounded mx-auto d-block' style='max-width:50%' alt='Responsive image'> 
@@ -98,6 +107,11 @@ if(isset($_GET['id'])){
 
 <?php } ?>
 
+<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="multipart/form-data">
+
+  <button type="submit" class="btn btn-primary">Senden</button>
+  
+  </form>
  
  
     </body>

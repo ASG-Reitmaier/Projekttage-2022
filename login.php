@@ -32,16 +32,16 @@
                 <br>
                 <br>
             <div style=" padding-left: 3%; padding-right: 3%" class="mb-3">
-                    <label for="formGroupExampleInput" class="form-label" style="font-family:sans-serif">Benutzername</label>
-                    <input style="border-style:solid; border-color:#e9e9e9; border-width: 3px; ;background-color: #f2f2f2" type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                <label for="Benutzername" class="form-label" style="font-family:sans-serif">Benutzername</label>
+                <input style="border-style:solid; border-color:#e9e9e9; border-width: 3px; ;background-color: #f2f2f2" type="text" class="form-control" id="Benutzername" placeholder="">
             </div>
             
             <div style=" padding-left: 3%; padding-right: 3%" class="mb-3">
-                    <label for="formGroupExampleInput2" class="form-label" style="font-family:sans-serif">Passwort</label>
-                    <input type="password" style="border-style:solid; border-color:#e9e9e9; border-width: 3px; ;background-color: #f2f2f2" type="text" class="form-control" id="eformGroupExampleInput2" placeholder="">
+                <label for="Passwort" class="form-label" style="font-family:sans-serif">Passwort</label>
+                <input style="border-style:solid; border-color:#e9e9e9; border-width: 3px; ;background-color: #f2f2f2" type="password" class="form-control" id="Passwort" placeholder="">
             </div>
               
-              <br>
+            <br>
               
             <a href="" style="text-align: center; margin: 42%;"> <button type="button" class="btn btn-light" style="background-color:#fb4400; color: white; font-size:21px;  width: 150px">Anmelden</button></a>
             <br>
