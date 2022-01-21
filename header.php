@@ -29,6 +29,9 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
                         exit(); 
                     } */
                 ?>
+                <li class="nav-item active">
+                    <a class="nav-item nav-link" href="logout.php">Logout</a>
+                </li>
             </ul>
         </div>
 
