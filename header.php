@@ -15,7 +15,7 @@
                 <li class="nav-item active">
                     <a class="nav-item nav-link" href="create.php">Erstellen</a>
                 </li>
-                <?php if($_SESSION['rolle'] === "admin"){ ?>
+                <?php if($_SESSION['rolle'] == "admin"){ ?>
                 <li class="nav-item active">
                     <a class="nav-item nav-link" href="admin.php">Verwaltung</a>
                 </li>
