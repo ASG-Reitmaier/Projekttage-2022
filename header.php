@@ -1,4 +1,7 @@
-<?php session_start();
+<?php 
+
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
 ?>
 
 <div style="float: right; background-color:#fb4400; height: 170% ; width:4%" data-scroll>
