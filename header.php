@@ -19,8 +19,8 @@
                 <li class="nav-item active">
                     <a class="nav-item nav-link" href="admin.php">Verwaltung</a>
                 </li>
-                <?php }
-                    /* else{
+                <?php /*}
+                     else{
                         header("Location:login.php");
                         exit(); 
                     } */
