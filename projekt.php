@@ -1,6 +1,7 @@
 <?php
 require_once('search.php');
 $db = new DB();
+<session_start();
 ?>
 
 <html lang='de'>
@@ -38,11 +39,11 @@ $db = new DB();
                 <li class="nav-item active">
                     <a class="nav-item nav-link" href="../create.php">Erstellen</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-item nav-link" href="../login.php">Adminstration</a>
+                <?php if($_SESSION['rolle'] === "admin"){ ?>
                 <li class="nav-item active">
                     <a class="nav-item nav-link" href="../admin.php">Verwaltung</a>
                 </li>
+                <?php } ?>
             </ul>
         </div>
 
