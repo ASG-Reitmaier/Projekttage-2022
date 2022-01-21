@@ -94,7 +94,7 @@ ob_start();
             "</td><td>".$row["name"].
             "</td><td>".$row["klasse"].
             "</td><td>".$row["rolle"]."</td><td>
-            <button type='submit' name ='import' class='btn btn-light' id='submit'>bearbeiten</button></td></tr>";
+            <button type='submit' name =".$row["benutzer_id"]."class='btn btn-light' formmethod='get' formaction='user.php' id='bearbeiten'>bearbeiten</button></td></tr>";
         }
         echo "</table>";
         $_SESSION['ExportAbfrage'] =
@@ -212,8 +212,6 @@ ob_start();
         $db->exportieren($_SESSION['ExportAbfrage']);
     }
 
-    if(isset($_POST["logout"])){     
-    }
 
     ?>
 
