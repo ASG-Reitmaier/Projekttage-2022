@@ -32,9 +32,3 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
         </ul>
     </div>
 </nav>
-<?php 
-if(isset($_POST["logout"])){     
-    
-}
-?>
-
