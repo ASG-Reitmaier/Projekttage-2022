@@ -307,11 +307,13 @@ class DB
 
     public function pruefeUser_Zeit($kursId, $Id)
     {
+        //Anzahl der gebuchten Schülerkurse
         $query = "SELECT COUNT(*) FROM benutzer_zu_kurse WHERE kurs_id=$kursId";
         $statement = $this->con->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+        //Anzahl der gebu
         $query = "SELECT teilnehmerbegrenzung FROM kurse WHERE kurs_id=$kursId";
         $statement = $this->con->prepare($query);
         $statement->execute();
