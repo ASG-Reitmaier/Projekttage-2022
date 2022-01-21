@@ -1,3 +1,6 @@
+<?php session_start();
+?>
+
 <div style="float: right; background-color:#fb4400; height: 170% ; width:4%" data-scroll>
         <input formmethod="post" type="image" id="logout" alt="logout" src="uploads\Test\Logout Logo v2.png" style="width: 100%;"> 
     </div>
@@ -12,12 +15,11 @@
                 <li class="nav-item active">
                     <a class="nav-item nav-link" href="create.php">Erstellen</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-item nav-link" href="admin.php">Adminstration</a>
-                </li>
+                <?php if($_SESSION['rolle'] === "admin"){ ?>
                 <li class="nav-item active">
                     <a class="nav-item nav-link" href="admin.php">Verwaltung</a>
                 </li>
+                <?php } ?>
             </ul>
         </div>
 
