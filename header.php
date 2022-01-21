@@ -19,11 +19,16 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
                 <li class="nav-item active">
                     <a class="nav-item nav-link" href="create.php">Erstellen</a>
                 </li>
-                <?php if($_SESSION['rolle'] == "admin"){ ?>
+                <?php // if($_SESSION['rolle'] == "admin"){ ?>
                 <li class="nav-item active">
                     <a class="nav-item nav-link" href="admin.php">Verwaltung</a>
                 </li>
-                <?php } ?>
+                <?php /*}
+                     else{
+                        header("Location:login.php");
+                        exit(); 
+                    } */
+                ?>
             </ul>
         </div>
 
