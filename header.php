@@ -1,4 +1,8 @@
-<?php session_start();
+<?php 
+
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 ?>
 
 <div style="float: right; background-color:#fb4400; height: 170% ; width:4%" data-scroll>
@@ -15,11 +19,16 @@
                 <li class="nav-item active">
                     <a class="nav-item nav-link" href="create.php">Erstellen</a>
                 </li>
-                <?php if($_SESSION['rolle'] === "admin"){ ?>
+                <?php // if($_SESSION['rolle'] == "admin"){ ?>
                 <li class="nav-item active">
                     <a class="nav-item nav-link" href="admin.php">Verwaltung</a>
                 </li>
-                <?php } ?>
+                <?php /*}
+                     else{
+                        header("Location:login.php");
+                        exit(); 
+                    } */
+                ?>
             </ul>
         </div>
 
