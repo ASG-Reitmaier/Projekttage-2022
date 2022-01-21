@@ -6,7 +6,7 @@ $db = new DB();
 session_start();
 @$_SESSION['suchBegriff'];
 @$_SESSION['sortierung'];
-if (!$_SESSION['sortierung'])
+if (@!$_SESSION['sortierung'])
   $_SESSION['sortierung'] = "Alphabetisch";
 ?>
 
