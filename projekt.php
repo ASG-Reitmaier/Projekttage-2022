@@ -1,7 +1,7 @@
 <?php
 require_once('search.php');
 $db = new DB();
-<session_start();
+session_start();
 ?>
 
 <html lang='de'>
