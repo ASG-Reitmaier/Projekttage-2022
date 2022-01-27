@@ -95,10 +95,10 @@ class DB
         return $data;
     }
 
-    // Gibt Alle Schüler aus via MySQL query (+ Prevention of SQL Injection)
-    public function zeigeEinSchüler($name)
+    // Gibt den Schüler mit dem $id aus via MySQL query (+ Prevention of SQL Injection)
+    public function zeigeEinSchüler($id)
     {
-        $query = "SELECT * FROM benutzer WHERE lower(name) = lower($name)";
+        $query = "SELECT * FROM benutzer WHERE benutzer_id = $id";
         $statement = $this->con->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
