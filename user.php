@@ -29,9 +29,22 @@
     </head>
 
 <?php 
-if(isset($_GET["bearbeiten"])){ 
-    $name = "placeholder";
-    $benutzer = $db->zeigeEinSchüler($name);
+if(isset($_POST["ID"])){ 
+    $ergebnis = $db->zeigeEinSchüler($_POST["ID"]);
+    $benutzer = $ergebnis[0];
+    echo $benutzer['name'];
+    echo "<form = 'post' action = 'user.php'>".
+            "<input name = 'name' type = 'text' placeholder = ".$benutzer["name"]." >".
+            "<input name = 'name' type = 'text' placeholder = ".$benutzer["klasse"]." >".
+            "<input name = 'name' type = 'text' placeholder = ".$benutzer["rolle"]." >".
+            "</form>";
+    echo "<br><br>
+        <table class='table border shadow p-3' style='margin: auto;'><tr><th>Benutzer ID</th><th>Name</th><th>Klasse</th><th>Rolle</th><th></th></tr>";
+    echo "<tr><td>".$benutzer["benutzer_id"].
+        "</td><td>".$benutzer["name"].
+        "</td><td>".$benutzer["klasse"].
+        "</td><td>".$benutzer["rolle"]."</td><td>";
+    echo "</table></form>";
 }
 ?>
     <body>
