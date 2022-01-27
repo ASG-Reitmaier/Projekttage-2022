@@ -88,7 +88,7 @@ class DB
     // Gibt Alle Schüler aus via MySQL query (+ Prevention of SQL Injection)
     public function zeigeSchüler()
     {
-        $query = "SELECT * FROM benutzer WHERE rolle = 'Schüler' ORDER BY lower(name)";
+        $query = "SELECT * FROM benutzer WHERE rolle = 'schueler' ORDER BY lower(name)";
         $statement = $this->con->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
