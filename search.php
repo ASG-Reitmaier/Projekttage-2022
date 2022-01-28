@@ -68,8 +68,10 @@ class DB
         //1000 entspricht der maximalen Zeichenlänge und ; dem Trennzeichen der csv-Datei. In Deutschland üblicherweise ; statt ,
         while($row = fgetcsv($file, 1000, ';')){#
             //implode verknüpft alle Arrayelemente zu einem String.
+            //print_r($row);
+            $row[3]=md5($row[3]);
             $value = "'" . implode("','",$row)."'";
-            $query ="INSERT INTO benutzer (name, klasse, rolle) VALUES (".$value.")";
+            $query ="INSERT INTO benutzer (name, klasse, rolle, passwort) VALUES (".$value.")";
             $statement = $this->con->prepare($query);
             $statement->execute();
         }
