@@ -76,6 +76,19 @@ class DB
     }
 
     // Gibt Alles von Benutzer aus via MySQL query (+ Prevention of SQL Injection)
+    public function updateBenutzer($id, $name, $klasse, $rolle)
+    {
+        $query = "UPDATE benutzer SET name = '$name', klasse = $klasse, rolle = '$rolle' WHERE benutzer.benutzer_id = $id";
+        
+        try {
+            $statement = $this->con->prepare($query);
+            $statement->execute();
+        } catch (exception $e){
+            echo "$e";
+        }
+    }
+
+    // Gibt Alles von Benutzer aus via MySQL query (+ Prevention of SQL Injection)
     public function zeigeBenutzer()
     {
         $query = "SELECT * FROM benutzer ORDER BY lower(name)";
@@ -88,17 +101,17 @@ class DB
     // Gibt Alle Schüler aus via MySQL query (+ Prevention of SQL Injection)
     public function zeigeSchüler()
     {
-        $query = "SELECT * FROM benutzer WHERE rolle = 'Schüler' ORDER BY lower(name)";
+        $query = "SELECT * FROM benutzer WHERE rolle = 'schueler' ORDER BY lower(name)";
         $statement = $this->con->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
 
-    // Gibt Alle Schüler aus via MySQL query (+ Prevention of SQL Injection)
-    public function zeigeEinSchüler($name)
+    // Gibt den Schüler mit dem $id aus via MySQL query (+ Prevention of SQL Injection)
+    public function zeigeEinSchüler($id)
     {
-        $query = "SELECT * FROM benutzer WHERE lower(name) = lower($name)";
+        $query = "SELECT * FROM benutzer WHERE benutzer_id = $id";
         $statement = $this->con->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -108,7 +121,7 @@ class DB
     // Gibt Alle Schüler aus via MySQL query (+ Prevention of SQL Injection)
     public function zeigeKlasse($klasse)
     {
-        $query = "SELECT * FROM benutzer WHERE rolle = 'Schüler' AND klasse = " . $klasse. " ORDER BY lower(name)";
+        $query = "SELECT * FROM benutzer WHERE rolle = 'schueler' AND klasse = " . $klasse. " ORDER BY lower(name)";
         $statement = $this->con->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -317,13 +330,11 @@ class DB
 
     public function pruefeUser_Zeit($kursId, $Id)
     {
-        //Anzahl der gebuchten Schülerkurse
         $query = "SELECT COUNT(*) FROM benutzer_zu_kurse WHERE kurs_id=$kursId";
         $statement = $this->con->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        //Anzahl der gebu
         $query = "SELECT teilnehmerbegrenzung FROM kurse WHERE kurs_id=$kursId";
         $statement = $this->con->prepare($query);
         $statement->execute();
@@ -363,34 +374,36 @@ class DB
             $test=true;
 
             foreach ($b_kurse AS $row) 
-            {
-                $benutzerKurs = $row["kurs_id"];
-                $query = "SELECT Tag_1 FROM kurse WHERE kurs_id=$benutzerKurs";
+            {     
+                $b=$b_kurse[$i]["kurs_id"];
+               
+               $query = "SELECT Tag_1 FROM kurse WHERE kurs_id=$b";
                 $statement = $this->con->prepare($query);
                 $statement->execute();
                 $tag1 = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                $query = "SELECT Tag_2 FROM kurse WHERE kurs_id=$benutzerKurs";
+
+                $query = "SELECT Tag_2 FROM kurse WHERE kurs_id=$b";
                 $statement = $this->con->prepare($query);
                 $statement->execute();
                 $tag2 = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                $query = "SELECT Tag_3 FROM kurse WHERE kurs_id=$benutzerKurs";
+                $query = "SELECT Tag_3 FROM kurse WHERE kurs_id=$b";
                 $statement = $this->con->prepare($query);
                 $statement->execute();
                 $tag3 = $statement->fetchAll(PDO::FETCH_ASSOC);
 
                
 
-                if($tag1_pr==true AND $tag1==true){
+                if($tag1_pr[0]["Tag_1"]==1 AND $tag1[0]["Tag_1"]==1){
                     $test=false;
                     echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-danger alert-dismissible fade show' role='alert'>An Tag 1 hast du bereits einen Kurs gebucht!   </div></div><div class='col'></div></div>";
                 }
-                if($tag2_pr==true AND $tag2==true){
+                if($tag2_pr[0]["Tag_2"]==1 AND $tag2[0]["Tag_2"]==1){
                     $test=false;
                     echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-danger alert-dismissible fade show' role='alert'>An Tag 2 hast du bereits einen Kurs gebucht!   </div></div><div class='col'></div></div>";
                 }
-                if($tag3_pr==true AND $tag3==true){
+                if($tag3_pr[0]["Tag_3"]==1 AND $tag3[0]["Tag_3"]==1){
                     $test=false;
                     echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-danger alert-dismissible fade show' role='alert'>An Tag 3 hast du bereits einen Kurs gebucht!   </div></div><div class='col'></div></div>";
                 }

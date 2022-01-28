@@ -27,14 +27,39 @@
             <script src="bootstrap5-dropdown-ml-hack.js"></script>
         
     </head>
-
+    <div>
 <?php 
-if(isset($_GET["bearbeiten"])){ 
-    $name = "placeholder";
-    $benutzer = $db->zeigeEinSchüler($name);
+if (isset($_POST['bestätigen'])){
+    $ergebnis = $db->zeigeEinSchüler($_POST["ID"]);
+    $benutzer = $ergebnis[0];
+    if (strlen($_POST['name'])){ $name = $_POST['name'];}
+    else { $name = $benutzer['name'];}
+    
+    if (strlen($_POST['klasse'])){ $klasse = $_POST['klasse']; }
+    else { $klasse = $benutzer['klasse']; }
+    
+    if (strlen($_POST['rolle'])){ $rolle = $_POST['rolle']; }
+    else { $rolle = $benutzer['rolle']; }
+
+    $db->updateBenutzer($_POST["ID"], $name, $klasse, $rolle);
+}
+
+if(isset($_POST["ID"])){ 
+    $ergebnis = $db->zeigeEinSchüler($_POST["ID"]);
+    $benutzer = $ergebnis[0];
+    echo "<br><br><br>
+        <form = 'post' action = 'user.php' style='width: 50%; margin: auto'>
+            <table class='table border shadow p-3' style='margin: auto;'>
+                <tr><th>Benutzer ID</th><th>".$benutzer['benutzer_id']."</th><th>".$benutzer['benutzer_id']."</th>
+                <tr><th>Name</th><td>".$benutzer['name']."</td><td><input name = 'name' type = 'text' placeholder = ".$benutzer["name"]."></td>
+                <tr><th>Klasse</th><td>".$benutzer['klasse']."</td><td><input name = 'klasse' type = 'text' placeholder = ".$benutzer["klasse"]."></td>
+                <tr><th>Rolle</th><td>".$benutzer['rolle']."</td><td><input name = 'rolle' type = 'text' placeholder = ".$benutzer["rolle"]."></td>
+            </table>
+            <br>
+            <input type='hidden' name = 'ID' value=".$benutzer["benutzer_id"]."></input>
+            <input formmethod='post' type='submit' class='btn btn-light' name='bestätigen' value='bestätigen'></input>
+        </form>";
 }
 ?>
-    <body>
-        
-    </body>
+    </div>
 </html>
