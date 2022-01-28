@@ -29,6 +29,21 @@
     </head>
     <div>
 <?php 
+if (isset($_POST['bestätigen'])){
+    $ergebnis = $db->zeigeEinSchüler($_POST["ID"]);
+    $benutzer = $ergebnis[0];
+    if (strlen($_POST['name'])){ $name = $_POST['name'];}
+    else { $name = $benutzer['name'];}
+    
+    if (strlen($_POST['klasse'])){ $klasse = $_POST['klasse']; }
+    else { $klasse = $benutzer['klasse']; }
+    
+    if (strlen($_POST['rolle'])){ $rolle = $_POST['rolle']; }
+    else { $rolle = $benutzer['rolle']; }
+
+    $db->updateBenutzer($_POST["ID"], $name, $klasse, $rolle);
+}
+
 if(isset($_POST["ID"])){ 
     $ergebnis = $db->zeigeEinSchüler($_POST["ID"]);
     $benutzer = $ergebnis[0];
@@ -44,21 +59,6 @@ if(isset($_POST["ID"])){
             <input type='hidden' name = 'ID' value=".$benutzer["benutzer_id"]."></input>
             <input formmethod='post' type='submit' class='btn btn-light' name='bestätigen' value='bestätigen'></input>
         </form>";
-}
-if (isset($_POST['bestätigen'])){
-    $ergebnis = $db->zeigeEinSchüler($_POST["ID"]);
-    $benutzer = $ergebnis[0];
-    if (strlen($_POST['name'])){ $name = $_POST['name'];}
-    else { $name = $benutzer['name'];}
-    
-    if (strlen($_POST['klasse'])){ $klasse = $_POST['klasse']; }
-    else { $klasse = $benutzer['klasse']; }
-    
-    if (strlen($_POST['rolle'])){ $rolle = $_POST['rolle']; }
-    else { $rolle = $benutzer['rolle']; }
-
-    echo $_POST["ID"], $name, $klasse, $rolle;
-    $db->updateBenutzer($_POST["ID"], $name, $klasse, $rolle);
 }
 ?>
     </div>
