@@ -375,9 +375,9 @@ class DB
 
             foreach ($b_kurse AS $row) 
             {     
-                $b=$b_kurse[$i]["kurs_id"];
+                $b=$row["kurs_id"];
                
-               $query = "SELECT Tag_1 FROM kurse WHERE kurs_id=$b";
+                $query = "SELECT Tag_1 FROM kurse WHERE kurs_id=$b";
                 $statement = $this->con->prepare($query);
                 $statement->execute();
                 $tag1 = $statement->fetchAll(PDO::FETCH_ASSOC);
