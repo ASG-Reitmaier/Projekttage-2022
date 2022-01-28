@@ -1,3 +1,10 @@
+<?php 
+
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+?>
+
 <html lang="de">
   <head>
     <meta charset="utf-8">
