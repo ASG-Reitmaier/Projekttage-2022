@@ -16,19 +16,19 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
             <li class="nav-item active">
                 <a class="nav-item nav-link" href="index.php">Übersicht</a>
             </li>
+            <?php  if(($_SESSION['rolle'] == "lehrer") || ($_SESSION['rolle'] == "admin")){ ?>
             <li class="nav-item active">
                 <a class="nav-item nav-link" href="create.php">Erstellen</a>
             </li>
-            <?php // if($_SESSION['rolle'] == "admin"){ ?>
+            <?php } ?>
+            <?php  if($_SESSION['rolle'] == "admin"){ ?>
             <li class="nav-item active">
                 <a class="nav-item nav-link" href="admin.php">Verwaltung</a>
             </li>
-            <?php /*}
-                 else{
-                header("Location:login.php");
-                    exit(); 
-                } */
-            ?>
+            <?php } ?>
+            <li class="nav-item active">
+                <a class="nav-item nav-link" href="logout.php">Logout</a>
+            </li>
         </ul>
     </div>
 </nav>
