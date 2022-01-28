@@ -94,7 +94,11 @@ ob_start();
             "</td><td>".$row["name"].
             "</td><td>".$row["klasse"].
             "</td><td>".$row["rolle"]."</td><td>
-            <button type='submit' name =".$row["benutzer_id"]."class='btn btn-light' formmethod='get' formaction='user.php' id='bearbeiten'>bearbeiten</button></td></tr>";
+            <form method = 'post' action='user.php'>
+            <input type='hidden' name = 'ID' value=".$row["benutzer_id"].">
+            <button type='submit' class='btn btn-light' formmethod='post' id='bearbeiten'>bearbeiten</button></td></tr>
+            </form>
+            ";
         }
         echo "</table>";
         $_SESSION['ExportAbfrage'] =
