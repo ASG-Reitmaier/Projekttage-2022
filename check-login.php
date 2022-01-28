@@ -29,7 +29,7 @@ if (isset($_POST['benutzername']) && isset($_POST['passwort'])) {
                 $password = md5($password);
                 $result = $db->loginAusgeben($username, $password);
             
-            if (count($result) === 1 && $result['0']['password'] === $passwort && $result['0']['name'] === $username) {
+            if (count($result) === 1 && $result['0']['passwort'] === $password && $result['0']['name'] === $username) {
                     // Der Benutzername muss einzigartig sein
 
                     $_SESSION['name'] = $result['0']['name'];
