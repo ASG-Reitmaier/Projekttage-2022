@@ -153,7 +153,7 @@ if(isset($_GET['id'])){
   <?php
   if(isset($_POST["button"]))
   {
-    $db->pruefeUser_Zeit(3, 11);
+    $db->pruefeUser_Zeit($_GET['id'],  $_SESSION['benutzer_id']);
   
   }
  
