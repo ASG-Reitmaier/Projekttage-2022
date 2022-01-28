@@ -54,6 +54,7 @@ session_start();
     <?php
 
 if(isset($_GET['id'])){
+  
     
     $projektDaten = $db->zeigeKurs($_GET['id']);
     
@@ -141,11 +142,12 @@ if(isset($_GET['id'])){
 
 
 <?php } ?>
+
 <div class="container-sm">
 
-<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="multipart/form-data">
+<form action="../projekt.php/?id=<?php echo $_GET['id'];?>" method="post" enctype="multipart/form-data">
 
-  <button type="submit" class="btn btn-primary" value="anmelden" name="button">Anmelden</button>
+  <button type="submit" class="btn btn-primary" value="anmelden" name="button"> Anmelden </button>
   
   </form>
   </div>

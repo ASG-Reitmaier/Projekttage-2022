@@ -317,96 +317,88 @@ class DB
 
     public function pruefeUser_Zeit($kursId, $Id)
     {
-        //Anzahl der Buchungen
-        $query = "SELECT COUNT(*) AS AnzahlBuchungen FROM benutzer_zu_kurse WHERE kurs_id=$kursId";
+        $query = "SELECT COUNT(*) FROM benutzer_zu_kurse WHERE kurs_id=$kursId";
         $statement = $this->con->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        //Teilnehmerbegrenzung
         $query = "SELECT teilnehmerbegrenzung FROM kurse WHERE kurs_id=$kursId";
         $statement = $this->con->prepare($query);
         $statement->execute();
         $datu = $statement->fetchAll(PDO::FETCH_ASSOC);
 
        
-        //Fehlermeledung wenn der Kurs voll ist
-        if($data[0]["AnzahlBuchungen"]>=$datu[0]["teilnehmerbegrenzung"])
+
+        if($data[0]["COUNT(*)"]>$datu[0]["teilnehmerbegrenzung"])
         {
             echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-danger alert-dismissible fade show' role='alert'> Der Kurs ist voll!   </div></div><div class='col'></div></div>";
         }
 
-        //Anmeldevorgang wenn Kurs nicht voll
-        if($data[0]["AnzahlBuchungen"]<$datu[0]["teilnehmerbegrenzung"])
+        if($data[0]["COUNT(*)"]<$datu[0]["teilnehmerbegrenzung"])
         {
-            //Liefert Kurse, bei denen der Benutzer angemeldet ist
             $query = "SELECT kurs_id FROM benutzer_zu_kurse WHERE b_id=$Id";
             $statement = $this->con->prepare($query);
             $statement->execute();
             $b_kurse = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-            if(count($b_kurse) > 0){
-                 //Liefert 1, wenn der Kurs am Tag 1 stattfindet, sonst 0.
-                $query = "SELECT Tag_1 FROM kurse WHERE kurs_id=$kursId";
-                 $statement = $this->con->prepare($query);
-                $statement->execute();
-                $tag1_pr = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $query = "SELECT Tag_1 FROM kurse WHERE kurs_id=$kursId";
+            $statement = $this->con->prepare($query);
+            $statement->execute();
+            $tag1_pr = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                //Liefert 1, wenn der Kurs am Tag 2 stattfindet, sonst 0.
-                $query = "SELECT Tag_2 FROM kurse WHERE kurs_id=$kursId";
-                $statement = $this->con->prepare($query); 
-                $statement->execute();
-                 $tag2_pr = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $query = "SELECT Tag_2 FROM kurse WHERE kurs_id=$kursId";
+            $statement = $this->con->prepare($query); 
+            $statement->execute();
+            $tag2_pr = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                //Liefert 1, wenn der Kurs am Tag 3 stattfindet, sonst 0.
-                $query = "SELECT Tag_3 FROM kurse WHERE kurs_id=$kursId";
+            $query = "SELECT Tag_3 FROM kurse WHERE kurs_id=$kursId";
+            $statement = $this->con->prepare($query);
+            $statement->execute();
+            $tag3_pr = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            
+
+            $test=true;
+
+            for ($i = 0; $i < count($b_kurse); $i++) 
+            {
+           
+                $b=$b_kurse[$i]["kurs_id"];
+               
+               $query = "SELECT Tag_1 FROM kurse WHERE kurs_id=$b";
                 $statement = $this->con->prepare($query);
                 $statement->execute();
-                $tag3_pr = $statement->fetchAll(PDO::FETCH_ASSOC);
+                $tag1 = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                $test=true;
-            
-                foreach($b_kurse AS $row) 
-                {
 
-                    $row['kurs_id'] = $benutzerkurs;
+                $query = "SELECT Tag_2 FROM kurse WHERE kurs_id=$b";
+                $statement = $this->con->prepare($query);
+                $statement->execute();
+                $tag2 = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                    //Liefert 1, wenn der Benutzerkurs am Tag 1 stattfindet, sonst 0.
-                    $query = "SELECT Tag_1 FROM kurse WHERE kurs_id=$benutzerkurs";
-                    $statement = $this->con->prepare($query);
-                    $statement->execute();
-                    $tag1 = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-                    //Liefert 1, wenn der Benutzerkurs am Tag 2 stattfindet, sonst 0.
-                    $query = "SELECT Tag_2 FROM kurse WHERE kurs_id=$benutzerkurs";
-                    $statement = $this->con->prepare($query);
-                    $statement->execute();
-                    $tag2 = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-                    //Liefert 1, wenn der Benutzerkurs am Tag 3 stattfindet, sonst 0.
-                    $query = "SELECT Tag_3 FROM kurse WHERE kurs_id=$benutzerkurs";
-                    $statement = $this->con->prepare($query);
-                    $statement->execute();
-                    $tag3 = $statement->fetchAll(PDO::FETCH_ASSOC);
+                $query = "SELECT Tag_3 FROM kurse WHERE kurs_id=$b";
+                $statement = $this->con->prepare($query);
+                $statement->execute();
+                $tag3 = $statement->fetchAll(PDO::FETCH_ASSOC);
 
                
 
-                    if($tag1_pr==true AND $tag1==true){
+                if($tag1_pr[0]["Tag_1"]==1 AND $tag1[0]["Tag_1"]==1){
                     $test=false;
                     echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-danger alert-dismissible fade show' role='alert'>An Tag 1 hast du bereits einen Kurs gebucht!   </div></div><div class='col'></div></div>";
-                    }
-                    if($tag2_pr==true AND $tag2==true){
+                }
+                if($tag2_pr[0]["Tag_2"]==1 AND $tag2[0]["Tag_2"]==1){
                     $test=false;
                     echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-danger alert-dismissible fade show' role='alert'>An Tag 2 hast du bereits einen Kurs gebucht!   </div></div><div class='col'></div></div>";
-                    }
-                    if($tag3_pr==true AND $tag3==true){
+                }
+                if($tag3_pr[0]["Tag_3"]==1 AND $tag3[0]["Tag_3"]==1){
                     $test=false;
                     echo "<div class='row'><div class='col'></div><div class='col'><div class='alert alert-danger alert-dismissible fade show' role='alert'>An Tag 3 hast du bereits einen Kurs gebucht!   </div></div><div class='col'></div></div>";
-                    }
                 }
             }
 
-                   
+            
+
         if($test){
             $this->benutzerZuKurse($kursId, $Id);
         }
