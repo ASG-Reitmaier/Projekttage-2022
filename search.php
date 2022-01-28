@@ -78,7 +78,8 @@ class DB
     // Gibt Alles von Benutzer aus via MySQL query (+ Prevention of SQL Injection)
     public function updateBenutzer($id, $name, $klasse, $rolle)
     {
-        $query = "UPDATE benutzer SET name = $name, klasse = $klasse, rolle = $rolle WHERE benutzer_id = $id";
+        $query = "UPDATE benutzer SET name = '$name', klasse = $klasse, rolle = '$rolle' WHERE benutzer.benutzer_id = $id";
+        
         try {
             $statement = $this->con->prepare($query);
             $statement->execute();
