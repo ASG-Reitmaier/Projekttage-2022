@@ -362,19 +362,20 @@ class DB
 
             $test=true;
 
-            for ($i = 0; $i < count($b_kurse); $i++) 
+            foreach ($b_kurse AS $row) 
             {
-               $query = "SELECT Tag_1 FROM kurse WHERE kurs_id=$b_kurse[$i]";
+                $benutzerKurs = $row["kurs_id"];
+                $query = "SELECT Tag_1 FROM kurse WHERE kurs_id=$benutzerKurs";
                 $statement = $this->con->prepare($query);
                 $statement->execute();
                 $tag1 = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                $query = "SELECT Tag_2 FROM kurse WHERE kurs_id=$b_kurse[$i]";
+                $query = "SELECT Tag_2 FROM kurse WHERE kurs_id=$benutzerKurs";
                 $statement = $this->con->prepare($query);
                 $statement->execute();
                 $tag2 = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                $query = "SELECT Tag_3 FROM kurse WHERE kurs_id=$b_kurse[$i]";
+                $query = "SELECT Tag_3 FROM kurse WHERE kurs_id=$benutzerKurs";
                 $statement = $this->con->prepare($query);
                 $statement->execute();
                 $tag3 = $statement->fetchAll(PDO::FETCH_ASSOC);
