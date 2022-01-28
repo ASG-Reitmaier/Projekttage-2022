@@ -8,8 +8,8 @@ session_start();
 
 <!DOCTYPE html> 
 <html> 
- 
-<head>
+
+
         
         <meta name ="viewport" content="width-device-width, initial-scale=1.0">
         <meta charset="utf-8">
@@ -29,10 +29,11 @@ session_start();
         <input formmethod="post" type="image" id="logout" alt="logout" src="../uploads\Test\Logout Logo v2.png" style="width: 100%;"> 
     </div>
 
-    <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light" style="height: 10ch;">
+<nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light" style="height: 10ch;">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwzB-PnY6KPKMhQxP9mBPsWxX29ESb72pGgQ&usqp=CAU" class="rounded float-right mg-fluid" style="width: 5%;">
         <div class="container-fluid">
-            <ul class="navbar-nav mr-auto" style="font-size: 2.5ch; padding">
+           
+            <ul class="navbar-nav mr-auto" style="font-size: 2.5ch; padding"> 
                 <li class="nav-item active">
                     <a class="nav-item nav-link" href="../index.php">Übersicht</a>
                 </li>
@@ -45,14 +46,10 @@ session_start();
                 </li>
                 <?php } ?>
             </ul>
-        </div>
+        </div> 
 
     </nav>
-
-
-  
-
-
+   
 
     <?php
 
@@ -65,11 +62,11 @@ if(isset($_GET['id'])){
 <h1 font-family="mono sans" align ="center"> <?php echo $projektDaten[0]["name"]; ?></h1>
 <br>
    <div>
-   <img src= '<?php echo "../".$projektDaten[0]['bild'];?>' class='rounded mx-auto d-block img-thumbnail' style='max-width:30%' alt='Responsive image'>
+   <img src= '<?php echo "../".$projektDaten[0]['bild'];?>' class='rounded mx-auto d-block img-thumbnail shadow' style='max-width:30%' alt='Responsive image'>
   
    <div>
 
-  <div class="container-sm p-5 my-5 border">
+  <div class="container-sm p-5 my-5 border shadow">
    <h5 align ="center"> <?php echo $projektDaten[0]["beschreibung"];?> </h5>
   </div>
    <div class="container-md">
@@ -144,12 +141,14 @@ if(isset($_GET['id'])){
 
 
 <?php } ?>
+<div class="container-sm">
 
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="multipart/form-data">
 
   <button type="submit" class="btn btn-primary" value="anmelden" name="button">Anmelden</button>
   
   </form>
+  </div>
 
   <?php
   if(isset($_POST["button"]))

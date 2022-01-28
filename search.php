@@ -96,6 +96,16 @@ class DB
     }
 
     // Gibt Alle Schüler aus via MySQL query (+ Prevention of SQL Injection)
+    public function zeigeEinSchüler($name)
+    {
+        $query = "SELECT * FROM benutzer WHERE lower(name) = lower($name)";
+        $statement = $this->con->prepare($query);
+        $statement->execute();
+        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
+    // Gibt Alle Schüler aus via MySQL query (+ Prevention of SQL Injection)
     public function zeigeKlasse($klasse)
     {
         $query = "SELECT * FROM benutzer WHERE rolle = 'schueler' AND klasse = " . $klasse. " ORDER BY lower(name)";
