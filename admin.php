@@ -4,7 +4,6 @@ $db = new DB();
 
 session_start();
 @$_SESSION['ExportAbfrage'];
-$_SESSION['Tabelle'] = "BenutzerTabelle";
 $table = "Kurs";
 //ob_start immer nach session_start(). Zum exportieren
 ob_start();
@@ -57,22 +56,23 @@ ob_start();
 
     <div class="dropdown" style="margin: auto;">
         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" style="float: left; width: 20%; margin: auto;">Zeigen</button>
-        <form class="dropdown-menu"  method = "post" action="admin.php" style="width: 20%; margin: auto;">
-            <input type = "submit" name= "SchülerTabelle" class ="button dropdown-item"  value ="Schüler"></input>
+        <form class="dropdown-menu"  method = "get" action="admin.php" style="width: 20%; margin: auto;">
+            <input type = "submit" name= "Tabelle" class ="button dropdown-item"  value ="Schüler"></input>
             <!-- <input type = "submit" name= "KlassenTabelle" class ="button dropdown-item" value ="Klasse"></input> -->
-            <input type = "submit" name= "KursenTabelle" class ="button dropdown-item" value ="Kurse"></input>
+            <input type = "submit" name= "Tabelle" class ="button dropdown-item" value ="Kurse"></input>
         </form>
         
         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" style="float: left; width: 20%; margin: auto;">Klasse</button>
-        <form class="dropdown-menu"  method = "post" action="admin.php" style="float: left; width: 20%; margin: auto;">
-            <input type = "submit" name= "KlassenTabelle5" class ="button dropdown-item"  value ="5. Klasse"></input>
-            <input type = "submit" name= "KlassenTabelle6" class ="button dropdown-item" value ="6. Klasse"></input>
-            <input type = "submit" name= "KlassenTabelle7" class ="button dropdown-item" value ="7. Klasse"></input>
-            <input type = "submit" name= "KlassenTabelle8" class ="button dropdown-item"  value ="8. Klasse"></input>
-            <input type = "submit" name= "KlassenTabelle9" class ="button dropdown-item" value ="9. Klasse"></input>
-            <input type = "submit" name= "KlassenTabelle10" class ="button dropdown-item" value ="10. Klasse"></input>
-            <input type = "submit" name= "KlassenTabelle11" class ="button dropdown-item"  value ="Q11"></input>
-            <input type = "submit" name= "KlassenTabelle12" class ="button dropdown-item" value ="Q12"></input>
+        <form class="dropdown-menu"  method = "get" action="admin.php" style="float: left; width: 20%; margin: auto;">
+            <input type = "hidden" name= "Tabelle" value ="Klasse"></input>
+            <input type = "submit" name= "Klasse" class ="button dropdown-item"  value ="5"></input>
+            <input type = "submit" name= "Klasse" class ="button dropdown-item" value ="6"></input>
+            <input type = "submit" name= "Klasse" class ="button dropdown-item" value ="7"></input>
+            <input type = "submit" name= "Klasse" class ="button dropdown-item"  value ="8"></input>
+            <input type = "submit" name= "Klasse" class ="button dropdown-item" value ="9"></input>
+            <input type = "submit" name= "Klasse" class ="button dropdown-item" value ="10"></input>
+            <input type = "submit" name= "Klasse" class ="button dropdown-item"  value ="11"></input>
+            <input type = "submit" name= "Klasse" class ="button dropdown-item" value ="12"></input>
         </form>
 
         <form class="button"  method = "post" action="admin.php" style="float: right; width: 20%; margin: auto;">
@@ -85,7 +85,7 @@ ob_start();
     <br>
     
     <?php
-    if(isset($_POST["SchülerTabelle"])){
+    if(isset($_GET['Tabelle']) && $_GET['Tabelle'] == "Schüler"){
         $ergebnis = $db->zeigeSchüler();
         echo "<table class='table border shadow p-3' style='margin: auto;'><tr><th>Benutzer ID</th><th>Name</th><th>Klasse</th><th>Rolle</th><th></th></tr>";
         // output data of each row
@@ -104,80 +104,36 @@ ob_start();
         $_SESSION['ExportAbfrage'] =
             "SELECT * 
             FROM benutzer 
-            WHERE rolle = 'Schüler' 
+            WHERE rolle = 'schueler' 
             ORDER BY upper(name)";
     } 
 
-    if(isset($_POST["KlassenTabelle5"])){
-        $ergebnis = $db->zeigeKlasse(5);
-        Klassentabelle($ergebnis, 5);
-    } if(isset($_POST["KlassenTabelle6"])){
-        $ergebnis = $db->zeigeKlasse(6);
-        Klassentabelle($ergebnis, 6);
-    } if(isset($_POST["KlassenTabelle7"])){
-        $ergebnis = $db->zeigeKlasse(7);
-        Klassentabelle($ergebnis, 7);
-    } if(isset($_POST["KlassenTabelle8"])){
-        $ergebnis = $db->zeigeKlasse(8);
-        Klassentabelle($ergebnis, 8);
-    } if(isset($_POST["KlassenTabelle9"])){
-        $ergebnis = $db->zeigeKlasse(9);
-        Klassentabelle($ergebnis, 9);
-    } if(isset($_POST["KlassenTabelle10"])){
-        $ergebnis = $db->zeigeKlasse(10);
-        Klassentabelle($ergebnis, 10);
-    } if(isset($_POST["KlassenTabelle11"])){
-        $ergebnis = $db->zeigeKlasse(11);
-        Klassentabelle($ergebnis, 11);
-    } if(isset($_POST["KlassenTabelle12"])){
-        $ergebnis = $db->zeigeKlasse(12);
-        Klassentabelle($ergebnis, 12);
-    } 
-
-    function Klassentabelle($ergebnis, $klasse) {
+    if(isset($_GET['Tabelle']) && $_GET['Tabelle'] == "Klasse"){
+        $klasse = $_GET['Klasse'];
+        $ergebnis = $db->zeigeKlasse($klasse);
         echo "<table class='table border shadow p-3' style='margin: auto;'><tr><th>Benutzer ID</th><th>Name</th><th>Klasse</th><th>Rolle</th><th></th></tr>";
         
         foreach($ergebnis AS $row){
             echo "<tr><td>".$row["benutzer_id"].
             "</td><td>".$row["name"].
             "</td><td>".$row["klasse"].
-            "</td><td>".$row["rolle"]."</td><td>";
+            "</td><td>".$row["rolle"]."</td><td>
+            <form method = 'post' action='user.php'>
+            <input type='hidden' name = 'ID' value=".$row["benutzer_id"].">
+            <button type='submit' class='btn btn-light' formmethod='post' id='bearbeiten'>bearbeiten</button></td></tr>
+            </form>
+            ";
         }
         echo "</table>";
         $_SESSION['ExportAbfrage'] =
             "SELECT * 
             FROM benutzer 
-            WHERE rolle = 'Schüler' 
+            WHERE rolle = 'schueler' 
             AND klasse = ".$klasse."
             ORDER BY lower(name)";
     }
 
-    /* if(isset($_POST["KursenTabelle"])){
-        $ergebnis = $db->zeigeAlleKurse();
-        echo "<table class='table border shadow p-3' style='margin: auto;'><tr><th>ID</th><th>Name</th><th>Teilnehmer</th><th>Jahrgangsstufen</th><th>Ort</th>
-        <th>Tage</th><th>Zeitraum</th><th>Kosten</th></tr>";
-
-        foreach($ergebnis AS $row){
-            echo "<tr><td>".$row["kurs_id"].
-            "</td><td>".$row["name"].
-            "</td><td>".$row["kursleiter1"]."<br>".$row["kursleiter2"]."<br>".$row["kursleiter3"].
-            "</td><td>".$row["teilnehmerbegrenzung"].
-            "</td><td>".$row["jahrgangsstufen_beschraenkung"].
-            "</td><td>".$row["ort"].
-            "</td><td>".$row["Tag_1"].$row["Tag_2"].$row["Tag_3"].
-            "</td><td>".$row["zeitraum_von"]."<br>- ".$row["zeitraum_bis"].
-            "</td><td>".$row["kosten"]."</td><tr>";
-        }
-        echo "</table>";
-        $_SESSION['ExportAbfrage'] =
-            "SELECT kurs_id, name, kursleiter1, kursleiter2, kursleiter3,
-            teilnehmerbegrenzung, jahrgangsstufen_beschraenkung, ort,
-            Tag_1, Tag_2, Tag_3, zeitraum_von, zeitraum_bis, kosten 
-            FROM kurse 
-            ORDER BY upper(name) ASC";
-    } */
-
-    if (isset($_POST["KursenTabelle"])){
+    if (isset($_GET['Tabelle']) && $_GET['Tabelle'] == "Kurse"){
         $ergebnis = $db->zeigeKurse_zu_Benutzer();
         echo "<table class='table border shadow p-3' style='margin: auto;'><tr><th>Kurs ID</th><th>Name</th>
         <th>Kursleiter</th><th>Teilnehmer</th><th>Benutzer ID</th><th>Name</th><th>Klasse</th></tr>";
@@ -250,22 +206,5 @@ ob_start();
         } catch(ValueError $e) {
             echo "Keine Dateien ausgewählt";
         }
-            /*if($_FILES["file"]["size"]>0){
-            $file = fopen($fileName, "r");
-            while(($column = fgetcsv($file, 10000, ";"))!== FALSE){
-               $query = "Insert into benutzer (user_id, name, klasse, rolle) values ('". $column[0] ."', '". $column[1] ."', '". $column[2] ."', '". $column[3] ."')";
-                $statement = $con->prepare($query);
-                $statement->execute();
-                $data = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-                if(!empty($data)){
-                    echo "CSV-Datei wurde erfolgreich hochgeladen";
-                }else{
-                    echo "CSV-Datei konnte nicht hochgeladen werden";
-                }
-
-           }*/
-    
     }
-
 ?>
