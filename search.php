@@ -1,7 +1,4 @@
-<link rel="canonical" href="https://getbootstrap.com/docs/5.0/components/alerts/">
 <?php
-
-
 if(count(get_included_files()) ==1) exit("Direct access not permitted.");
 
 class DB
@@ -39,14 +36,15 @@ class DB
         
         //entleert den Outputstream und erstellt eine CSV-Datei
         ob_clean();
-        header( "Content-Type: text/csv; charset: utf-8");
-        header( "Content-Disposition: attachment; filename=\"$filename\"" );
+        header("Content-Type: text/csv; charset: utf-8");
+        header("Content-Disposition: attachment; filename=\"$filename\"");
         $fp = fopen('php://output', 'w');
-
+        ob_clean();
 
         // utf-8 Unterstützung in csv
         $arr = array();
-        fputs($fp, $bom = ( chr(0xEF) . chr(0xBB) . chr(0xBF) ));
+        //fputs($fp, chr(0xEF) . chr(0xBB) . chr(0xBF)); geht nicht mehr???
+
         // Spaltennamen aus der SQL-Tabelle einfügen
         for ($i = 0; $i < $result->columnCount(); $i++){
             $arr = array_merge($arr, array($result->getColumnMeta($i)["name"]));
@@ -435,3 +433,4 @@ class DB
     */
 }
 ?>
+
