@@ -47,7 +47,7 @@ if (@!$_SESSION['sortierung'])
       <div class = "container-fluid">
         <form class = "d-flex" action = "index.php" method = "GET">
             <input class = "form-control me-2" type="search" placeholder = "Suche..." aria-label="Search" name="search" value= <?php if (isset($_GET["search"])) {echo $_GET["search"];}?>>
-            <button class = "btn btn-outline-succes" type = "submit"> Search </button>
+            <button class="btn btn-primary" type = "submit"> Anzeigen </button>
         </form>
         <!-- das Dropdown-Menü -->
         <div class="dropdown">
