@@ -168,6 +168,7 @@ class DB
     }
 
     // Gibt alles von einem Kurs mit einer bestimmten id aus via MySQL query (+ Prevention of SQL Injection)
+    
     public function zeigeKurs($id)
     {
         $query = "SELECT * FROM kurse WHERE kurs_id = $id";

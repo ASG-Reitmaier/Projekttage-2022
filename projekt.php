@@ -55,13 +55,9 @@ session_start();
    
 
     <?php
-
-if(isset($_GET['id'])){
-  
-    
-    $projektDaten = $db->zeigeKurs($_GET['id']);
-    
-    ?>
+      if(isset($_GET['id'])){
+      $projektDaten = $db->zeigeKurs($_GET['id']);
+     ?>
  
 <h1 font-family="mono sans" align ="center"> <?php echo $projektDaten[0]["name"]; ?></h1>
 <br>

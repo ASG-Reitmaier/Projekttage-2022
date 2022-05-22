@@ -82,7 +82,6 @@ if (@!$_SESSION['sortierung'])
       function zeigeDaten($suchDaten){
         ?>
 
-
     <div class = "container" data-scroll>
       <div class = "clearfix">
         <div class = "row">
